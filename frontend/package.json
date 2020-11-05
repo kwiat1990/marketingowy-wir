@@ -1,0 +1,26 @@
+{
+  "name": "marketingowy-wir",
+  "description": "Based on JAMstack and headless CMS",
+  "version": "1.0.0",
+  "author": "kwiat1990@gmail.com",
+  "main": "gridsome.config.js",
+  "private": true,
+  "scripts": {
+    "build": "gridsome build",
+    "develop": "gridsome develop",
+    "explore": "gridsome explore"
+  },
+  "dependencies": {
+    "@gridsome/source-strapi": "^0.2.0",
+    "gridsome": "^0.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "gridsome-plugin-typescript": "^0.4.0",
+    "node-sass": "^5.0.0",
+    "prettier": "2.1.2",
+    "sass-loader": "^10.0.5",
+    "ts-loader": "^8.0.7",
+    "typescript": "^4.0.5"
+  }
+}
