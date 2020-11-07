@@ -1,0 +1,11 @@
+:root {
+  --mq: "small";
+
+  @media (min-width: 768px) {
+    --mq: "medium";
+  }
+
+  @media (min-width: 1264px) {
+    --mq: "large";
+  }
+}

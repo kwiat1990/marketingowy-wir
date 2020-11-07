@@ -30,7 +30,19 @@
     }
 </page-query>
 
-<script lang="ts" src="./Index.ts"></script>
+<script lang="ts">
+export default {
+  metaInfo: {
+    title: "Marketingowy Wir",
+    meta: [
+      {
+        name: "description",
+        content: "Blog o online marketingu.",
+      },
+    ],
+  },
+};
+</script>
 
 <style>
 .home-links a {

@@ -1,21 +1,39 @@
 <template>
   <div id="app">
-    <Header />
+    <app-header />
+
     <main class="main">
       <transition>
         <router-view />
       </transition>
     </main>
-    <footer>Footer</footer>
+
+    <div>
+      <app-icon icon="x"></app-icon>
+      <app-icon icon="archive"></app-icon>
+      <app-icon icon="bell"></app-icon>
+    </div>
+
+    <app-footer></app-footer>
   </div>
 </template>
 
-<script lang="ts">
-import Header from "~/components/Header/Header.vue";
+<script>
+import Footer from "./layouts/partials/Footer.vue";
+import Icon from "~/components/Icon.vue";
+import Header from "~/layouts/partials/Header.vue";
 
 export default {
   components: {
-    Header,
+    "app-footer": Footer,
+    "app-header": Header,
+    "app-icon": Icon,
+  },
+  created() {
+    // const s1 = performance.now();
+    // console.log(getComputedStyle(document.documentElement).getPropertyValue("--mq"));
+    // const s2 = performance.now();
+    // console.log(s2 - s1);
   },
 };
 </script>
@@ -37,6 +55,21 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100%;
+
+  // TODO adjust theming options
+  @media (prefers-color-scheme: light) {
+    body {
+      background: white;
+      color: black;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: black;
+      color: white;
+    }
+  }
 }
 
 #app {

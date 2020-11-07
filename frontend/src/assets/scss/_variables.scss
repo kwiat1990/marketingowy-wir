@@ -1,13 +1,45 @@
+@import "colors";
+@import "spacing";
+
 :root {
+  // theming
+  --color-primary: var(--color-sand);
+  --color-secondary: var(--color-dark);
+  --bg-primary: var(--color-sand);
+  --bg-secondary: var(--color-dark);
+
+  --border-color: var(--color-light);
+  --border-color-darker: var(--color-gray);
+
   --body-color: #433422;
-  --bg: #f1e7d0;
-  --dark-bg: #111;
+  --bg: #{map-get($colors, sand)};
+  --dark-bg: #{map-get($colors, dark)};
   --code-bg: #222;
   --bg-transparent: rgba(241, 231, 208, 0.88);
-  --bg-secondary: #eae0c9;
+  //--bg-secondary: #eae0c9;
   --bg-teritary: #eadec2;
-  --border-color: #ded0bf;
-  --border-color-darker: #ccbca9;
+  //--border-color: #ded0bf;
+  //--border-color-darker: #ccbca9;
   --glow: 2px 2px 15px 0 #ccbca9;
   --primary-color: #00a672;
+
+  [data-theme="dark"] {
+    // theming
+    --color-primary: var(--color-dark);
+    --color-secondary: var(--color-sand);
+    --bg-primary: var(--color-dark);
+    --bg-secondary: var(--color-sand);
+
+    --body-color: #433422;
+    --bg: var(--color-dark);
+    --dark-bg: #{map-get($colors, dark)};
+    --code-bg: #222;
+    --bg-transparent: rgba(241, 231, 208, 0.88);
+    //--bg-secondary: #eae0c9;
+    --bg-teritary: #eadec2;
+    --border-color: #ded0bf;
+    --border-color-darker: #ccbca9;
+    --glow: 2px 2px 15px 0 #ccbca9;
+    --primary-color: #00a672;
+  }
 }

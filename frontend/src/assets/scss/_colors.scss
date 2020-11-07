@@ -1,0 +1,16 @@
+$colors: (
+  dark: #212121,
+  gray: #313131,
+  white: #fff,
+  black: #000,
+  sand: #f1e7d0,
+  light: #ded0bf,
+);
+
+:root {
+  @each $name, $color in $colors {
+    --color-#{$name}: #{$color};
+  }
+
+  --color-sandish: #f1e7d0;
+}

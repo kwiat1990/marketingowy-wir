@@ -4,8 +4,18 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
+// const SvgSprite = require("vue-svg-sprite");
+
 module.exports = {
   siteName: "Marketingowy wir",
+  // assetsDir: "./src/assets",
+
+  chainWebpack: (config) => {
+    const svgRule = config.module.rule("svg");
+    svgRule.uses.clear();
+    svgRule.use("svg-sprite-loader").loader("svg-sprite-loader");
+  },
+
   plugins: [
     {
       use: "@gridsome/source-strapi",
@@ -17,6 +27,9 @@ module.exports = {
     },
     {
       use: "gridsome-plugin-typescript",
+    },
+    {
+      use: "gridsome-plugin-tailwindcss",
     },
   ],
 };
