@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   future: {
     // removeDeprecatedGapUtilities: true,
@@ -17,6 +19,10 @@ module.exports = {
       dark: "var(--color-dark)",
       black: "var(--color-black)",
       white: "var(--color-white)",
+    },
+    container: {
+      center: true,
+      padding: defaultTheme.spacing["4"]
     },
     rotate: {
       135: "135deg",

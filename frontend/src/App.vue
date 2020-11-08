@@ -1,18 +1,12 @@
 <template>
   <div id="app">
-    <app-header />
+    <app-header></app-header>
 
-    <main class="main">
+    <main>
       <transition>
         <router-view />
       </transition>
     </main>
-
-    <div>
-      <app-icon icon="close"></app-icon>
-      <app-icon icon="archive"></app-icon>
-      <app-icon icon="bell"></app-icon>
-    </div>
 
     <app-footer></app-footer>
   </div>
@@ -73,7 +67,7 @@ body {
   flex-direction: column;
 }
 
-.main {
+main {
   flex: 1 0 auto;
 }
 </style>

@@ -1,26 +1,62 @@
 6
 <template>
-  <header class="header">
+  <header>
     <div class="bar"></div>
-    Header
+
+    <div class="container">
+      <app-nav></app-nav>
+      <transition-group name="fade">
+        <button key="button" type="button" @click="showSearch = true">
+          <app-icon icon="search"></app-icon>
+        </button>
+        <app-search key="search" v-if="showSearch" @on-close="showSearch = false"></app-search>
+      </transition-group>
+    </div>
   </header>
 </template>
 
 <script>
+import Icon from "~/components/Icon.vue";
+import Nav from "~/components/Nav.vue";
+import Search from "~/components/Search.vue";
+
 export default {
-  components: {},
+  components: {
+    "app-icon": Icon,
+    "app-nav": Nav,
+    "app-search": Search,
+  },
   name: "Header",
+
+  data() {
+    return {
+      showSearch: false,
+    };
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.header {
-  height: 50px;
-  border-bottom: 1px solid var(--border-color);
+.fade-enter-active,
+.fade-leave-active {
+  transition: transform 0.3s;
+}
+
+.fade-enter, 
+.fade-leave-to {
+  transform: translateY(-100%);
+}
+
+header {
+  @apply border-b border-accent-primary;
 }
 
 .bar {
   background: linear-gradient(90deg, var(--primary-color), #8ed6fb 50%, #d32e9d);
-  height: 4px;
+  @apply relative h-1 z-10;
+}
+
+.container {
+  @apply flex relative items-center justify-between;
 }
 </style>
