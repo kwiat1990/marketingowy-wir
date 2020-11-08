@@ -9,7 +9,7 @@
     </main>
 
     <div>
-      <app-icon icon="x"></app-icon>
+      <app-icon icon="close"></app-icon>
       <app-icon icon="archive"></app-icon>
       <app-icon icon="bell"></app-icon>
     </div>
@@ -49,12 +49,8 @@ body,
 
 body {
   background-color: var(--bg);
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
   min-height: 100%;
+  scroll-behavior: smooth;
 
   // TODO adjust theming options
   @media (prefers-color-scheme: light) {

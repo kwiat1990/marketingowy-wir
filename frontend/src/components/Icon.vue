@@ -1,5 +1,5 @@
 <template>
-  <svg class="icon">
+  <svg class="icon" :class="{ [`rotate-${this.rotate}`]: this.rotate, transform: this.rotate }">
     <use :xlink:href="`#${iconCode}`"></use>
   </svg>
 </template>
@@ -12,6 +12,7 @@ export default {
       type: String,
       required: true,
     },
+    rotate: String,
   },
 
   computed: {
@@ -25,7 +26,8 @@ export default {
 
 <style lang="scss" scoped>
 .icon {
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 1.5em;
+  width: 1.5em;
+  @apply inline-block;
 }
 </style>

@@ -1,5 +1,4 @@
 @import "colors";
-@import "spacing";
 
 :root {
   // theming
@@ -7,19 +6,15 @@
   --color-secondary: var(--color-dark);
   --bg-primary: var(--color-sand);
   --bg-secondary: var(--color-dark);
-
-  --border-color: var(--color-light);
-  --border-color-darker: var(--color-gray);
+  --accent-primary: var(--color-light);
+  --accent-secondary: var(--color-gray);
 
   --body-color: #433422;
   --bg: #{map-get($colors, sand)};
   --dark-bg: #{map-get($colors, dark)};
   --code-bg: #222;
   --bg-transparent: rgba(241, 231, 208, 0.88);
-  //--bg-secondary: #eae0c9;
   --bg-teritary: #eadec2;
-  //--border-color: #ded0bf;
-  //--border-color-darker: #ccbca9;
   --glow: 2px 2px 15px 0 #ccbca9;
   --primary-color: #00a672;
 
@@ -29,13 +24,14 @@
     --color-secondary: var(--color-sand);
     --bg-primary: var(--color-dark);
     --bg-secondary: var(--color-sand);
+    --border-color-primary: var(--color-light);
+    --border-color-secondary: var(--color-gray);
 
     --body-color: #433422;
     --bg: var(--color-dark);
     --dark-bg: #{map-get($colors, dark)};
     --code-bg: #222;
     --bg-transparent: rgba(241, 231, 208, 0.88);
-    //--bg-secondary: #eae0c9;
     --bg-teritary: #eadec2;
     --border-color: #ded0bf;
     --border-color-darker: #ccbca9;
