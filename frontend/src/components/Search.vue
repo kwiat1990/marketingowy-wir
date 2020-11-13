@@ -1,12 +1,12 @@
 <template>
   <div class="search">
-      <form @submit.prevent>
-        <input type="text" placeholder="Wyszukaj frazę" v-model="searchTerm" />
-      </form>
-      <button type="button" @click="$emit('on-close')">
-        <app-icon icon="close"></app-icon>
-      </button>
-    </div>
+    <form @submit.prevent>
+      <input type="text" placeholder="Wyszukaj frazę" v-model="searchTerm" />
+    </form>
+    <button type="button" @click="$emit('on-close')">
+      <app-icon icon="close"></app-icon>
+    </button>
+  </div>
 </template>
 
 <script>
@@ -20,9 +20,9 @@ export default {
 
   data() {
     return {
-      searchTerm: ""
-    }
-  }
+      searchTerm: "",
+    };
+  },
 };
 </script>
 
@@ -41,6 +41,6 @@ input {
 
 input,
 button {
-  @apply px-4
+  @apply px-4;
 }
 </style>

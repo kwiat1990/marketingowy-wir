@@ -8,7 +8,7 @@
         :title="icon.text"
         class="even:ml-4"
       >
-        <app-icon :icon="icon.code"></app-icon>
+        vorgestern<app-icon :icon="icon.code"></app-icon>
       </a>
 
       <p>

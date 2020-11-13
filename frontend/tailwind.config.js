@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   future: {
@@ -22,7 +22,7 @@ module.exports = {
     },
     container: {
       center: true,
-      padding: defaultTheme.spacing["4"]
+      padding: defaultTheme.spacing["4"],
     },
     rotate: {
       135: "135deg",

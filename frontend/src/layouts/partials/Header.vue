@@ -42,7 +42,7 @@ export default {
   transition: transform 0.3s;
 }
 
-.fade-enter, 
+.fade-enter,
 .fade-leave-to {
   transform: translateY(-100%);
 }
