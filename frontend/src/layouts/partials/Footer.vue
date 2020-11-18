@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="section-gradient">
     <div class="container">
       <a
         v-for="icon in icons"
@@ -8,7 +8,7 @@
         :title="icon.text"
         class="even:ml-4"
       >
-        vorgestern<app-icon :icon="icon.code"></app-icon>
+        <app-icon :icon="icon.code"></app-icon>
       </a>
 
       <p>
@@ -62,10 +62,12 @@ export default {
 
 <style lang="scss" scoped>
 footer {
+  background: var(--section-gadient);
   @apply py-6 bg-secondary text-center text-primary;
 }
 
 p {
-  @apply pt-4 mt-4 text-xs border-t border-solid border-primary;
+  border-color: var(--separator);
+  @apply pt-4 mt-4 text-xs border-t border-solid;
 }
 </style>

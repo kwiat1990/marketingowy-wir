@@ -1,25 +1,36 @@
 <template>
   <Layout>
-    <ul>
-      <li v-for="restaurant in $page.allStrapiRestaurant.edges" :key="restaurant.node.id">
-        {{ restaurant.node.name }}
-        <ul>
-          <li v-for="category in restaurant.node.categories" :key="category.id">
+    <template v-if="$page.allStrapiArticle">
+      <article
+        class="border-b mb_8 prose"
+        v-for="article in $page.allStrapiArticle.edges"
+        :key="article.node.id"
+      >
+        <h2>{{ article.node.title }}</h2>
+        <!-- remove pointer to localhost:1337, it's for local dev only -->
+        <g-image v-if="article.node.cover[0]" :src="`http://localhost:1337${article.node.cover[0].url}`" alt=""></g-image>
+        <div v-html="marked(article.node.content)"></div>
+
+        <ul class="mt-8">
+          <li v-for="category in article.node.categories" :key="category.id">
             <g-link :to="'categories/' + category.id">{{ category.name }}</g-link>
           </li>
         </ul>
-      </li>
-    </ul>
+      </article>
+    </template>
   </Layout>
 </template>
 
 <page-query>
   query {
-      allStrapiRestaurant {
+      allStrapiArticle {
         edges {
           node {
-            id
-            name
+            title
+            content
+            cover {
+              url
+            }
             categories {
               id
               name
@@ -30,8 +41,13 @@
     }
 </page-query>
 
-<script lang="ts">
+<script>
+import * as marked from "marked";
+
 export default {
+  data() {
+    return { marked };
+  },
   metaInfo: {
     title: "Marketingowy Wir",
     meta: [

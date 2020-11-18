@@ -8,6 +8,44 @@
   --bg-secondary: var(--color-dark);
   --accent-primary: var(--color-light);
   --accent-secondary: var(--color-gray);
+  --separator: rgba(255, 255, 255, .2);
+  --section-gadient: linear-gradient(
+    306deg,
+    rgba(54, 54, 54, 0.05),
+    rgba(54, 54, 54, 0.05) 33.333%,
+    rgba(85, 85, 85, 0.05) 0,
+    rgba(85, 85, 85, 0.05) 66.666%,
+    hsla(0, 0%, 100%, 0.05) 0,
+    hsla(0, 0%, 100%, 0.05) 99.999%
+  ),
+  linear-gradient(
+    353deg,
+    rgba(81, 81, 81, 0.05),
+    rgba(81, 81, 81, 0.05) 33.333%,
+    hsla(0, 0%, 93.3%, 0.05) 0,
+    hsla(0, 0%, 93.3%, 0.05) 66.666%,
+    rgba(32, 32, 32, 0.05) 0,
+    rgba(32, 32, 32, 0.05) 99.999%
+  ),
+  linear-gradient(
+    140deg,
+    hsla(0, 0%, 75.3%, 0.05),
+    hsla(0, 0%, 75.3%, 0.05) 33.333%,
+    hsla(0, 0%, 42.7%, 0.05) 0,
+    hsla(0, 0%, 42.7%, 0.05) 66.666%,
+    rgba(30, 30, 30, 0.05) 0,
+    rgba(30, 30, 30, 0.05) 99.999%
+  ),
+  linear-gradient(
+    189deg,
+    rgba(77, 77, 77, 0.05),
+    rgba(77, 77, 77, 0.05) 33.333%,
+    rgba(55, 55, 55, 0.05) 0,
+    rgba(55, 55, 55, 0.05) 66.666%,
+    hsla(0, 0%, 56.9%, 0.05) 0,
+    hsla(0, 0%, 56.9%, 0.05) 99.999%
+  ),
+  linear-gradient(90deg, var(--bg-secondary), var(--bg-secondary));
 
   --body-color: #433422;
   --bg: #{map-get($colors, sand)};

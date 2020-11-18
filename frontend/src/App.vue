@@ -62,12 +62,12 @@ body {
   }
 }
 
+main {
+  flex: 1 0 auto;
+}
+
 #app {
   display: flex;
   flex-direction: column;
-}
-
-main {
-  flex: 1 0 auto;
 }
 </style>

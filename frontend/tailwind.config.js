@@ -28,10 +28,18 @@ module.exports = {
       135: "135deg",
       270: "270deg",
     },
+    typography: {
+      default: {
+        css: {
+          color: "inherit",
+          maxWidth: "none"
+        }
+      }
+    },
     extend: {},
   },
   variants: {
     margin: ["odd", "even"],
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
