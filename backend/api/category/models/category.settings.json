@@ -15,10 +15,9 @@
       "required": true,
       "unique": true
     },
-    "restaurants": {
-      "collection": "restaurant",
+    "articles": {
       "via": "categories",
-      "dominant": true
+      "collection": "article"
     }
   }
 }
