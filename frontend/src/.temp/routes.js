@@ -1,6 +1,7 @@
 const c1 = () => import(/* webpackChunkName: "page--src--templates--category-vue" */ "/home/mateusz.kwiatkowski/Playground/marketingowy-wir/frontend/src/templates/Category.vue")
-const c2 = () => import(/* webpackChunkName: "page--src--pages--404-vue" */ "/home/mateusz.kwiatkowski/Playground/marketingowy-wir/frontend/src/pages/404.vue")
-const c3 = () => import(/* webpackChunkName: "page--src--pages--index-vue" */ "/home/mateusz.kwiatkowski/Playground/marketingowy-wir/frontend/src/pages/Index.vue")
+const c2 = () => import(/* webpackChunkName: "page--src--pages--about-vue" */ "/home/mateusz.kwiatkowski/Playground/marketingowy-wir/frontend/src/pages/About.vue")
+const c3 = () => import(/* webpackChunkName: "page--src--pages--404-vue" */ "/home/mateusz.kwiatkowski/Playground/marketingowy-wir/frontend/src/pages/404.vue")
+const c4 = () => import(/* webpackChunkName: "page--src--pages--index-vue" */ "/home/mateusz.kwiatkowski/Playground/marketingowy-wir/frontend/src/pages/Index.vue")
 
 export default [
   {
@@ -44,18 +45,22 @@ export default [
     component: c1
   },
   {
+    path: "/about/",
+    component: c2
+  },
+  {
     name: "404",
     path: "/404/",
-    component: c2
+    component: c3
   },
   {
     name: "home",
     path: "/",
-    component: c3
+    component: c4
   },
   {
     name: "*",
     path: "*",
-    component: c2
+    component: c3
   }
 ]

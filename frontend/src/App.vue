@@ -42,7 +42,7 @@ body,
 }
 
 body {
-  background-color: var(--bg);
+  background-color: var(--bg-primary);
   min-height: 100%;
   scroll-behavior: smooth;
 

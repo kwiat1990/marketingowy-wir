@@ -8,8 +8,13 @@
       >
         <h2>{{ article.node.title }}</h2>
         <!-- remove pointer to localhost:1337, it's for local dev only -->
-        <g-image v-if="article.node.cover[0]" :src="`http://localhost:1337${article.node.cover[0].url}`" alt=""></g-image>
-        <div v-html="marked(article.node.content)"></div>
+        <g-image
+          v-if="article.node.cover[0]"
+          :src="`http://localhost:1337${article.node.cover[0].url}`"
+          alt=""
+        ></g-image>
+        <!--        <div v-html="marked(article.node.content)"></div>-->
+        <app-rich-content :content="article.node.content"></app-rich-content>
 
         <ul class="mt-8">
           <li v-for="category in article.node.categories" :key="category.id">
@@ -42,12 +47,11 @@
 </page-query>
 
 <script>
-import * as marked from "marked";
+import RichContent from "~/components/RichContent.vue";
 
 export default {
-  data() {
-    return { marked };
-  },
+  components: { "app-rich-content": RichContent },
+
   metaInfo: {
     title: "Marketingowy Wir",
     meta: [

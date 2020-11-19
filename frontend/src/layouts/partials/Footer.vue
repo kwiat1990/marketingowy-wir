@@ -38,7 +38,7 @@ export default {
   },
 
   mounted() {
-    this.hasScrollbar = document.innerHeight > window.innerHeigh;
+    this.hasScrollbar = document.innerHeight > window.innerHeight;
   },
 
   computed: {
@@ -63,7 +63,7 @@ export default {
 <style lang="scss" scoped>
 footer {
   background: var(--section-gadient);
-  @apply py-6 bg-secondary text-center text-primary;
+  @apply py-12 bg-secondary text-center text-primary;
 }
 
 p {

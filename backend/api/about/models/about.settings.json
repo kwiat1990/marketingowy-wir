@@ -1,8 +1,9 @@
 {
   "kind": "singleType",
-  "collectionName": "abouts",
+  "collectionName": "about",
   "info": {
-    "name": "About"
+    "name": "About",
+    "description": ""
   },
   "options": {
     "increments": true,
