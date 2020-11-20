@@ -49,7 +49,7 @@ export default {
 
 header {
   background: var(--section-gadient);
-  @apply bg-secondary border-b border-accent-primary text-primary;
+  @apply bg-secondary text-primary;
 }
 
 .bar {

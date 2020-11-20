@@ -3,9 +3,13 @@
     <app-header></app-header>
 
     <main>
+      <app-waves inverted></app-waves>
+
       <transition>
         <router-view />
       </transition>
+
+      <app-waves></app-waves>
     </main>
 
     <app-footer></app-footer>
@@ -16,12 +20,14 @@
 import Footer from "./layouts/partials/Footer.vue";
 import Icon from "~/components/Icon.vue";
 import Header from "~/layouts/partials/Header.vue";
+import Waves from "~/layouts/partials/Waves.vue";
 
 export default {
   components: {
     "app-footer": Footer,
     "app-header": Header,
     "app-icon": Icon,
+    "app-waves": Waves,
   },
   created() {
     // const s1 = performance.now();

@@ -12,12 +12,7 @@ query {
 }
 </static-query>
 
-<style>
-img {
-  height: auto;
-  max-width: 100%;
-}
-
+<style lang="scss" scoped>
 .layout {
   max-width: 760px;
   margin: 0 auto;

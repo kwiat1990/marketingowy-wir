@@ -24,10 +24,6 @@ module.exports = {
       center: true,
       padding: defaultTheme.spacing["4"],
     },
-    rotate: {
-      135: "135deg",
-      270: "270deg",
-    },
     typography: {
       default: {
         css: {
@@ -36,7 +32,12 @@ module.exports = {
         }
       }
     },
-    extend: {},
+    extend: {
+      rotate: {
+        135: "135deg",
+        270: "270deg",
+      },
+    },
   },
   variants: {
     margin: ["odd", "even"],
