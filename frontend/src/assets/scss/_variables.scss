@@ -44,8 +44,7 @@
     rgba(55, 55, 55, 0.05) 66.666%,
     hsla(0, 0%, 56.9%, 0.05) 0,
     hsla(0, 0%, 56.9%, 0.05) 99.999%
-  ),
-  linear-gradient(90deg, var(--bg-secondary), var(--bg-secondary));
+  );
 
   --body-color: #433422;
   --bg: #{map-get($colors, sand)};
