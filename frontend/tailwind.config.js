@@ -24,18 +24,18 @@ module.exports = {
       center: true,
       padding: defaultTheme.spacing["4"],
     },
-    typography: {
-      default: {
-        css: {
-          color: "inherit",
-          maxWidth: "none"
-        }
-      }
-    },
     extend: {
       rotate: {
         135: "135deg",
         270: "270deg",
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: "inherit",
+            maxWidth: "none",
+          },
+        },
       },
     },
   },

@@ -10,18 +10,21 @@
   },
   "dependencies": {
     "@gridsome/source-strapi": "^0.2.0",
-    "@tailwindcss/typography": "^0.2.0",
+    "@tailwindcss/typography": "^0.3.1",
+    "autoprefixer": "^9.8.6",
     "babel-runtime": "^6.26.0",
-    "gridsome": "^0.7.0",
-    "marked": "^1.2.4"
+    "gridsome": "^0.7.22",
+    "marked": "^1.2.5",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1"
   },
   "devDependencies": {
-    "eslint": "^7.12.1",
-    "gridsome-plugin-tailwindcss": "^3.0.1",
+    "eslint": "^7.14.0",
+    "gridsome-plugin-tailwindcss": "^4.1.0",
     "gridsome-plugin-typescript": "^0.4.0",
     "node-sass": "^5.0.0",
-    "prettier": "2.1.2",
-    "sass-loader": "^10.0.5",
+    "prettier": "^2.2.0",
+    "sass-loader": "^10.1.0",
     "svg-sprite-loader": "^5.0.0",
     "vue-svg-loader": "^0.16.0"
   }
