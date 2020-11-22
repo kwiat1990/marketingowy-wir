@@ -19,6 +19,9 @@
     "isInternal": {
       "type": "boolean",
       "default": false
+    },
+    "iconCode": {
+      "type": "string"
     }
   }
 }

@@ -8,8 +8,7 @@
 
 module.exports = {
   siteName: "Marketingowy wir",
-  // assetsDir: "./src/assets",
-
+  
   chainWebpack: (config) => {
     const svgRule = config.module.rule("svg");
     svgRule.uses.clear();
@@ -42,7 +41,7 @@ module.exports = {
       use: "gridsome-plugin-typescript",
     },
     {
-      use: "gridsome-plugin-tailwindcss"
+      use: "gridsome-plugin-tailwindcss",
     },
   ],
 };

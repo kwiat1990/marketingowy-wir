@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div class="prose layout">
     <slot />
   </div>
 </template>
@@ -15,8 +15,6 @@ query {
 <style lang="scss" scoped>
 .layout {
   max-width: 760px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  @apply px-6 mx-auto;
 }
 </style>

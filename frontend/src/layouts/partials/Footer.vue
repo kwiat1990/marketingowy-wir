@@ -1,25 +1,33 @@
 <template>
-  <footer class="section-gradient" ref="footer">
-    <div class="container">
-      <a
-        v-for="icon in $static.data.edges[0].node.icons.data"
-        :key="icon.text"
-        :href="icon.url"
-        :title="icon.text"
-        class="even:ml-4"
-      >
-        <app-icon :icon="icon.code"></app-icon>
-      </a>
-
-      <hr>
-
-      <g-link :to="$static.data.edges[0].node.link"></g-link>
-
-      <p>
-        {{ $static.data.edges[0].node.copyright }}
-      </p>
-
-      <app-scroll-to-top v-if="hasScrollbar" class="mt-5"></app-scroll-to-top>
+  <footer ref="footer">
+    <app-waves></app-waves>
+    <div class="inner">
+      <div class="container">
+        <div class="separator">
+          <a
+            v-for="icon in $static.data.edges[0].node.socialIcons"
+            :key="icon.id"
+            :href="icon.url"
+            :title="icon.title"
+            :aria-label="icon.text"
+          >
+            <app-icon :icon="icon.iconCode"></app-icon>
+          </a>
+        </div>
+        <div class="separator">
+          <g-link
+            v-for="link in $static.data.edges[0].node.links"
+            :key="link.id"
+            :to="link.url"
+            :title="link.title"
+            >{{ link.label }}</g-link
+          >
+        </div>
+        <p>
+          {{ $static.data.edges[0].node.copyright }}
+        </p>
+        <app-scroll-to-top v-if="hasScrollbar" class="block mx-auto mt-5 -mb-8"></app-scroll-to-top>
+      </div>
     </div>
   </footer>
 </template>
@@ -30,14 +38,15 @@
       edges {
         node {
           copyright,
-          icons {
-            data {
-              code,
-              text,
-              url
-            }
+          socialIcons {
+            id,
+            iconCode,
+            label,
+            title,
+            url
           }
           links {
+            id
             isInternal
             label
             title
@@ -52,12 +61,14 @@
 <script>
 import Icon from "~/components/Icon.vue";
 import ScrollToTop from "~/components/ScrollToTop.vue";
+import Waves from "~/layouts/partials/Waves.vue";
 
 export default {
   name: "Footer",
   components: {
     "app-icon": Icon,
     "app-scroll-to-top": ScrollToTop,
+    "app-waves": Waves,
   },
 
   data() {
@@ -68,8 +79,10 @@ export default {
   },
 
   mounted() {
+    // TODO: doesn't work by privacy-policy due to scrolling on route change
     this.observer = new IntersectionObserver((entries) => {
       // if intersectionRatio is 0, the target is out of view
+      console.log("observer", entries[0].intersectionRatio);
       if (entries[0].intersectionRatio <= 0) {
         this.hasScrollbar = true;
       }
@@ -87,34 +100,21 @@ export default {
       this.hasScrollbar = false;
     },
   },
-
-  computed: {
-    icons() {
-      return [
-        {
-          code: "facebook",
-          href: "#",
-          text: "Facebook",
-        },
-        {
-          code: "instagram",
-          href: "#",
-          text: "Instagram",
-        },
-      ];
-    },
-  },
 };
 </script>
 
 <style lang="scss" scoped>
-footer {
+.inner {
   background: var(--section-gadient);
   @apply py-12 bg-secondary text-center text-primary;
 }
 
-p {
+.separator {
   border-color: var(--separator);
-  @apply pt-4 mt-4 text-xs border-t border-solid;
+  @apply my-5 pb-5 space-x-4 border-b border-dotted;
+}
+
+p {
+  @apply text-xs;
 }
 </style>

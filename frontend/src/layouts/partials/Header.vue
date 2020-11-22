@@ -16,6 +16,7 @@
         <app-search key="search" v-if="showSearch" @on-close="showSearch = false"></app-search>
       </transition-group>
     </div>
+    <app-waves inverted></app-waves>
   </header>
 </template>
 
@@ -23,12 +24,14 @@
 import Icon from "~/components/Icon.vue";
 import Nav from "~/components/Nav.vue";
 import Search from "~/components/Search.vue";
+import Waves from "~/layouts/partials/Waves.vue";
 
 export default {
   components: {
     "app-icon": Icon,
     "app-nav": Nav,
     "app-search": Search,
+    "app-waves": Waves,
   },
   name: "Header",
 

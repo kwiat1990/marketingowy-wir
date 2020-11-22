@@ -11,13 +11,15 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "icons": {
-      "type": "json"
-    },
     "copyright": {
       "type": "string"
     },
     "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "link.page-link"
+    },
+    "socialIcons": {
       "type": "component",
       "repeatable": true,
       "component": "link.page-link"

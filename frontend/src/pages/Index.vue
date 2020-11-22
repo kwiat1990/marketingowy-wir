@@ -1,11 +1,9 @@
 <template>
   <section>
-   
-
     <Layout>
       <template v-if="$page.articles">
         <article
-          class="mb-8 border-b prose"
+          class="mb-8 prose border-b"
           v-for="article in $page.articles.edges"
           :key="article.node.id"
         >
@@ -14,7 +12,7 @@
           <!-- remove pointer to localhost:1337, it's for local dev only -->
           <g-image
             v-if="article.node.cover[0]"
-            :src="`http://localhost:1337${article.node.cover[0].url}`"
+            :src="getUrl(article.node.cover[0].url)"
             alt=""
           ></g-image>
 
@@ -22,7 +20,7 @@
 
           <ul class="mt-8">
             <li v-for="category in article.node.categories" :key="category.id">
-              <g-link :to="'categories/' + category.id">{{ category.name }}</g-link>
+              <!-- <g-link :to="'categories/' + category.id">{{ category.name }}</g-link> -->
             </li>
           </ul>
         </article>
@@ -53,10 +51,17 @@
 </page-query>
 
 <script>
+import getUrl from "~/utils/url-resolver";
 import RichContent from "~/components/RichContent.vue";
 
 export default {
   components: { "app-rich-content": RichContent },
+  
+  data() {
+    return {
+      getUrl,
+    };
+  },
 
   metaInfo: {
     title: "Marketingowy Wir",
@@ -74,5 +79,4 @@ export default {
 .home-links a {
   margin-right: 1rem;
 }
-
 </style>

@@ -2,23 +2,20 @@
   <Layout>
     <div>
       <h1>{{ $page.category.name }}</h1>
-      <ul>
+      <!-- <ul>
         <li v-for="articles in $page.category.articles" :key="$page.category.id">
           {{ articles.title }}
         </li>
-      </ul>
+      </ul> -->
     </div>
   </Layout>
 </template>
 
 <page-query>
   query Category($id: ID!) {
-      category: strapiCategory(id: $id) {
-        id
-        name
-        articles {
-          title
-        }
-      }
+    category: strapiCategory(id: $id) {
+      id
+      name
     }
+  }
 </page-query>
