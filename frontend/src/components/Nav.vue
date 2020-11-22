@@ -32,8 +32,8 @@ export default {
           href: "/some",
         },
         {
-          name: "None",
-          href: "/none",
+          name: "About",
+          href: "/about",
         },
       ];
     },
@@ -43,17 +43,10 @@ export default {
 
 <style lang="scss" scoped>
 .nav-link {
-  position: relative;
   @apply block py-3;
 
   &--is-active {
-    @apply text-accent-primary;
-
-    &::after {
-      content: "";
-      top: 100%;
-      @apply block absolute inset-x-0 bg-dark h-px;
-    }
+    text-shadow: 0 0 10px var(--color-glow);
   }
 }
 </style>

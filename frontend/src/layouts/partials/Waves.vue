@@ -1,5 +1,6 @@
 <template>
   <svg
+    v-once
     class="waves"
     :class="this.inverted ? ['transform', 'rotate-180'] : null"
     xmlns="http://www.w3.org/2000/svg"

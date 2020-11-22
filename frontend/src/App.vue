@@ -1,17 +1,13 @@
 <template>
   <div id="app">
     <app-header></app-header>
-
+    <app-waves inverted></app-waves>
     <main>
-      <app-waves inverted></app-waves>
-
       <transition>
         <router-view />
       </transition>
-
-      <app-waves></app-waves>
     </main>
-
+    <app-waves></app-waves>
     <app-footer></app-footer>
   </div>
 </template>
@@ -41,18 +37,28 @@ export default {
 <style lang="scss">
 @import "src/assets/scss/variables";
 
+@layer base {
+  img {
+    @apply mx-auto;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
 html,
 body,
 #app {
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
   background-color: var(--bg-primary);
-  min-height: 100%;
   scroll-behavior: smooth;
 
-  // TODO adjust theming options
+  // TODO: adjust theming options
   @media (prefers-color-scheme: light) {
     body {
       background: white;
@@ -70,6 +76,7 @@ body {
 
 main {
   flex: 1 0 auto;
+  @apply my-12;
 }
 
 #app {

@@ -1,24 +1,53 @@
 <template>
-  <footer class="section-gradient">
+  <footer class="section-gradient" ref="footer">
     <div class="container">
       <a
-        v-for="icon in icons"
+        v-for="icon in $static.data.edges[0].node.icons.data"
         :key="icon.text"
-        :href="icon.href"
+        :href="icon.url"
         :title="icon.text"
         class="even:ml-4"
       >
         <app-icon :icon="icon.code"></app-icon>
       </a>
 
+      <hr>
+
+      <g-link :to="$static.data.edges[0].node.link"></g-link>
+
       <p>
-        Copyright © {{ new Date().getFullYear() }} Marketingowy Wir. Wszelkie prawa zastrzeżone.
+        {{ $static.data.edges[0].node.copyright }}
       </p>
 
-      <app-scroll-to-top v-if="this.hasScrollbar" class="mt-5"></app-scroll-to-top>
+      <app-scroll-to-top v-if="hasScrollbar" class="mt-5"></app-scroll-to-top>
     </div>
   </footer>
 </template>
+
+<static-queryY>
+  query {
+    data: allStrapiFooter {
+      edges {
+        node {
+          copyright,
+          icons {
+            data {
+              code,
+              text,
+              url
+            }
+          }
+          links {
+            isInternal
+            label
+            title
+            url
+          }
+        }
+      }
+    }
+  }
+</static-queryY>
 
 <script>
 import Icon from "~/components/Icon.vue";
@@ -34,11 +63,29 @@ export default {
   data() {
     return {
       hasScrollbar: false,
+      observer: null,
     };
   },
 
   mounted() {
-    this.hasScrollbar = document.innerHeight > window.innerHeight;
+    this.observer = new IntersectionObserver((entries) => {
+      // if intersectionRatio is 0, the target is out of view
+      if (entries[0].intersectionRatio <= 0) {
+        this.hasScrollbar = true;
+      }
+    });
+    this.observer.observe(this.$el);
+  },
+
+  beforeDestroy() {
+    this.observer.disconnect();
+  },
+
+  watch: {
+    // react on route change
+    $route(to, from) {
+      this.hasScrollbar = false;
+    },
   },
 
   computed: {

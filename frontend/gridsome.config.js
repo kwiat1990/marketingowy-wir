@@ -35,14 +35,14 @@ module.exports = {
         apiURL: `http://localhost:1337`,
         queryLimit: 1000, // Defaults to 100
         contentTypes: ["Article", "Category"],
-        singleTypes: ["About"],
+        singleTypes: ["About", "Footer"],
       },
     },
     {
       use: "gridsome-plugin-typescript",
     },
     {
-      use: "gridsome-plugin-tailwindcss",
+      use: "gridsome-plugin-tailwindcss"
     },
   ],
 };

@@ -1,0 +1,9 @@
+{
+  "debug.javascript.terminalOptions": {},
+  "npm.exclude": [
+    ".temp",
+    ".cache",
+    "**/.cache",
+    "**/.cache/**"
+  ],
+}

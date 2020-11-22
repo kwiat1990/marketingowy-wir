@@ -4,11 +4,15 @@
     <div class="bar"></div>
 
     <div class="container">
-      <app-nav></app-nav>
+      <g-link to="/" class="brand">Marketingowy wir</g-link>
+
+      <app-nav class="ml-8 mr-auto"></app-nav>
+
       <transition-group name="fade">
         <button key="button" type="button" @click="showSearch = true">
           <app-icon icon="search"></app-icon>
         </button>
+
         <app-search key="search" v-if="showSearch" @on-close="showSearch = false"></app-search>
       </transition-group>
     </div>
@@ -54,10 +58,14 @@ header {
 
 .bar {
   background: linear-gradient(90deg, var(--primary-color), #8ed6fb 50%, #d32e9d);
-  @apply relative h-1 z-10;
+  @apply relative z-10 h-1;
+}
+
+.brand {
+  @apply block text-2xl font-bold text-center;
 }
 
 .container {
-  @apply flex relative items-center justify-between;
+  @apply relative flex items-center justify-between;
 }
 </style>

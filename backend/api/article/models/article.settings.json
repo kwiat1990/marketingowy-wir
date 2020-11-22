@@ -40,6 +40,14 @@
       "collection": "category",
       "via": "articles",
       "dominant": true
+    },
+    "preview": {
+      "type": "text"
+    },
+    "tags": {
+      "collection": "tag",
+      "via": "articles",
+      "dominant": true
     }
   }
 }

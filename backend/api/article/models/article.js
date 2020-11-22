@@ -5,7 +5,16 @@
  * to customize this model
  */
 
-const slugify = require('slugify');
+const slugify = require("slugify");
+
+function truncateBySentence(text, sentenceCount = 4) {
+  // match ".","!","?" - english ending sentence punctuation
+  const sentences = text.match(/[^\.!\?]+[\.!\?]+/g);
+  if (sentences && sentences.length >= sentenceCount) {
+    return sentences.slice(0, sentenceCount).join(" ");
+  }
+  return text;
+}
 
 module.exports = {
   /**
@@ -14,13 +23,21 @@ module.exports = {
   lifecycles: {
     async beforeCreate(data) {
       if (data.title) {
-        data.slug = slugify(data.title, {lower: true});
+        data.slug = slugify(data.title, { lower: true });
+      }
+
+      if (data.content) {
+        data.preview = truncateBySentence(data.content);
       }
     },
 
     async beforeUpdate(params, data) {
       if (data.title) {
-        data.slug = slugify(data.title, {lower: true});
+        data.slug = slugify(data.title, { lower: true });
+      }
+
+      if (data.content) {
+        data.preview = truncateBySentence(data.content);
       }
     },
   },
