@@ -5,14 +5,11 @@
 
     <div class="container">
       <g-link to="/" class="brand">Marketingowy wir</g-link>
-
       <app-nav class="ml-8 mr-auto"></app-nav>
-
       <transition-group name="fade">
         <button key="button" type="button" @click="showSearch = true">
           <app-icon icon="search"></app-icon>
         </button>
-
         <app-search key="search" v-if="showSearch" @on-close="showSearch = false"></app-search>
       </transition-group>
     </div>

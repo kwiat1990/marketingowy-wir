@@ -2,7 +2,7 @@
   <div id="app">
     <app-header></app-header>
     <main>
-      <transition>
+      <transition name="fade" mode="out-in">
         <router-view />
       </transition>
     </main>
@@ -37,6 +37,16 @@ export default {
   img {
     @apply mx-auto;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 
 html,

@@ -23,10 +23,10 @@
             >{{ link.label }}</g-link
           >
         </div>
-        <p>
+        <span class="text-xs">
           {{ $static.data.edges[0].node.copyright }}
-        </p>
-        <app-scroll-to-top v-if="hasScrollbar" class="block mx-auto mt-5 -mb-8"></app-scroll-to-top>
+        </span>
+        <app-scroll-to-top v-show="needBackToTop" class="block mx-auto mt-5 -mb-8"></app-scroll-to-top>
       </div>
     </div>
   </footer>
@@ -73,21 +73,20 @@ export default {
 
   data() {
     return {
-      hasScrollbar: false,
+      needBackToTop: false,
       observer: null,
     };
   },
 
   mounted() {
-    // TODO: doesn't work by privacy-policy due to scrolling on route change
     this.observer = new IntersectionObserver((entries) => {
-      // if intersectionRatio is 0, the target is out of view
-      console.log("observer", entries[0].intersectionRatio);
-      if (entries[0].intersectionRatio <= 0) {
-        this.hasScrollbar = true;
-      }
+      // If intersectionRatio is 0, the target is out of view
+      this.needBackToTop = entries[0].intersectionRatio <= 0;
     });
-    this.observer.observe(this.$el);
+    // Watch page header visibility to determine if back to top is needed.
+    // IntersectionObserver for header works better than for footer because of some inconsistency:
+    // if during route change page needs to be scrolled to top, then values for footer are miscalculated)
+    this.observer.observe(document.querySelector("header"));
   },
 
   beforeDestroy() {
@@ -95,9 +94,9 @@ export default {
   },
 
   watch: {
-    // react on route change
+    // React on route change
     $route(to, from) {
-      this.hasScrollbar = false;
+      this.needBackToTop = false;
     },
   },
 };
@@ -111,10 +110,6 @@ export default {
 
 .separator {
   border-color: var(--separator);
-  @apply my-5 pb-5 space-x-4 border-b border-dotted;
-}
-
-p {
-  @apply text-xs;
+  @apply my-5 pb-5 space-x-4 border-b;
 }
 </style>
