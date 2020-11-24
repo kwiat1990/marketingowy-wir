@@ -1,14 +1,15 @@
 <template>
   <Layout>
-    <small v-if="$page.article.categories[0]">{{ $page.article.categories[0].name }}</small>
+    <small v-if="$page.article.categories.length > 0">{{ $page.article.categories[0].name }}</small>
     <h1>{{ $page.article.title }}</h1>
     <g-image
-      :src="getUrl($page.article.cover[0].url)"
-      :alt="$page.article.cover[0].alternativeText"
+      v-if="$page.article.cover.length > 0"
+      :src="getUrl($page.article.cover.url)"
+      :alt="$page.article.cover.alternativeText"
     ></g-image>
-    <span>{{ $page.article.cover[0].caption }}</span>
+    <span>{{ $page.article.cover.caption }}</span>
     <app-rich-content :content="$page.article.content"></app-rich-content>
-    <app-tags :tags="$page.article.tags"></app-tags>
+    <app-tags v-if="$page.article.tags.length > 0" :tags="$page.article.tags"></app-tags>
   </Layout>
 </template>
 

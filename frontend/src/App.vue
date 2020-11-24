@@ -49,6 +49,10 @@ export default {
   opacity: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   height: 100%;
@@ -62,7 +66,6 @@ body,
 
 body {
   background-color: var(--bg-primary);
-  scroll-behavior: smooth;
 
   // TODO: adjust theming options
   @media (prefers-color-scheme: light) {

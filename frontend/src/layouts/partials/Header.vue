@@ -1,19 +1,20 @@
 6
 <template>
   <header>
-    <div class="bar"></div>
-
-    <div class="container">
-      <g-link to="/" class="brand">Marketingowy wir</g-link>
-      <app-nav class="ml-8 mr-auto"></app-nav>
-      <transition-group name="fade">
-        <button key="button" type="button" @click="showSearch = true">
-          <app-icon icon="search"></app-icon>
-        </button>
-        <app-search key="search" v-if="showSearch" @on-close="showSearch = false"></app-search>
-      </transition-group>
+    <div class="inner">
+      <div class="bar"></div>
+      <div class="container">
+        <g-link to="/" class="brand">Marketingowy wir</g-link>
+        <app-nav class="ml-auto mr-8"></app-nav>
+        <transition-group name="fade">
+          <button key="button" type="button" @click="showSearch = true">
+            <app-icon icon="search"></app-icon>
+          </button>
+          <app-search key="search" v-if="showSearch" @on-close="showSearch = false"></app-search>
+        </transition-group>
+      </div>
     </div>
-    <app-waves inverted></app-waves>
+    <app-waves animate invert></app-waves>
   </header>
 </template>
 
@@ -51,9 +52,9 @@ export default {
   transform: translateY(-100%);
 }
 
-header {
+.inner {
   background: var(--section-gadient);
-  @apply bg-secondary text-primary;
+  @apply bg-secondary text-primary overflow-hidden;
 }
 
 .bar {

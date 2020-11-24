@@ -1,6 +1,6 @@
 <template>
   <footer ref="footer">
-    <app-waves></app-waves>
+    <app-waves animate></app-waves>
     <div class="inner">
       <div class="container">
         <div class="separator">
@@ -26,7 +26,7 @@
         <span class="text-xs">
           {{ $static.data.edges[0].node.copyright }}
         </span>
-        <app-scroll-to-top v-show="needBackToTop" class="block mx-auto mt-5 -mb-8"></app-scroll-to-top>
+        <app-scroll-to-top v-show="needBackToTop" class="block mx-auto mt-5 -mb-4"></app-scroll-to-top>
       </div>
     </div>
   </footer>
@@ -105,11 +105,11 @@ export default {
 <style lang="scss" scoped>
 .inner {
   background: var(--section-gadient);
-  @apply py-12 bg-secondary text-center text-primary;
+  @apply py-8 bg-secondary text-center text-primary;
 }
 
 .separator {
   border-color: var(--separator);
-  @apply my-5 pb-5 space-x-4 border-b;
+  @apply mb-5 pb-5 space-x-4 border-b;
 }
 </style>
