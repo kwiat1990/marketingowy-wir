@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <app-header></app-header>
-    <main>
+    <main class="main">
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>
@@ -83,7 +83,7 @@ body {
   }
 }
 
-main {
+.main {
   flex: 1 0 auto;
   @apply my-12;
 }

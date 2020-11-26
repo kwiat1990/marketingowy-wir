@@ -45,9 +45,8 @@
       "type": "text"
     },
     "tags": {
-      "collection": "tag",
       "via": "articles",
-      "dominant": true
+      "collection": "tag"
     }
   }
 }

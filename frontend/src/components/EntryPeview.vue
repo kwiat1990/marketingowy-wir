@@ -1,6 +1,5 @@
 <template>
   <section class="card">
-    <app-waves class="absolute top-0 left-0" height="40px" :color="getRandomColor" invert></app-waves>
     <g-image
       v-if="entry.image.url"
       :src="getUrl(entry.image.url)"
@@ -41,9 +40,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card {
+.card { 
   background: #f5f3ec;
   box-shadow: 0 0 15px -5px var(--color-glow);
-  @apply relative;
+  @apply relative overflow-hidden;
 }
 </style>

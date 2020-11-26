@@ -13,7 +13,7 @@ export default {
     transformed() {
       return {
         name: "MarkdownTransformer",
-        template: `<div>${marked(this.content)}</div>`,
+        template: `<div class="rich-content">${marked(this.content)}</div>`,
       };
     },
   },

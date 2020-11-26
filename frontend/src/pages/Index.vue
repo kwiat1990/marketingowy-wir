@@ -1,35 +1,14 @@
 <template>
   <section>
-    <Layout>
+    <Layout twoCols>
       <template v-if="previews">
         <app-entry-preview
           v-for="article in previews"
           :key="article.id"
           :entry="article"
         ></app-entry-preview>
-        
-        <!-- <article
-          class="mb-8 prose border-b"
-          v-for="article in $page.articles.edges"
-          :key="article.id"
-        >
-          <h2>{{ article.node.title }}</h2>
-
-          <g-image
-            v-if="article.node.cover[0]"
-            :src="getUrl(article.node.cover[0].url)"
-            alt=""
-          ></g-image>
-
-          <app-rich-content :content="article.node.content"></app-rich-content> 
-
-          <ul class="mt-8">
-            <li v-for="category in article.node.categories" :key="category.id">
-              <g-link :to="'categories/' + category.id">{{ category.name }}</g-link>
-            </li>
-          </ul>
-        </article> -->
       </template>
+      <template slot="sidebar">Okie</template>
     </Layout>
   </section>
 </template>
@@ -73,7 +52,7 @@ export default {
 
   computed: {
     previews() {
-      return this.$page.articles.edges.map(entry => {
+      return this.$page.articles.edges.map((entry) => {
         return {
           id: entry.node.id,
           category: entry.node.categories[0]?.name,
@@ -84,10 +63,10 @@ export default {
           image: {
             url: entry.node.cover[0]?.url,
             alternativeText: "",
-          }
-        } 
-      })
-    }
+          },
+        };
+      });
+    },
   },
 
   metaInfo: {

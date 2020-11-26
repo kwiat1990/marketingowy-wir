@@ -7,66 +7,7 @@
 const slugify = require("slugify");
 
 module.exports = function (api) {
-  // Helper
-  async function pageBuilder(collectionName, graphqlQuery, page) {
-    const { data } = await graphqlQuery;
-    await data[collectionName].edges.forEach((edge) => page(edge.node));
-  }
-
-  // Pages
   api.createPages(async ({ graphql, createPage }) => {
-    // pageBuilder(
-    //   "allStrapiArticle",
-    //   graphql(`
-    //     {
-    //       allStrapiArticle {
-    //         edges {
-    //           node {
-    //             id
-    //             title
-    //             slug
-    //             content
-    //           }
-    //         }
-    //       }
-    //     }
-    //   `),
-    //   (node) => {
-    //     createPage({
-    //       path: `/articles/${node.slug}`,
-    //       component: './src/templates/Article.vue',
-    //       context: {
-    //         id: node.id,
-    //       },
-    //     })
-    //   }
-    // );
-
-    // pageBuilder(
-    //   "allStrapiCategory",
-    //   graphql(`
-    //     {
-    //       allStrapiCategory {
-    //         edges {
-    //           node {
-    //             id
-    //             name
-    //           }
-    //         }
-    //       }
-    //     }
-    //   `),
-    //   (node) => {
-    //     createPage({
-    //       path: `/category/${category.node.id}`,
-    //       component: './src/templates/Category.vue',
-    //       context: {
-    //         id: category.node.id,
-    //       },
-    //     })
-    //   }
-    // );
-
     const { data } = await graphql(`
       {
         allStrapiArticle {
@@ -77,7 +18,17 @@ module.exports = function (api) {
             }
           }
         }
+
         allStrapiCategory {
+          edges {
+            node {
+              id
+              name
+            }
+          }
+        }
+
+        allStrapiTag {
           edges {
             node {
               id
@@ -90,6 +41,7 @@ module.exports = function (api) {
 
     const articles = await data.allStrapiArticle.edges;
     const categories = await data.allStrapiCategory.edges;
+    const tags = await data.allStrapiTag.edges;
 
     await articles.forEach((article) => {
       createPage({
@@ -107,6 +59,16 @@ module.exports = function (api) {
         component: "./src/templates/Category.vue",
         context: {
           id: category.node.id,
+        },
+      });
+    });
+
+    await tags.forEach((tag) => {
+      createPage({
+        path: `/tag/${tag.node.id}`,
+        component: "./src/templates/DefaultPage.vue",
+        context: {
+          id: tag.node.id,
         },
       });
     });

@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "tags",
   "info": {
-    "name": "tag"
+    "name": "tag",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -16,8 +17,9 @@
       "unique": true
     },
     "articles": {
+      "collection": "article",
       "via": "tags",
-      "collection": "article"
+      "dominant": true
     }
   }
 }
