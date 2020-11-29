@@ -5,4 +5,18 @@
  * to customize this model
  */
 
-module.exports = {};
+module.exports = {
+  lifecycles: {
+    async beforeCreate(data) {
+      if (data.name) {
+        data.slug = strapi.services.slug.buildSlug(data.name);
+      }
+    },
+
+    async beforeUpdate(params, data) {
+      if (data.name) {
+        data.slug = strapi.services.slug.buildSlug(data.name);
+      }
+    },
+  },
+};

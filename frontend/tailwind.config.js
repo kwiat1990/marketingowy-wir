@@ -8,6 +8,9 @@ module.exports = {
   purge: [],
   theme: {
     colors: {
+      current: "currentColor",
+      transparent: "transparent",
+
       primary: "var(--color-primary)",
       secondary: "var(--color-secondary)",
       "surface-primary": "var(--bg-primary)",
@@ -32,8 +35,21 @@ module.exports = {
       typography: {
         DEFAULT: {
           css: {
+            blockquote: {
+              borderLeftColor: "var(--bg-secondary)",
+            },
             color: "inherit",
+            img: {
+              marginTop: 0,
+              marginBottom: 0,
+            },
             maxWidth: "none",
+            "ol > li::before": {
+              color: "inherit",
+            },
+            "ul > li::before": {
+              backgroundColor: "currentColor",
+            },
           },
         },
       },

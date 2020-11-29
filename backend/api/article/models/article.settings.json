@@ -36,10 +36,9 @@
       "plugin": "upload",
       "required": false
     },
-    "categories": {
-      "collection": "category",
+    "category": {
       "via": "articles",
-      "dominant": true
+      "model": "category"
     },
     "preview": {
       "type": "text"

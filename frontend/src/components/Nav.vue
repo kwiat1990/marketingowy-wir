@@ -43,10 +43,17 @@ export default {
 
 <style lang="scss" scoped>
 .nav-link {
-  @apply block py-3;
+  @apply block relative py-3;
+
+  &::after {
+    content: "";
+    @apply absolute left-2/4 bottom-2 block transform -translate-x-2/4 h-1 w-1 opacity-0 rounded-full bg-current;
+  }
 
   &--is-active {
-    text-shadow: 0 0 10px var(--color-glow);
+    &::after {
+      @apply animate-pulse delay-300 opacity-100;
+    }
   }
 }
 </style>

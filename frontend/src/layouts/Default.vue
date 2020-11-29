@@ -3,15 +3,30 @@
     <main>
       <slot />
     </main>
-    <sidebar v-if="!hideSidebar">
-      <slot name="sidebar"></slot>
-      Here goes sidebar content
-    </sidebar>
+    <aside v-if="!hideSidebar">
+      <ul>
+        <li v-for="category in $static.categories.edges" :key="category.node.id">
+          <g-link :to="category.node.slug">{{ category.node.name }}</g-link>
+        </li>
+      </ul>
+    </aside>
   </div>
 </template>
 
 <static-query>
 query {
+  categories: allStrapiCategory(
+    sortBy: "name", order: ASC, 
+    filter: { articles: { title: { exists: true }}}
+  ) {
+    edges {
+      node {
+        id
+        name
+        slug
+      }
+    }
+  }
   metadata {
     siteName
   }
@@ -61,7 +76,7 @@ export default {
     }
   }
 
-  sidebar {
+  aside {
     @apply bg-accent-primary;
   }
 }

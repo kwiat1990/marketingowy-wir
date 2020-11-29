@@ -4,8 +4,6 @@
 
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
-const slugify = require("slugify");
-
 module.exports = function (api) {
   api.createPages(async ({ graphql, createPage }) => {
     const { data } = await graphql(`
@@ -13,6 +11,10 @@ module.exports = function (api) {
         allStrapiArticle {
           edges {
             node {
+              category {
+                name
+                slug
+              }
               id
               slug
             }
@@ -24,6 +26,18 @@ module.exports = function (api) {
             node {
               id
               name
+              slug
+              articles {
+                published_at
+                id
+                title
+                cover {
+                  url
+                }
+                preview
+                slug
+                category
+              }
             }
           }
         }
@@ -33,6 +47,18 @@ module.exports = function (api) {
             node {
               id
               name
+              slug
+              articles {
+                published_at
+                id
+                title
+                cover {
+                  url
+                }
+                preview
+                slug
+                category
+              }
             }
           }
         }
@@ -43,32 +69,38 @@ module.exports = function (api) {
     const categories = await data.allStrapiCategory.edges;
     const tags = await data.allStrapiTag.edges;
 
-    await articles.forEach((article) => {
+    await articles.forEach(({ node: article }) => {
       createPage({
-        path: `/articles/${article.node.slug}`,
+        path: `/${article.category.slug}/${article.slug}`,
         component: "./src/templates/Article.vue",
         context: {
-          id: article.node.id,
+          id: article.id,
+          dataType: "article",
+          data: article,
         },
       });
     });
 
-    await categories.forEach((category) => {
+    await categories.forEach(({ node: category }) => {
       createPage({
-        path: `/category/${slugify(category.node.name)}`,
-        component: "./src/templates/Category.vue",
-        context: {
-          id: category.node.id,
-        },
-      });
-    });
-
-    await tags.forEach((tag) => {
-      createPage({
-        path: `/tag/${tag.node.id}`,
+        path: `/${category.slug}`,
         component: "./src/templates/DefaultPage.vue",
         context: {
-          id: tag.node.id,
+          id: category.id,
+          dataType: "category",
+          data: category,
+        },
+      });
+    });
+
+    await tags.forEach(({ node: tag }) => {
+      createPage({
+        path: `/${tag.slug}`,
+        component: "./src/templates/DefaultPage.vue",
+        context: {
+          id: tag.id,
+          dataType: "tag",
+          data: tag,
         },
       });
     });

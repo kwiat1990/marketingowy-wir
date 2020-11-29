@@ -1,10 +1,10 @@
 <template>
   <Layout>
-    <small v-if="$page.article.categories.length > 0">{{ $page.article.categories[0].name }}</small>
+    <small v-if="$page.article.category">{{ $page.article.category.name }}</small>
     <h1>{{ $page.article.title }}</h1>
     <g-image
       v-if="$page.article.cover.length > 0"
-      :src="getUrl($page.article.cover.url)"
+      :src="getUrl($page.article.cover[0].url)"
       :alt="$page.article.cover.alternativeText"
     ></g-image>
     <span>{{ $page.article.cover.caption }}</span>
@@ -24,7 +24,7 @@
         alternativeText
         caption
       }
-      categories {
+      category {
         name
       }
       tags {

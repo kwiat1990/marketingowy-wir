@@ -20,6 +20,9 @@
       "collection": "article",
       "via": "tags",
       "dominant": true
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }

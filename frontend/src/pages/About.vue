@@ -1,6 +1,11 @@
 <template>
   <Layout class="prose">
     <h1>{{ $page.about.edges[0].node.title }}</h1>
+    <g-image
+      v-if="$page.about.edges[0].node.img.length > 0"
+      :src="getUrl($page.about.edges[0].node.img[0].url)"
+    ></g-image>
+    <app-rich-content :content="$page.about.edges[0].node.content"></app-rich-content>
   </Layout>
 </template>
 
@@ -21,8 +26,18 @@
 </page-query>
 
 <script>
+import getUrl from "~/utils/url-resolver";
+import RichContent from "~/components/RichContent.vue";
+
 export default {
   name: "About",
+  components: { "app-rich-content": RichContent },
+
+  data() {
+    return {
+      getUrl,
+    };
+  },
 };
 </script>
 

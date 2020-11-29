@@ -26,9 +26,10 @@
           }
           preview
           slug
-          categories {
+          category {
             id
             name
+            slug
           }
         }
       }
@@ -52,18 +53,19 @@ export default {
 
   computed: {
     previews() {
-      return this.$page.articles.edges.map((entry) => {
+      return this.$page.articles.edges.map(({ node: entry }) => {
         return {
-          id: entry.node.id,
-          category: entry.node.categories[0]?.name,
-          date: entry.node.published_at,
-          title: entry.node.title,
-          content: entry.node.preview,
-          slug: entry.node.slug,
+          id: entry.id,
+          category: entry.category?.name,
+          date: entry.published_at,
+          title: entry.title,
+          content: entry.preview,
+          slug: entry.slug,
           image: {
-            url: entry.node.cover[0]?.url,
+            url: entry.cover[0]?.url,
             alternativeText: "",
           },
+          link: `/${entry.category.slug}/${entry.slug}`,
         };
       });
     },
