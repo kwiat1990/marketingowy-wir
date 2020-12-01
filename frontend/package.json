@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "eslint": "^7.14.0",
-    "gridsome-plugin-tailwindcss": "^4.1.0",
+    "gridsome-plugin-tailwindcss": "^4.1.1",
     "gridsome-plugin-typescript": "^0.4.0",
     "node-sass": "^5.0.0",
     "prettier": "^2.2.1",
