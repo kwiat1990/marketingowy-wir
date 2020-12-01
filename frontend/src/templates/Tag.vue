@@ -7,11 +7,23 @@
 </template>
 
 <page-query>
-  query Tag($id: ID!) {
+  query Tag($id: ID) {
     tag: strapiTag(id: $id) {
       id
       name
-      articles
+      articles {
+        published_at
+        id
+        title
+        cover {
+          url
+        }
+        preview
+        slug
+        category {
+          slug
+        }
+      }
     }
   }
 </page-query>

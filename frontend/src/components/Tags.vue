@@ -1,7 +1,7 @@
 <template>
   <ul class="tags">
     <li v-for="tag in tags" :key="tag.id">
-      <g-link to="/">{{ tag.name }}</g-link>
+      <g-link :to="tag.slug">{{ tag.name }}</g-link>
     </li>
   </ul>
 </template>

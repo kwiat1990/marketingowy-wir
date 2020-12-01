@@ -21,7 +21,7 @@ module.exports = function (api) {
           }
         }
 
-        allStrapiCategory {
+        allStrapiCategory(filter: { articles: { title: { exists: true } } }) {
           edges {
             node {
               id
@@ -36,7 +36,11 @@ module.exports = function (api) {
                 }
                 preview
                 slug
-                category
+                category {
+                  id
+                  name
+                  slug
+                }
               }
             }
           }
@@ -57,7 +61,11 @@ module.exports = function (api) {
                 }
                 preview
                 slug
-                category
+                category {
+                  id
+                  name
+                  slug
+                }
               }
             }
           }

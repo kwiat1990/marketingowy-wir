@@ -1,6 +1,8 @@
 <template>
   <Layout>
-    <small v-if="$page.article.category">{{ $page.article.category.name }}</small>
+    <small v-if="$page.article.category"
+      ><g-link :to="$page.article.category.slug">{{ $page.article.category.name }}</g-link></small
+    >
     <h1>{{ $page.article.title }}</h1>
     <g-image
       v-if="$page.article.cover.length > 0"
@@ -26,10 +28,12 @@
       }
       category {
         name
+        slug
       }
       tags {
         id
         name
+        slug
       }
     }
   }

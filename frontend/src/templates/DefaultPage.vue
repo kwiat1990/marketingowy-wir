@@ -19,11 +19,11 @@ export default {
   components: { "app-entry-preview": EntryPreview },
 
   computed: {
-    previews() {
-      return this.$context.data.articles.map((entry) => {
-        return {
+     previews() {
+      return this.$context.data.articles.map( (entry) => {
+        return  {
           id: entry.id,
-          category: entry.category?.name,
+          category: entry.category.name,
           date: entry.published_at,
           title: entry.title,
           content: entry.preview,
@@ -32,7 +32,7 @@ export default {
             url: entry.cover[0]?.url,
             alternativeText: "",
           },
-          link: `${this.$context.data.slug}/${entry.slug}`,
+          link: `${entry.category.slug}/${entry.slug}`,
         };
       });
     },
