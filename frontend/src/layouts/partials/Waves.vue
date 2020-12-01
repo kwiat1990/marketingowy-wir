@@ -1,6 +1,5 @@
 <template>
   <svg
-    v-once
     class="waves"
     :class="classes"
     :style="styles"
@@ -63,6 +62,8 @@ export default {
 
 <style lang="scss" scoped>
 .waves {
+  color: inherit;
+  transition: color 0.3s;
   @apply w-full;
 
   &--is-animated {

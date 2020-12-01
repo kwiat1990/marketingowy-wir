@@ -23,7 +23,7 @@ module.exports = {
        * By default relational field for "category" has only an id, which isn't very helpful. 
        * In order to retrieve all data of a category, it needs to be populated direct inside the controller.
        * Strapi's graphql plugin make this out-of-the-box but it has some performance issues (in comaprision to Rest API it is 9x slower 
-       * if there is plenty of relational collections!)
+       * if there is plenty of relational collections!). See: https://github.com/strapi/strapi/issues/8552
        */
       entities = await strapi.services.category.find(ctx.query, [
         "articles.category",

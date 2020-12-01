@@ -1,11 +1,13 @@
 <template>
   <div class="search">
-    <form @submit.prevent>
-      <input type="text" placeholder="Wyszukaj frazę" v-model="searchTerm" />
-    </form>
-    <button type="button" @click="$emit('on-close')">
-      <app-icon icon="close"></app-icon>
-    </button>
+    <div class="container">
+      <form @submit.prevent>
+        <input type="text" placeholder="Wyszukaj frazę" v-model="searchTerm" />
+      </form>
+      <button type="button" @click="$emit('on-close')">
+        <app-icon icon="close"></app-icon>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -28,7 +30,11 @@ export default {
 
 <style lang="scss" scoped>
 .search {
-  @apply flex absolute inset-0 bg-white;
+  @apply absolute inset-0 bg-white;
+}
+
+.container {
+  @apply flex min-h-full;
 }
 
 form {

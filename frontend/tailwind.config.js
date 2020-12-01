@@ -1,4 +1,6 @@
+const { screens } = require("tailwindcss/defaultTheme");
 const defaultTheme = require("tailwindcss/defaultTheme");
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   future: {
@@ -25,7 +27,10 @@ module.exports = {
     },
     container: {
       center: true,
-      padding: defaultTheme.spacing["4"],
+      padding: {
+        DEFAULT: defaultTheme.spacing["6"],
+        lg: defaultTheme.spacing["20"],
+      },
     },
     extend: {
       rotate: {
@@ -58,5 +63,12 @@ module.exports = {
   variants: {
     margin: ["odd", "even"],
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    plugin(function ({ addBase, theme }) {
+      addBase({
+        body: { fontSize: theme("fontSize.lg"), lineHeight: theme("lineHeight.relaxed") },
+      });
+    }),
+  ],
 };

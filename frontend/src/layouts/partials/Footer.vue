@@ -23,7 +23,7 @@
             >{{ link.label }}</g-link
           >
         </div>
-        <span class="text-xs">
+        <span class="text-base">
           {{ $static.data.edges[0].node.copyright }}
         </span>
         <app-scroll-to-top v-show="needBackToTop" class="block mx-auto mt-5 -mb-4"></app-scroll-to-top>
@@ -103,9 +103,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  @apply max-w-none;
+}
+
 .inner {
   background: var(--section-gadient);
-  @apply py-8 bg-secondary text-center text-primary;
+  @apply py-12 bg-secondary text-center text-primary;
 }
 
 .separator {

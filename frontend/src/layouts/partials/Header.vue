@@ -14,7 +14,7 @@
         </transition-group>
       </div>
     </div>
-    <app-waves animate invert></app-waves>
+    <app-waves animate invert :color="showSearch ? '#fff' : null"></app-waves>
   </header>
 </template>
 
@@ -44,12 +44,13 @@ export default {
 <style lang="scss" scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: transform 0.3s;
+  transition: opacity 0.3s;
 }
 
 .fade-enter,
 .fade-leave-to {
-  transform: translateY(-100%);
+  // transform: translateY(-100%);
+  opacity: 0;
 }
 
 .inner {
@@ -67,6 +68,6 @@ export default {
 }
 
 .container {
-  @apply relative flex items-center justify-between;
+  @apply relative flex items-center justify-between max-w-none;
 }
 </style>

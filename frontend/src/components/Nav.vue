@@ -47,12 +47,12 @@ export default {
 
   &::after {
     content: "";
-    @apply absolute left-2/4 bottom-2 block transform -translate-x-2/4 h-1 w-1 opacity-0 rounded-full bg-current;
+    @apply absolute left-2/4 bottom-2 block transition-opacity transform -translate-x-2/4 h-1 w-1 opacity-0 rounded-full bg-current;
   }
 
   &--is-active {
     &::after {
-      @apply animate-pulse delay-300 opacity-100;
+      @apply delay-300 opacity-100;
     }
   }
 }
