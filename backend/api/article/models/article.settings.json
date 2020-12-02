@@ -37,15 +37,16 @@
       "required": false
     },
     "category": {
-      "via": "articles",
-      "model": "category"
+      "model": "category",
+      "via": "articles"
     },
-    "preview": {
-      "type": "text"
+    "lead": {
+      "type": "text",
+      "maxLength": 350
     },
     "tags": {
-      "via": "articles",
-      "collection": "tag"
+      "collection": "tag",
+      "via": "articles"
     }
   }
 }

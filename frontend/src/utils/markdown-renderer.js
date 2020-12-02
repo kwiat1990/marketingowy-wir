@@ -11,7 +11,7 @@ const renderer = {
     if (match) {
       return `<g-link to="${href}">${text}</g-link>`;
     }
-    return  `<a href=${href} title="${title}">${text}</a>`
+    return  `<a href=${href} ${title ? 'title="' + title + '"' : ''}>${text}</a>`
   },
 
   image(href, title, text) {

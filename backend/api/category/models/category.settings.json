@@ -17,8 +17,8 @@
       "unique": true
     },
     "articles": {
-      "collection": "article",
-      "via": "category"
+      "via": "category",
+      "collection": "article"
     },
     "slug": {
       "type": "string"

@@ -24,8 +24,8 @@
           cover {
             url
           }
-          preview
           slug
+          lead
           category {
             id
             name
@@ -39,6 +39,7 @@
 
 <script>
 import getUrl from "~/utils/url-resolver";
+import truncate from "~/utils/truncate";
 import RichContent from "~/components/RichContent.vue";
 import EntryPreview from "../components/EntryPeview.vue";
 
@@ -59,7 +60,7 @@ export default {
           category: entry.category?.name,
           date: entry.published_at,
           title: entry.title,
-          content: entry.preview,
+          content: truncate(entry.lead),
           slug: entry.slug,
           image: {
             url: entry.cover[0]?.url,

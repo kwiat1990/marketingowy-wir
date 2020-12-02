@@ -1,5 +1,10 @@
 <template>
-  <g-link v-if="entry.link" :to="entry.link" class="card" :style="{['borderColor']: getRandomColor}">
+  <g-link
+    v-if="entry.link"
+    :to="entry.link"
+    class="card"
+    :style="{ ['borderColor']: getRandomColor }"
+  >
     <g-image
       v-if="entry.image.url"
       :src="getUrl(entry.image.url)"
@@ -7,7 +12,7 @@
       class="mb-4"
     ></g-image>
     <span class="title">{{ entry.title }}</span>
-    <app-rich-content :content="entry.content" class="mt-4"></app-rich-content>
+    <p class="mt-4">{{ entry.content }}</p>
     <time class="block mt-4 text-base" :datetime="getFormattedDate(entry.date).datetime">{{
       getFormattedDate(entry.date).date
     }}</time>
@@ -17,19 +22,18 @@
 <script>
 import getUrl from "~/utils/url-resolver";
 import getFormattedDate from "~/utils/format-date";
-import RichContent from "~/components/RichContent.vue";
 import Waves from "~/layouts/partials/Waves.vue";
 
 export default {
   name: "EntryPreview",
-  components: { "app-rich-content": RichContent, "app-waves": Waves },
+  components: { "app-waves": Waves },
   props: {
     entry: Object,
   },
   data() {
     return {
       getUrl,
-      getFormattedDate
+      getFormattedDate,
     };
   },
 
