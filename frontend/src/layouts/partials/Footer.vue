@@ -108,7 +108,7 @@ export default {
 }
 
 .inner {
-  background: var(--section-gadient);
+  background: var(--section-gradient);
   @apply py-12 bg-secondary text-center text-primary;
 }
 

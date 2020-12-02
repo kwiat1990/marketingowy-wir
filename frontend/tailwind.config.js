@@ -19,6 +19,7 @@ module.exports = {
       "surface-secondary": "var(--bg-secondary)",
       "accent-primary": "var(--accent-primary)",
       "accent-secondary": "var(--accent-secondary)",
+      "accent-tertiary": "var(--accent-tertiary)",
 
       sand: "var(--color-sand)",
       dark: "var(--color-dark)",
@@ -44,16 +45,20 @@ module.exports = {
               borderLeftColor: "var(--bg-secondary)",
             },
             color: "inherit",
-            img: {
-              marginTop: 0,
-              marginBottom: 0,
-            },
             maxWidth: "none",
             "ol > li::before": {
               color: "inherit",
             },
             "ul > li::before": {
               backgroundColor: "currentColor",
+            },
+          },
+        },
+        lg: {
+          css: {
+            img: {
+              marginTop: 0,
+              marginBottom: 0,
             },
           },
         },

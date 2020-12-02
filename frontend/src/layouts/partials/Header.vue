@@ -54,7 +54,7 @@ export default {
 }
 
 .inner {
-  background: var(--section-gadient);
+  background: var(--section-gradient);
   @apply bg-secondary text-primary overflow-hidden;
 }
 

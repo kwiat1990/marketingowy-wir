@@ -1,22 +1,22 @@
 <template>
-  <section class="card">
+  <g-link v-if="entry.link" :to="entry.link" class="card" :style="{['borderColor']: getRandomColor}">
     <g-image
       v-if="entry.image.url"
       :src="getUrl(entry.image.url)"
       :alt="entry.image.alternativeText"
+      class="mb-4"
     ></g-image>
-    <div class="p-4">
-      <span v-if="entry.category">{{ entry.category.toUpperCase() }}</span>
-      <h1 class="mb-0">{{ entry.title }}</h1>
-      <time :datetime="getFormattedDate.datetime">{{ getFormattedDate.date }}</time>
-      <app-rich-content :content="entry.content"></app-rich-content>
-      <g-link v-if="entry.link" :to="entry.link">Czytaj więcej</g-link>
-    </div>
-  </section>
+    <span class="title">{{ entry.title }}</span>
+    <app-rich-content :content="entry.content" class="mt-4"></app-rich-content>
+    <time class="block mt-4 text-base" :datetime="getFormattedDate(entry.date).datetime">{{
+      getFormattedDate(entry.date).date
+    }}</time>
+  </g-link>
 </template>
 
 <script>
 import getUrl from "~/utils/url-resolver";
+import getFormattedDate from "~/utils/format-date";
 import RichContent from "~/components/RichContent.vue";
 import Waves from "~/layouts/partials/Waves.vue";
 
@@ -29,22 +29,11 @@ export default {
   data() {
     return {
       getUrl,
+      getFormattedDate
     };
   },
 
   computed: {
-    getFormattedDate() {
-      const date = new Date(this.entry.date);
-      return {
-        datetime: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
-        date: date.toLocaleDateString("pl-PL", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        }),
-      };
-    },
-
     getRandomColor() {
       return "#" + Math.floor(Math.random() * 16777215).toString(16);
     },
@@ -53,9 +42,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.title {
+  background-size: 0 50%;
+  @apply inline text-2xl bg-gradient-to-r from-accent-tertiary to-accent-tertiary bg-no-repeat transition-all duration-500 bg-left-bottom;
+}
+
 .card {
-  background: #f5f3ec;
-  box-shadow: 0 0 15px -5px var(--color-glow);
-  @apply relative overflow-hidden;
+  @apply relative border-t-8 border-solid overflow-hidden;
+
+  &:hover {
+    .title {
+      background-size: 100% 50%;
+    }
+  }
 }
 </style>

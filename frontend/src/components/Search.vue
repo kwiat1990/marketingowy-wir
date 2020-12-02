@@ -34,7 +34,7 @@ export default {
 }
 
 .container {
-  @apply flex min-h-full;
+  @apply flex min-h-full max-w-none;
 }
 
 form {

@@ -1,5 +1,5 @@
 <template>
-  <div class="prose layout" :class="getLayout">
+  <div class="layout" :class="getLayout">
     <slot></slot>
   </div>
 </template>
@@ -25,13 +25,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.prose {
-  @apply px-6 lg:px-20 max-w-screen-xl mx-auto;
-}
-
 .layout {
+   @apply px-6 lg:px-20 max-w-screen-2xl mx-auto;
+   
   &--splited {
-    @apply px-6 mx-auto max-w-screen-lg md:grid md:gap-8 md:grid-cols-2;
+    @apply grid gap-12 sm:gap-6 md:gap-16 xl:gap-20 sm:grid-cols-2 lg:grid-cols-3;
   }
 }
 </style>

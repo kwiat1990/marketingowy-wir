@@ -8,8 +8,9 @@
   --bg-secondary: var(--color-dark);
   --accent-primary: var(--color-light);
   --accent-secondary: var(--color-gray);
+  --accent-tertiary: var(--color-glow);
   --separator: rgba(255, 255, 255, .2);
-  --section-gadient: linear-gradient(
+  --section-gradient: linear-gradient(
     306deg,
     rgba(54, 54, 54, 0.05),
     rgba(54, 54, 54, 0.05) 33.333%,

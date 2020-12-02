@@ -8,12 +8,12 @@ import marked from "~/utils/markdown-renderer";
 export default {
   name: "RichContent",
   props: ["content"],
-  template: `<component v-bind:is="transformed"></component>`,
+  template: `<component :is="transformed"></component>`,
   computed: {
     transformed() {
       return {
         name: "MarkdownTransformer",
-        template: `<div class="rich-content">${marked(this.content)}</div>`,
+        template: `<div class="prose prose-lg">${marked(this.content)}</div>`,
       };
     },
   },
