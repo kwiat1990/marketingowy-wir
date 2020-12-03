@@ -34,7 +34,7 @@ module.exports = function (api) {
                 cover {
                   url
                 }
-                preview
+                lead
                 slug
                 category {
                   id
@@ -59,7 +59,7 @@ module.exports = function (api) {
                 cover {
                   url
                 }
-                preview
+                lead
                 slug
                 category {
                   id

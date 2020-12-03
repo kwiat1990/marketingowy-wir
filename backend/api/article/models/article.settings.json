@@ -19,7 +19,7 @@
       "type": "string"
     },
     "cover": {
-      "collection": "file",
+      "model": "file",
       "via": "related",
       "allowedTypes": [
         "images",
@@ -41,7 +41,7 @@
       "collection": "tag",
       "via": "articles"
     },
-    "Content": {
+    "content": {
       "type": "dynamiczone",
       "components": [
         "content.image-text"

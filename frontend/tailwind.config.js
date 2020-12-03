@@ -45,7 +45,8 @@ module.exports = {
               borderLeftColor: "var(--bg-secondary)",
             },
             color: "inherit",
-            maxWidth: "none",
+            margin: "0 auto",
+            maxWidth: "50rem",
             "ol > li::before": {
               color: "inherit",
             },

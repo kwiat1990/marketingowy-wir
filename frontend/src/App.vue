@@ -37,6 +37,11 @@ export default {
   img {
     @apply mx-auto;
   }
+  .prose {
+    a:hover {
+      color: red;
+    }
+  }
 }
 
 .fade-enter-active,

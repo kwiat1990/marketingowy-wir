@@ -19,18 +19,19 @@ export default {
   components: { "app-entry-preview": EntryPreview },
 
   computed: {
-     previews() {
-      return this.$context.data.articles.map( (entry) => {
-        return  {
+    previews() {
+      return this.$context.data.articles.map((entry) => {
+        return {
           id: entry.id,
           category: entry.category.name,
           date: entry.published_at,
           title: entry.title,
-          content: entry.preview,
+          content: entry.lead,
           slug: entry.slug,
           image: {
-            url: entry.cover[0]?.url,
-            alternativeText: "",
+            url: entry.cover?.url,
+            alt: entry.cover?.alternativeText,
+            caption: entry.cover?.caption,
           },
           link: `${entry.category.slug}/${entry.slug}`,
         };

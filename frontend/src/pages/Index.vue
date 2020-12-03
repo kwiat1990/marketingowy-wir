@@ -23,6 +23,8 @@
           title
           cover {
             url
+            caption
+            alternativeText
           }
           slug
           lead
@@ -63,8 +65,9 @@ export default {
           content: truncate(entry.lead),
           slug: entry.slug,
           image: {
-            url: entry.cover[0]?.url,
-            alternativeText: "",
+            url: entry.cover?.url,
+            alt: entry.cover?.alternativeText,
+            caption: entry.cover?.caption,
           },
           link: `/${entry.category.slug}/${entry.slug}`,
         };
