@@ -1,4 +1,5 @@
 # Local MySQL DB, start with $ docker-compose up
+# For more details to configuration see: https://medium.com/@etiennerouzeaud/play-databases-with-adminer-and-docker-53dc7789f35f
 version: "3.1"
 services:
   db:
@@ -13,3 +14,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: develop
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8090:8080

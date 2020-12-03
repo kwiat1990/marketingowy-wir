@@ -16,19 +16,10 @@
       "required": true
     },
     "content": {
-      "type": "richtext",
-      "required": true
-    },
-    "img": {
-      "collection": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false
+      "type": "dynamiczone",
+      "components": [
+        "content.image-text"
+      ]
     }
   }
 }

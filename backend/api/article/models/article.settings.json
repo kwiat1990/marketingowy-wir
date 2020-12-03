@@ -18,13 +18,6 @@
     "slug": {
       "type": "string"
     },
-    "date": {
-      "type": "date"
-    },
-    "content": {
-      "type": "richtext",
-      "required": true
-    },
     "cover": {
       "collection": "file",
       "via": "related",
@@ -47,6 +40,12 @@
     "tags": {
       "collection": "tag",
       "via": "articles"
+    },
+    "Content": {
+      "type": "dynamiczone",
+      "components": [
+        "content.image-text"
+      ]
     }
   }
 }
