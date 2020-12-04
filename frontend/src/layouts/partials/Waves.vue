@@ -31,10 +31,7 @@ export default {
   props: {
     animate: Boolean,
     invert: Boolean,
-    color: {
-      type: String,
-      default: "#2f2f2f",
-    },
+    color: String,
     height: {
       type: String,
       default: "20px"
@@ -51,7 +48,7 @@ export default {
     },
     styles() {
       return {
-        color: this.color,
+        color: this.color || "#2f2f2f",
         height: this.height,
         "min-height": this.height,
       };

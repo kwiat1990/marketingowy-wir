@@ -4,8 +4,55 @@
 
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
+
+const fs = require("fs");
+const http = require("http");
+const path = require("path");
+
 module.exports = function (api) {
-  api.createPages(async ({ graphql, createPage }) => {
+  api.onCreateNode((options) => {
+    /**
+     * Move all Strapi media files (videos, images etc.) to Gridsome's asset directory and set its URL to local path, 
+     * so that all features of `g-image` can be used (automatic srcset, blur, lazy-loading)
+     * @param {Object} imageObject 
+     */
+    function moveImagesAndOverwriteUrl(imageObject) {
+      const localFilePath = `./src/assets/img/${imageObject.hash + imageObject.ext}`;
+      const hostname = process.env.STRAPI_URL;
+
+      http.get(`${hostname}${imageObject.url}`, (response) => {
+        Object.defineProperty(imageObject, "url", {
+          value: path.resolve(__dirname, localFilePath),
+          writable: true,
+        });
+
+        const file = fs.createWriteStream(localFilePath);
+        response.pipe(file);
+      });
+    }
+
+    if (options.cover && options.cover.url) {
+      moveImagesAndOverwriteUrl(options.cover);
+    }
+
+    if (options.content) {
+      options.content.forEach((item, index) => {
+        if (item.image && item.image.url) {
+          moveImagesAndOverwriteUrl(options.content[index].image);
+        }
+      });
+    }
+
+    if (options.articles) {
+      options.articles.forEach((item, index) => {
+        if (item.cover) {
+          moveImagesAndOverwriteUrl(options.articles[index].cover);
+        }
+      });
+    }
+  });
+
+   api.createPages(async ({ graphql, createPage }) => {
     const { data } = await graphql(`
       {
         allStrapiArticle {
@@ -83,7 +130,7 @@ module.exports = function (api) {
         component: "./src/templates/Article.vue",
         context: {
           id: article.id,
-          dataType: "article",
+          dataType: "Article",
           data: article,
         },
       });
@@ -92,12 +139,12 @@ module.exports = function (api) {
     await categories.forEach(({ node: category }) => {
       createPage({
         path: `/${category.slug}`,
-        component: "./src/templates/DefaultPage.vue",
+        component: "./src/templates/Category.vue",
         context: {
           id: category.id,
-          dataType: "category",
+          dataType: "Category",
           data: category,
-        },
+        }
       });
     });
 
@@ -107,7 +154,7 @@ module.exports = function (api) {
         component: "./src/templates/DefaultPage.vue",
         context: {
           id: tag.id,
-          dataType: "tag",
+          dataType: "Tag",
           data: tag,
         },
       });
