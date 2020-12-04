@@ -15,8 +15,10 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: develop
 
-  adminer:
+  adminer_container:
     image: adminer
     restart: always
     ports:
       - 8090:8080
+    environment: 
+      ADMINER_DESIGN: pepa-linha
