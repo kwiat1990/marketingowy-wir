@@ -1,0 +1,36 @@
+@import "src/assets/scss/variables";
+@import "src/assets/scss/tailwind";
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--bg-primary);
+
+  // TODO: adjust theming options
+  @media (prefers-color-scheme: light) {
+    body {
+      background: white;
+      color: black;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: black;
+      color: white;
+    }
+  }
+}

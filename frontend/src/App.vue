@@ -21,28 +21,11 @@ export default {
     "app-header": Header,
     "app-icon": Icon,
   },
-  created() {
-    // const s1 = performance.now();
-    // console.log(getComputedStyle(document.documentElement).getPropertyValue("--mq"));
-    // const s2 = performance.now();
-    // console.log(s2 - s1);
-  },
 };
 </script>
 
 <style lang="scss">
-@import "src/assets/scss/variables";
-
-@layer base {
-  img {
-    @apply mx-auto;
-  }
-  .prose {
-    a:hover {
-      color: red;
-    }
-  }
-}
+@import "src/assets/scss/base.scss";
 
 .fade-enter-active,
 .fade-leave-active {
@@ -52,40 +35,6 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-html,
-body,
-#app {
-  min-height: 100%;
-}
-
-body {
-  background-color: var(--bg-primary);
-
-  // TODO: adjust theming options
-  @media (prefers-color-scheme: light) {
-    body {
-      background: white;
-      color: black;
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    body {
-      background: black;
-      color: white;
-    }
-  }
 }
 
 .main {

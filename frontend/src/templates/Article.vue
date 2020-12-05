@@ -1,31 +1,31 @@
 <template>
   <Layout>
-    <small v-if="$page.article.category"
-      ><g-link :to="$page.article.category.slug">{{ $page.article.category.name }}</g-link></small
-    >
-    <h1 class="text-4xl font-bold text-center sm:text-7xl">{{ $page.article.title }}</h1>
-    <span class="block mt-8 text-2xl text-center">{{ $page.article.lead }}</span>
-    <time
-      class="block mt-4 text-base"
-      :datetime="getFormattedDate($page.article.published_at).datetime"
-      >{{ getFormattedDate($page.article.published_at).date }}</time
-    >
-    <app-tags v-if="$page.article.tags.length > 0" :tags="$page.article.tags"></app-tags>
+    <div class="hero">
+      <g-link v-if="$page.article.category" class="category" :to="$page.article.category.slug">{{ $page.article.category.name }}</g-link>
+      <h1 class="headline">{{ $page.article.title }}</h1>
+      <span class="lead">{{ $page.article.lead }}</span>
+      <time class="date" :datetime="getFormattedDate($page.article.published_at).datetime">{{
+        getFormattedDate($page.article.published_at).date
+      }}</time>
+      <app-tags v-if="$page.article.tags.length > 0" :tags="$page.article.tags"></app-tags>
+    </div>
 
-    <g-image
-      v-if="$page.article.cover"
-      :src="getUrl($page.article.cover.url)"
-      :alt="$page.article.cover.alternativeText"
-    ></g-image>
+    <figure v-if="$page.article.cover">
+      <g-image
+        :src="getUrl($page.article.cover.url)"
+        :alt="$page.article.cover.alternativeText"
+      ></g-image>
+      <figcaption v-if="$page.article.cover.caption">
+        {{ $page.article.content.caption }}
+      </figcaption>
+    </figure>
 
     <template v-for="content in $page.article.content">
-      <g-image
-        v-if="content.image"
-        :src="getUrl(content.image.url)"
-        :alt="content.image.alternativeText"
-        :key="`image-${content.id}`"
-      ></g-image>
-      <span v-if="content.image" :key="`caption-${content.id}`">{{ content.image.caption }}</span>
+      <figure v-if="content.image" :key="`image-${content.id}`">
+        <g-image :src="getUrl(content.image.url)" :alt="content.image.alternativeText"></g-image>
+        <figcaption v-if="content.image.caption">{{ content.image.caption }}</figcaption>
+      </figure>
+
       <app-rich-content :content="content.text" :key="`text-${content.id}`"></app-rich-content>
     </template>
   </Layout>
@@ -82,3 +82,30 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+img {
+  max-width: calc(100% + #{theme("spacing.12")});
+  @apply -mx-6 my-10;
+}
+
+.category {
+  @apply uppercase border-b-4 inline-block pb-1 mb-4;
+}
+
+.date {
+  @apply block my-4 text-base;
+}
+
+.headline {
+  @apply text-4xl font-bold text-center sm:text-7xl;
+}
+
+.hero {
+  @apply max-w-3xl mx-auto text-center;
+}
+
+.lead {
+  @apply block mt-8 text-xl sm:text-2xl text-center;
+}
+</style>

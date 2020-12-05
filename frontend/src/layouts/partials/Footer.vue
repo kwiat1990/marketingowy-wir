@@ -108,8 +108,7 @@ export default {
 }
 
 .inner {
-  background: var(--section-gradient);
-  @apply py-12 bg-secondary text-center text-primary;
+  @apply py-12 bg-secondary bg-gradient text-center text-primary;
 }
 
 .separator {

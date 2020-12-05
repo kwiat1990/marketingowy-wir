@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <h1>{{ $context.data.name }}</h1>
+    <h1>{{ $page.tag.name }}</h1>
     <template v-if="previews.length > 0">
       <app-entry-preview
         v-for="article in previews"
@@ -11,6 +11,32 @@
   </Layout>
 </template>
 
+<page-query>
+  query ($id: ID!) {
+    tag: strapiTag(id: $id) {
+      id
+      name
+      slug
+      articles {
+        id
+        title
+        lead
+        slug
+        published_at
+        category {
+          name
+          slug
+        }
+        cover {
+          url
+          alternativeText
+          caption
+        }
+      }
+    }
+  }
+</page-query>
+
 <script>
 import EntryPreview from "../components/EntryPeview.vue";
 
@@ -20,7 +46,7 @@ export default {
 
   computed: {
     previews() {
-      return this.$context.data.articles.map((entry) => {
+      return this.$page.tag.articles.map((entry) => {
         return {
           id: entry.id,
           category: entry.category.name,

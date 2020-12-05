@@ -1,14 +1,10 @@
 <template>
-  <g-link
-    v-if="entry.link"
-    :to="entry.link"
-    class="card"
-    :style="{ ['borderColor']: getRandomColor }"
-  >
+  <g-link v-if="entry.link" :to="entry.link" class="card">
     <g-image
       v-if="entry.image.url"
       :src="getUrl(entry.image.url)"
       :alt="entry.image.alternativeText"
+      :style="{ ['borderColor']: getRandomColor }"
       class="mb-4"
     ></g-image>
     <span class="title">{{ entry.title }}</span>
@@ -46,13 +42,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+img {
+  max-width: calc(100% + theme("spacing.12"));
+  @apply -mx-6 border-t-8 border-solid sm:mx-auto sm:max-w-full;
+}
+
 .title {
   background-size: 0 50%;
   @apply inline text-2xl bg-gradient-to-r from-accent-tertiary to-accent-tertiary bg-no-repeat transition-all duration-500 bg-left-bottom;
 }
 
 .card {
-  @apply relative border-t-8 border-solid overflow-hidden;
+  @apply relative;
 
   &:hover {
     .title {

@@ -21,7 +21,7 @@ export default {
   @apply list-none space-x-4;
 
   li {
-    @apply inline-block p-1 border;
+    @apply inline-block py-1 px-3 rounded-full bg-accent-tertiary text-secondary hover:bg-gradient;
   }
 }
 </style>
