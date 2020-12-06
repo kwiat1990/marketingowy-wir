@@ -7,6 +7,8 @@
       :style="{ ['borderColor']: getRandomColor }"
       class="mb-4"
     ></g-image>
+    <!-- TODO: handle responsive images -->
+    <!-- <app-image-loader :strapiImage="entry.image"></app-image-loader> -->
     <span class="title">{{ entry.title }}</span>
     <p class="mt-4">{{ entry.content }}</p>
     <time class="block mt-4 text-base" :datetime="getFormattedDate(entry.date).datetime">{{
@@ -19,10 +21,11 @@
 import getUrl from "~/utils/url-resolver";
 import getFormattedDate from "~/utils/format-date";
 import Waves from "~/layouts/partials/Waves.vue";
+import ImageLoader from "~/components/ImageLoader.vue";
 
 export default {
   name: "EntryPreview",
-  components: { "app-waves": Waves },
+  components: { "app-image-loader": ImageLoader, "app-waves": Waves },
   props: {
     entry: Object,
   },
@@ -44,7 +47,8 @@ export default {
 <style lang="scss" scoped>
 img {
   max-width: calc(100% + theme("spacing.12"));
-  @apply -mx-6 border-t-8 border-solid sm:mx-auto sm:max-w-full;
+  @apply -mx-6 border-t-8 border-solid;
+  @apply sm:mx-auto sm:max-w-full;
 }
 
 .title {

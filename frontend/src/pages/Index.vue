@@ -25,6 +25,30 @@
             url
             caption
             alternativeText
+            height
+            width
+            formats {
+              thumbnail {
+                url
+                width
+                height
+              }
+              large {
+                url
+                width
+                height
+              }
+              medium {
+                url
+                width
+                height
+              }
+              small {
+                url
+                width
+                height
+              }
+            }
           }
           slug
           lead
@@ -68,6 +92,7 @@ export default {
             url: entry.cover?.url,
             alt: entry.cover?.alternativeText,
             caption: entry.cover?.caption,
+            formats: entry.cover?.formats
           },
           link: `/${entry.category.slug}/${entry.slug}`,
         };
