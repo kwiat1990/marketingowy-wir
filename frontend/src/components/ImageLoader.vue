@@ -34,7 +34,7 @@ export default {
         alt: "",
         src: this.getUrl(this.strapiImage.url),
         srcset: formats.map(image => `${this.getUrl(image.url)} ${image.width}w`).join(", "),
-        // sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+        sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
         sizes: "",
         size: {
           height: this.strapiImage.height,

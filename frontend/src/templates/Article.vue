@@ -41,13 +41,13 @@
         id
         text
         image {
-          url
+          url(width: 1000)
           alternativeText
           caption
         }
       }
       cover {
-        url
+        url(width: 1200)
         alternativeText
         caption
       }
@@ -86,7 +86,7 @@ export default {
 <style lang="scss" scoped>
 img {
   max-width: calc(100% + #{theme("spacing.12")});
-  @apply -mx-6 my-10;
+  @apply -mx-6 my-10 sm:mx-auto sm:max-w-full;
 }
 
 .category {

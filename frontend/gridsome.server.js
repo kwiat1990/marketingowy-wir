@@ -32,6 +32,7 @@ module.exports = function (api) {
     }
 
     if (options.cover && options.cover.url) {
+      
       moveImagesAndOverwriteUrl(options.cover);
     }
 

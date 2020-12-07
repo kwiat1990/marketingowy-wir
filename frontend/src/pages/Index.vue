@@ -22,7 +22,7 @@
           id
           title
           cover {
-            url
+            url(width: 640)
             caption
             alternativeText
             height
