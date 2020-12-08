@@ -8,6 +8,7 @@
 
 module.exports = {
   siteName: "Marketingowy wir",
+  runtimeCompiler: true,
   
   chainWebpack: (config) => {
     const svgRule = config.module.rule("svg");
@@ -36,9 +37,6 @@ module.exports = {
         contentTypes: ["Article", "Category", "Tag"],
         singleTypes: ["About", "Footer"],
       },
-    },
-    {
-      use: "gridsome-plugin-typescript",
     },
     {
       use: "gridsome-plugin-tailwindcss",

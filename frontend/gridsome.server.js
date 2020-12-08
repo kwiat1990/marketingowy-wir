@@ -9,30 +9,29 @@ const fs = require("fs");
 const http = require("http");
 const path = require("path");
 
+/**
+ * Move all Strapi media files (videos, images etc.) to Gridsome's asset directory and set its URL to local path,
+ * so that all features of `g-image` can be used (automatic srcset, blur, lazy-loading)
+ * @param {Object} imageObject
+ */
+function moveImagesAndOverwriteUrl(imageObject) {
+  const localFilePath = `./src/assets/img/${imageObject.hash + imageObject.ext}`;
+  const hostname = process.env.STRAPI_URL;
+
+  http.get(`${hostname}${imageObject.url}`, (response) => {
+    Object.defineProperty(imageObject, "url", {
+      value: path.resolve(__dirname, localFilePath),
+      writable: true,
+    });
+
+    const file = fs.createWriteStream(localFilePath);
+    response.pipe(file);
+  });
+}
+
 module.exports = function (api) {
   api.onCreateNode((options) => {
-    /**
-     * Move all Strapi media files (videos, images etc.) to Gridsome's asset directory and set its URL to local path, 
-     * so that all features of `g-image` can be used (automatic srcset, blur, lazy-loading)
-     * @param {Object} imageObject 
-     */
-    function moveImagesAndOverwriteUrl(imageObject) {
-      const localFilePath = `./src/assets/img/${imageObject.hash + imageObject.ext}`;
-      const hostname = process.env.STRAPI_URL;
-
-      http.get(`${hostname}${imageObject.url}`, (response) => {
-        Object.defineProperty(imageObject, "url", {
-          value: path.resolve(__dirname, localFilePath),
-          writable: true,
-        });
-
-        const file = fs.createWriteStream(localFilePath);
-        response.pipe(file);
-      });
-    }
-
     if (options.cover && options.cover.url) {
-      
       moveImagesAndOverwriteUrl(options.cover);
     }
 
@@ -53,7 +52,7 @@ module.exports = function (api) {
     }
   });
 
-   api.createPages(async ({ graphql, createPage }) => {
+  api.createPages(async ({ graphql, createPage }) => {
     const { data } = await graphql(`
       {
         allStrapiArticle {
@@ -145,7 +144,7 @@ module.exports = function (api) {
           id: category.id,
           dataType: "Category",
           data: category,
-        }
+        },
       });
     });
 
