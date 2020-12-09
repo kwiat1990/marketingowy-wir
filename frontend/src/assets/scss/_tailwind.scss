@@ -12,6 +12,11 @@
     @apply mx-auto px-6 lg:px-20;
   }
 
+  .fixed-container {
+    @extend .container;
+    @apply max-w-screen-2xl;
+  }
+
   .prose {
     @apply max-w-3xl mx-auto text-current;
 
@@ -41,6 +46,6 @@
 
 @layer components {
   .button {
-    @apply inline-block py-2 px-4 border-2 rounded-lg focus:ring-2 hover:border-accent-tertiary transition-colors duration-200;
+    @apply inline-block py-2 px-4 border-2 rounded-full focus:ring-2 hover:border-accent-tertiary transition-colors duration-200;
   }
 }

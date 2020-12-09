@@ -1,5 +1,5 @@
 <template>
-  <g-link v-if="entry.link" :to="entry.link" class="card">
+  <section class="card">
     <g-image
       v-if="entry.image.url"
       :src="getUrl(entry.image.url)"
@@ -7,14 +7,13 @@
       :style="{ ['borderColor']: getRandomColor }"
       class="mb-4"
     ></g-image>
-    <!-- TODO: handle responsive images -->
-    <!-- <app-image-loader :strapiImage="entry.image"></app-image-loader> -->
-    <span class="title">{{ entry.title }}</span>
-    <p class="mt-4">{{ entry.content }}</p>
     <time class="block mt-4 text-base" :datetime="getFormattedDate(entry.date).datetime">{{
       getFormattedDate(entry.date).date
     }}</time>
-  </g-link>
+    <span class="title">{{ entry.title }}</span>
+    <p class="my-4">{{ entry.content }}</p>
+    <g-link v-if="entry.link" :to="entry.link" class="button" >Czytaj więcej</g-link>
+  </section>
 </template>
 
 <script>
@@ -51,18 +50,17 @@ img {
   @apply sm:mx-auto sm:max-w-full;
 }
 
+.read-more {
+  background-size: 100% 50%;
+  @apply inline  bg-gradient-to-r from-accent-tertiary to-accent-tertiary bg-no-repeat transition-all duration-500 bg-left-bottom;
+  
+}
+
 .title {
-  background-size: 0 50%;
-  @apply inline text-2xl bg-gradient-to-r from-accent-tertiary to-accent-tertiary bg-no-repeat transition-all duration-500 bg-left-bottom;
+  @apply text-2xl;
 }
 
 .card {
   @apply relative;
-
-  &:hover {
-    .title {
-      background-size: 100% 50%;
-    }
-  }
 }
 </style>

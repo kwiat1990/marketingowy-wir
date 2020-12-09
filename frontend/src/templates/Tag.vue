@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <Layout :colNum="3">
     <div>
       <h1>{{ $page.tag.name }}</h1>
     </div>
