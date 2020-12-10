@@ -23,7 +23,6 @@ export default {
   props: {
     filters: Array,
     preselected: Array,
-    reset: Boolean,
   },
 
   data() {
@@ -39,10 +38,6 @@ export default {
   },
 
   watch: {
-    reset(newVal, oldVal) {
-      this.selected = [];
-    },
-
     selected(newVal, oldVal) {
       this.$emit("on-filter-change", newVal);
     },

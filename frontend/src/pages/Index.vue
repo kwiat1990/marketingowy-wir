@@ -4,7 +4,7 @@
       v-if="filters"
       class="container mb-6 container--fixed"
       :filters="filters"
-      :preselected="preselected"
+      :preselected=" Object.values($route.query)"
       @on-filter-change="onFilterChange"
     ></app-filters>
 
