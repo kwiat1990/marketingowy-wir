@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="hero">
-      <g-link v-if="$page.article.category" class="category" :to="$page.article.category.slug">{{ $page.article.category.name }}</g-link>
+      <g-link v-if="$page.article.category" class="category link-decor" :to="$page.article.category.slug">{{ $page.article.category.name }}</g-link>
       <h1 class="headline">{{ $page.article.title }}</h1>
       <span class="lead">{{ $page.article.lead }}</span>
       <time class="date" :datetime="getFormattedDate($page.article.published_at).datetime">{{
@@ -90,7 +90,7 @@ img {
 }
 
 .category {
-  @apply uppercase border-b-4 inline-block pb-1 mb-4;
+  @apply uppercase inline-block pb-0 mb-4;
 }
 
 .date {

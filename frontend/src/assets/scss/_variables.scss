@@ -2,14 +2,14 @@
 
 :root {
   // theming
-  --color-primary: var(--color-sand);
-  --color-secondary: var(--color-dark);
-  --bg-primary: var(--color-sand);
-  --bg-secondary: var(--color-dark);
-  --accent-primary: var(--color-light);
-  --accent-secondary: var(--color-gray);
-  --accent-tertiary: var(--color-glow);
-  --accent-quaternary: var(--color-glow-light);
+  --content-1: var(--color-eerie-black);
+  --content-2: var(--color-isabelline);
+  --surface-1: var(--color-isabelline);
+  --surface-2: var(--color-eerie-black);
+  --surface-3: var(--color-gray);
+  --accent-1: var(--color-wheat);
+  --accent-2: var(--color-gold-crayola);
+  --accent-3: var(--color-jet);
   --separator: rgba(255, 255, 255, .2);
   --section-gradient: linear-gradient(
     306deg,

@@ -30,7 +30,7 @@ export default {
 
 <style lang="scss" scoped>
 .search {
-  @apply absolute inset-0 bg-white;
+  @apply absolute inset-0 bg-color-white;
 }
 
 .container {

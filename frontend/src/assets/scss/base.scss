@@ -17,7 +17,7 @@ body,
 }
 
 body {
-  background-color: var(--bg-primary);
+  background-color: var(--surface-1);
 
   // TODO: adjust theming options
   @media (prefers-color-scheme: light) {

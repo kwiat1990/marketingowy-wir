@@ -108,7 +108,7 @@ export default {
 }
 
 .inner {
-  @apply py-12 bg-secondary bg-gradient text-center text-primary;
+  @apply py-12 bg-color-surface-2 bg-gradient text-center text-color-content-2;
 }
 
 .separator {

@@ -1,9 +1,9 @@
 <template>
-  <ul class="tags">
-    <li v-for="tag in tags" :key="tag.id">
-      <g-link :to="tag.slug">{{ tag.name }}</g-link>
-    </li>
-  </ul>
+  <div class="tags">
+    <g-link v-for="tag in tags" :key="tag.id" :to="tag.slug" class="px-2 button button--dark">{{
+      tag.name
+    }}</g-link>
+  </div>
 </template>
 
 <script>
@@ -18,10 +18,6 @@ export default {
 
 <style lang="scss" scoped>
 .tags {
-  @apply list-none space-x-4;
-
-  li {
-    @apply inline-block py-1 px-3 rounded-full bg-accent-tertiary text-secondary hover:bg-gradient;
-  }
+  @apply flex space-x-2;
 }
 </style>

@@ -12,7 +12,7 @@
     }}</time>
     <span class="title">{{ entry.title }}</span>
     <p class="my-4">{{ entry.content }}</p>
-    <g-link v-if="entry.link" :to="entry.link" class="button" >Czytaj więcej</g-link>
+    <g-link v-if="entry.link" :to="entry.link" class="link-decor">Czytaj więcej</g-link>
   </section>
 </template>
 
@@ -52,7 +52,7 @@ img {
 
 .read-more {
   background-size: 100% 50%;
-  @apply inline  bg-gradient-to-r from-accent-tertiary to-accent-tertiary bg-no-repeat transition-all duration-500 bg-left-bottom;
+  @apply inline  bg-gradient-to-r from-color-accent-3 to-color-accent-3 bg-no-repeat transition-all duration-500 bg-left-bottom;
   
 }
 

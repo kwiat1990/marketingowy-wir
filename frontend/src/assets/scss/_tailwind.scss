@@ -10,12 +10,12 @@
 
   .container {
     @apply mx-auto px-6 lg:px-20;
+
+    &--fixed {
+      @apply max-w-screen-2xl;
+    }
   }
 
-  .fixed-container {
-    @extend .container;
-    @apply max-w-screen-2xl;
-  }
 
   .prose {
     @apply max-w-3xl mx-auto text-current;
@@ -27,7 +27,7 @@
     }
 
     blockquote {
-      @apply border-secondary;
+      @apply border-color-surface-2;
     }
 
     ol {
@@ -46,6 +46,25 @@
 
 @layer components {
   .button {
-    @apply inline-block py-2 px-4 border-2 rounded-full focus:ring-2 hover:border-accent-tertiary transition-colors duration-200;
+    @apply inline-block cursor-pointer border-2 border-dotted bg-color-surface-3 border-color-surface-3 rounded-full hover:border-color-accent-3 transition-colors duration-300;
+
+    &--dark {
+      @apply text-color-content-2 border-color-surface-2 bg-color-accent-3 hover:border-color-surface-3;
+    }
+  }
+
+  .link-decor {
+    @apply relative pb-1 font-bold;
+
+    &:hover {
+      &::after {
+        @apply w-0;
+      }
+    }
+
+    &::after {
+      content: "";
+      @apply block absolute left-2/4 bottom-0 transform -translate-x-1/2 h-0.5 w-full bg-color-surface-2 transition-all duration-300;
+    }
   }
 }

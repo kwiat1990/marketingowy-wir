@@ -49,12 +49,11 @@ export default {
 
 .fade-enter,
 .fade-leave-to {
-  // transform: translateY(-100%);
   opacity: 0;
 }
 
 .inner {
-  @apply bg-secondary bg-gradient text-primary overflow-hidden;
+  @apply bg-color-surface-2 bg-gradient text-color-content-2 overflow-hidden;
 }
 
 .bar {
