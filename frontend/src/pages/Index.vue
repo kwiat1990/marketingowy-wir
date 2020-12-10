@@ -2,27 +2,32 @@
   <section>
     <app-filters
       v-if="filters"
-      class="mb-6 fixed-container"
+      class="container mb-6 container--fixed"
       :filters="filters"
-      :preselected="Object.values($route.query)"
+      :preselected="preselected"
       @on-filter-change="onFilterChange"
     ></app-filters>
 
     <Layout :colNum="3">
       <template v-if="previews">
         <app-entry-preview
-          v-for="article in filteredArticles"
+          v-for="article in previews"
           :key="article.id"
           :entry="article"
         ></app-entry-preview>
       </template>
-      </Layout>
+    </Layout>
+    <button @click="loadMore">Load more</button>
   </section>
 </template>
 
 <page-query>
-  query { 
-    articles: allStrapiArticle(sort: [{ by: "date" }]) {
+  query($page: Int) { 
+    articles: allStrapiArticle(perPage: 3, page: $page, sort: [{ by: "date" }]) @paginate {
+      pageInfo {
+        totalPages
+        currentPage
+      }
       edges {
         node {
           category {
@@ -71,37 +76,27 @@ export default {
     return {
       getUrl,
       visibleArticles: [],
+      preselected: [],
     };
+  },
+
+  created() {
+    this.visibleArticles = this.$page.articles.edges;
   },
 
   methods: {
     onFilterChange(filters) {
       this.$router.replace(
-        {
-          path: this.$route.path,
-          query: { ...filters },
-        },
+        { query: { ...filters } },
         // silcence irrelevant duplicate navigation error caused by preselected filters,
         // which trigger "on-filter-change" event direct after page load
         () => {}
       );
     },
 
-    beforeEnter: function (el) {
-      el.style.opacity = 0;
-      el.style.height = 0;
-    },
-    enter: function (el, done) {
-      var delay = el.dataset.index * 150;
-      setTimeout(function () {
-        Velocity(el, { opacity: 1, height: "1.6em" }, { complete: done });
-      }, delay);
-    },
-    leave: function (el, done) {
-      var delay = el.dataset.index * 150;
-      setTimeout(function () {
-        Velocity(el, { opacity: 0, height: 0 }, { complete: done });
-      }, delay);
+    async loadMore() {
+      const { data } = await this.$fetch(`/${this.$route.params?.page + 1 || 2}`);
+      this.visibleArticles = [...this.visibleArticles, ...data.articles.edges];
     },
   },
 
@@ -119,17 +114,17 @@ export default {
     filteredArticles() {
       const query = Object.values(this.$route.query);
       if (query.length > 0) {
-        return this.previews.filter((article) => {
-          if (query.includes(article.categoryCode)) {
+        return this.visibleArticles.filter(({ node: article }) => {
+          if (query.includes(article.category.slug)) {
             return article;
           }
         });
       }
-      return this.previews;
+      return this.visibleArticles;
     },
 
     previews() {
-      return this.$page.articles.edges.map(({ node: entry }) => {
+      return this.filteredArticles.map(({ node: entry }) => {
         return {
           id: entry.id,
           category: entry.category?.name,
@@ -152,6 +147,12 @@ export default {
     },
   },
 
+  watch: {
+    $route(to, from) {
+      this.preselected = Object.values(to.query);
+    },
+  },
+
   metaInfo: {
     title: "Marketingowy Wir",
     meta: [
@@ -164,6 +165,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

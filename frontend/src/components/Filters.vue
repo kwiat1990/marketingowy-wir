@@ -1,21 +1,19 @@
 <template>
   <div class="filters">
-    <input type="radio" id="filter-all" :checked="selected.length <= 0" @change="selected = []" />
-    <label for="filter-all">
+    <label class="button" for="filter-all" :class="{ ['button--dark']: selected.length <= 0 }">
+      <input type="radio" id="filter-all" :checked="selected.length <= 0" @change="selected = []" />
       <span>All</span>
     </label>
-    <template v-for="filter in filters">
-      <input
-        type="checkbox"
-        :id="filter.code"
-        :value="filter.code"
-        v-model="selected"
-        :key="'oko' + filter.id"
-      />
-      <label :key="filter.id" :for="filter.code">
-        <span>{{ filter.name }}</span>
-      </label>
-    </template>
+    <label
+      v-for="filter in filters"
+      :key="filter.id"
+      :for="filter.code"
+      :class="{ ['button--dark']: selected.includes(filter.code) }"
+      class="button"
+    >
+      <input type="checkbox" :id="filter.code" :value="filter.code" v-model="selected" />
+      <span>{{ filter.name }}</span>
+    </label>
   </div>
 </template>
 
@@ -25,6 +23,7 @@ export default {
   props: {
     filters: Array,
     preselected: Array,
+    reset: Boolean,
   },
 
   data() {
@@ -40,6 +39,10 @@ export default {
   },
 
   watch: {
+    reset(newVal, oldVal) {
+      this.selected = [];
+    },
+
     selected(newVal, oldVal) {
       this.$emit("on-filter-change", newVal);
     },
@@ -52,15 +55,11 @@ export default {
   @apply space-x-5;
 
   input {
-    @apply opacity-0 invisible absolute;
-  }
-
-  input:checked + label {
-    @apply bg-accent-secondary bg-gradient text-accent-primary;
+    @apply sr-only;
   }
 
   label {
-    @apply rounded-full py-2 px-4 border-2 border-accent-secondary cursor-pointer transition-all duration-300 uppercase text-sm hover:bg-gradient;
+    @apply py-1 px-4 uppercase text-sm;
   }
 }
 </style>
