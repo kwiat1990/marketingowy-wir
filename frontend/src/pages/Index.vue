@@ -4,30 +4,35 @@
       v-if="filters"
       class="container mb-6 container--fixed"
       :filters="filters"
-      :preselected=" Object.values($route.query)"
+      :preselected="Object.values($route.query)"
       @on-filter-change="onFilterChange"
     ></app-filters>
 
     <Layout :colNum="3">
       <template v-if="previews">
         <app-entry-preview
-          v-for="article in previews"
+          v-for="article in paginatedResults"
           :key="article.id"
           :entry="article"
         ></app-entry-preview>
       </template>
     </Layout>
-    <button @click="loadMore">Load more</button>
+
+    <div class="container mb-6 container--fixed">
+      <button
+        v-if="hasMorePages"
+        class="block px-2 mx-auto mt-10 text-xl font-bold button button--dark"
+        @click="loadMore"
+      >
+        Load more
+      </button>
+    </div>
   </section>
 </template>
 
 <page-query>
-  query($page: Int) { 
-    articles: allStrapiArticle(perPage: 3, page: $page, sort: [{ by: "date" }]) @paginate {
-      pageInfo {
-        totalPages
-        currentPage
-      }
+  query { 
+  articles: allStrapiArticle(sort: [{ by: "date" }]) { 
       edges {
         node {
           category {
@@ -50,7 +55,7 @@
         }
       }
     }
-    categories:  allStrapiCategory(sortBy: "name", order: ASC) {
+    categories: allStrapiCategory(sortBy: "name", order: ASC) {
       edges {
         node {
           id
@@ -75,32 +80,40 @@ export default {
   data() {
     return {
       getUrl,
-      visibleArticles: [],
-      preselected: [],
+      articles: [],
+      currentPage: 1,
+      resultsPerPage: 3,
     };
   },
 
-  created() {
-    this.visibleArticles = this.$page.articles.edges;
+  mounted() {
+    this.articles = this.$page.articles.edges;
   },
 
   methods: {
     onFilterChange(filters) {
+      this.currentPage = 1;
       this.$router.replace(
         { query: { ...filters } },
-        // silcence irrelevant duplicate navigation error caused by preselected filters,
+        // silence irrelevant duplicate navigation error caused by preselected filters,
         // which trigger "on-filter-change" event direct after page load
         () => {}
       );
     },
 
-    async loadMore() {
-      const { data } = await this.$fetch(`/${this.$route.params?.page + 1 || 2}`);
-      this.visibleArticles = [...this.visibleArticles, ...data.articles.edges];
+    loadMore() {
+      if (this.hasMorePages) {
+        this.currentPage += 1;
+      }
     },
   },
 
   computed: {
+    hasMorePages() {
+      console.log(this.currentPage, Math.ceil(this.filteredArticles.length / this.resultsPerPage));
+      return this.currentPage < Math.ceil(this.filteredArticles.length / this.resultsPerPage);
+    },
+
     filters() {
       return this.$page.categories.edges.map(({ node: category }) => {
         return {
@@ -114,13 +127,18 @@ export default {
     filteredArticles() {
       const query = Object.values(this.$route.query);
       if (query.length > 0) {
-        return this.visibleArticles.filter(({ node: article }) => {
+        return this.articles.filter(({ node: article }) => {
           if (query.includes(article.category.slug)) {
             return article;
           }
         });
       }
-      return this.visibleArticles;
+      return this.articles;
+    },
+
+    paginatedResults() {
+      const resultsToShow = this.resultsPerPage * this.currentPage;
+      return [...this.previews.slice(0, resultsToShow)];
     },
 
     previews() {
@@ -137,19 +155,10 @@ export default {
             url: entry.cover?.url,
             alt: entry.cover?.alternativeText,
             caption: entry.cover?.caption,
-            formats: entry.cover?.formats,
-            height: entry.cover?.height,
-            width: entry.cover?.width,
           },
           link: `/${entry.category.slug}/${entry.slug}`,
         };
       });
-    },
-  },
-
-  watch: {
-    $route(to, from) {
-      this.preselected = Object.values(to.query);
     },
   },
 

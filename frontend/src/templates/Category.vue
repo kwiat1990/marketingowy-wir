@@ -1,14 +1,14 @@
 <template>
-  <Layout>
+  <section>
     <h1>{{ $page.category.name }}</h1>
-    <template v-if="previews.length > 0">
+    <Layout v-if="previews.length > 0">
       <app-entry-preview
         v-for="article in previews"
         :key="article.id"
         :entry="article"
       ></app-entry-preview>
-    </template>
-  </Layout>
+    </Layout>
+  </section>
 </template>
 
 <page-query>
@@ -30,17 +30,37 @@
         }
       }
     }
+    categories: allStrapiCategory(sortBy: "name", order: ASC) {
+      edges {
+        node {
+          id
+          name
+          slug
+        }
+      }
+    }
   }
 </page-query>
 
 <script>
-import EntryPreview from "../components/EntryPeview.vue";
+import AppEntryPreview from "~/components/EntryPeview.vue";
+import AppFilters from "~/components/Filters.vue";
 
 export default {
   name: "DefaultPage",
-  components: { "app-entry-preview": EntryPreview },
+  components: { AppEntryPreview, AppFilters },
 
   computed: {
+    filters() {
+      return this.$page.categories.edges.map(({ node: category }) => {
+        return {
+          code: category.slug,
+          id: category.id,
+          name: category.name,
+        };
+      });
+    },
+    
     previews() {
       return this.$page.category.articles.map((entry) => {
         return {

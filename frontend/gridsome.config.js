@@ -3,13 +3,12 @@
 
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
-
-// const SvgSprite = require("vue-svg-sprite");
+const tailwind = require("tailwindcss");
 
 module.exports = {
   siteName: "Marketingowy wir",
   runtimeCompiler: true,
-  
+
   chainWebpack: (config) => {
     const svgRule = config.module.rule("svg");
     svgRule.uses.clear();
@@ -28,6 +27,14 @@ module.exports = {
       });
   },
 
+  css: {
+    loaderOptions: {
+      postcss: {
+        plugins: [tailwind]
+      },
+    },
+  },
+
   plugins: [
     {
       use: "@gridsome/source-strapi",
@@ -37,9 +44,6 @@ module.exports = {
         contentTypes: ["Article", "Category", "Tag"],
         singleTypes: ["About", "Footer"],
       },
-    },
-    {
-      use: "gridsome-plugin-tailwindcss",
     },
   ],
 };

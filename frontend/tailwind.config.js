@@ -3,7 +3,12 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: [],
+  purge: {
+    content: ["./src/**/*.vue", "./src/**/*.js"],
+    options: {
+      safelist: ["g-image", "g-image--lazy", "g-image--loaded"],
+    },
+  },
   theme: {
     colors: {
       current: "currentColor",

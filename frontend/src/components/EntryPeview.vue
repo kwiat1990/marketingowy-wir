@@ -4,7 +4,6 @@
       v-if="entry.image.url"
       :src="getUrl(entry.image.url)"
       :alt="entry.image.alternativeText"
-      :style="{ ['borderColor']: getRandomColor }"
       class="mb-4"
     ></g-image>
     <time class="block mt-4 text-base" :datetime="getFormattedDate(entry.date).datetime">{{
@@ -34,25 +33,19 @@ export default {
       getFormattedDate,
     };
   },
-
-  computed: {
-    getRandomColor() {
-      return "#" + Math.floor(Math.random() * 16777215).toString(16);
-    },
-  },
 };
 </script>
 
 <style lang="scss" scoped>
 img {
   max-width: calc(100% + theme("spacing.12"));
-  @apply -mx-6 border-t-8 border-solid;
+  @apply -mx-6;
   @apply sm:mx-auto sm:max-w-full;
 }
 
 .read-more {
   background-size: 100% 50%;
-  @apply inline  bg-gradient-to-r from-color-accent-3 to-color-accent-3 bg-no-repeat transition-all duration-500 bg-left-bottom;
+  @apply inline bg-gradient-to-r from-color-accent-3 to-color-accent-3 bg-no-repeat transition-all duration-500 bg-left-bottom;
   
 }
 
