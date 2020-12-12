@@ -9,6 +9,11 @@ module.exports = {
   siteName: "Marketingowy wir",
   runtimeCompiler: true,
 
+  templates: {
+    StrapiArticle: "/:category__name/:title",
+    StrapiCategory: "/:name",
+  },
+
   chainWebpack: (config) => {
     const svgRule = config.module.rule("svg");
     svgRule.uses.clear();
@@ -30,7 +35,7 @@ module.exports = {
   css: {
     loaderOptions: {
       postcss: {
-        plugins: [tailwind]
+        plugins: [tailwind],
       },
     },
   },
