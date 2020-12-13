@@ -43,7 +43,7 @@
 
 @layer components {
   .button {
-    @apply inline-block transition-colors duration-300 border-2 border-dotted rounded-full cursor-pointer bg-color-surface-3 border-color-surface-3 hover:border-color-accent-3;
+    @apply relative inline-block overflow-hidden transition-colors duration-300 border-2 border-dotted rounded-full cursor-pointer bg-color-surface-3 border-color-surface-3 hover:border-color-accent-3;
   }
   .button--dark {
     @apply text-color-content-2 border-color-surface-2 bg-color-accent-3 hover:border-color-surface-3;

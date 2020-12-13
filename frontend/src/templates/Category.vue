@@ -7,48 +7,53 @@
       :filters="filters"
     ></app-filters>
 
-    <Layout v-if="previews.length > 0">
-      <app-entry-preview
-        v-for="article in previews"
+    <Layout v-if="articles.length > 0">
+      <app-preview-card
+        v-for="{ node: article } in articles"
         :key="article.id"
-        :entry="article"
-      ></app-entry-preview>
+        :content="article.lead"
+        :date="article.published_at"
+        :image="article.cover"
+        :title="article.title"
+        :url="article.path"
+      ></app-preview-card>
     </Layout>
-    <button @click="fetchMore">Load</button>
+    <button v-if="hasNextPage" @click="fetchMore">Load</button>
   </section>
 </template>
 
 <page-query>
-  query ($page: Int, $slug: String!) {
-    articles: allStrapiArticle(filter: { category: { slug: { eq: $slug }}}, perPage: 1, page: $page) @paginate {
+  query($page: Int, $name: String!) {
+    articles: allStrapiArticle(
+      filter: { category: { name: { eq: $name } } }
+      perPage: 1
+      page: $page
+    ) @paginate {
+      pageInfo {
+        currentPage
+        hasNextPage
+      }
       edges {
         node {
-          id
-          title
-          lead
-          slug
-          path
-          published_at
           cover {
-            url
             alternativeText
             caption
+            url(width: 640)
           }
-          category {
-            id
-            name
-            slug
-          }
+          id
+          lead
+          path
+          published_at
+          title
         }
       }
     }
-   categories: allStrapiCategory(sortBy: "name", order: ASC) {
+    categories: allStrapiCategory(sortBy: "name", order: ASC) {
       edges {
         node {
           id
           name
           path
-          slug
         }
       }
     }
@@ -56,64 +61,20 @@
 </page-query>
 
 <script>
-import AppEntryPreview from "~/components/EntryPeview.vue";
+import { collectionMixin } from "~/mixins/collection.mixin";
+import AppPreviewCard from "~/components/PreviewCard.vue";
 import AppFilters from "~/components/Filters.vue";
 
 export default {
-  name: "DefaultPage",
-  components: { AppEntryPreview, AppFilters },
-
-  data() {
-    return {
-      visibleArticles: [],
-    };
-  },
-
-  mounted() {
-    this.visibleArticles = this.$page.articles.edges;
-  },
-
-  methods: {
-    async fetchMore() {
-      const { data } = await this.$fetch(this.$route.path + "/2");
-      this.visibleArticles = [...this.visibleArticles, ...data.articles.edges];
-    },
-  },
-
-  computed: {
-     filters() {
-      return this.$page.categories.edges.map(({ node: category }) => {
-        return {
-          path: category.path,
-          id: category.id,
-          name: category.name,
-        };
-      });
-    },
-    
-    previews() {
-      return this.visibleArticles.map(({ node: entry }) => {
-        return {
-          id: entry.id,
-          category: entry.category.name,
-          date: entry.published_at,
-          title: entry.title,
-          content: entry.lead,
-          slug: entry.slug,
-          image: {
-            url: entry.cover?.url,
-            alt: entry.cover?.alternativeText,
-            caption: entry.cover?.caption,
-          },
-          link: entry.path,
-        };
-      });
-    },
-  },
+  name: "Category",
+  mixins: [collectionMixin],
+  components: { AppPreviewCard, AppFilters },
 
   watch: {
     $route(newRoute, oldRoute) {
-      this.visibleArticles = this.$page.articles.edges;
+      this.articles = this.$page.articles.edges;
+      this.hasNextPage = this.$page.articles.pageInfo.hasNextPage;
+      this.currentPage = this.$page.articles.pageInfo.currentPage;
     },
   },
 };

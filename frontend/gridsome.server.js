@@ -31,6 +31,28 @@ function moveImagesAndOverwriteUrl(imageObject) {
 
 module.exports = function (api) {
   api.onCreateNode((options) => {
+    // add custom-made "path" to the collections
+    // this happens automatically for collections created with template option in gridsome config
+    // but unfortunately only on 1st level
+    if (options.internal.typeName === "StrapiArticle") {
+      options.category.path = `/${options.category.slug}/`;
+      options.tags.forEach((tag) => {
+        tag.path = `/tagi/${tag.slug}/`;
+      });
+    }
+
+    if (options.internal.typeName === "StrapiCategory") {
+      options.path = `/${options.slug}/`;
+    }
+
+    if (
+      options.internal.typeName === "StrapiTag" &&
+      options.internal.typeName === "StrapiCategory"
+    ) {
+      options.articles.forEach((article) => (article.category.path = `/${article.category.slug}/`));
+    }
+
+    // replace image's url with g-image data object
     if (options.cover && options.cover.url) {
       moveImagesAndOverwriteUrl(options.cover);
     }
@@ -50,5 +72,22 @@ module.exports = function (api) {
         }
       });
     }
+  });
+
+  // because route matching pattern for category and home is the same, 
+  // category pages have to to be created in advance, so that their routes are hardcoded  
+  api.createPages(async ({ getCollection, createPage }) => {
+    getCollection("StrapiCategory")
+      .data()
+      .forEach((category) => {
+        createPage({
+          path: `/${category.path}`,
+          component: "./src/templates/Category.vue",
+          context: {
+            id: category.id,
+            name: category.name,
+          },
+        });
+      });
   });
 };

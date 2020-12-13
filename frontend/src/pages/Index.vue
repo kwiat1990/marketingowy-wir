@@ -5,19 +5,27 @@
       class="container mb-6 container--fixed"
       :filters="filters"
     ></app-filters>
-    
+
     <Layout :colNum="3">
-      <template v-if="previews">
-        <app-entry-preview
-          v-for="article in previews"
+      <template v-if="articles.length > 0">
+        <app-preview-card
+          v-for="{ node: article } in articles"
           :key="article.id"
-          :entry="article"
-        ></app-entry-preview>
+          :content="article.lead"
+          :date="article.published_at"
+          :image="article.cover"
+          :title="article.title"
+          :url="article.path"
+        ></app-preview-card>
       </template>
     </Layout>
 
     <div class="container mb-6 container--fixed">
-      <button class="block px-2 mx-auto mt-10 text-xl font-bold button button--dark">
+      <button
+        v-if="hasNextPage"
+        class="block px-2 mx-auto mt-10 text-xl font-bold button button--dark"
+        @click="fetchMore"
+      >
         Load more
       </button>
     </div>
@@ -25,98 +33,52 @@
 </template>
 
 <page-query>
-  query($page: Int) { 
-    articles: allStrapiArticle(sort: [{ by: "date" }], perPage: 1, page: $page) @paginate { 
-      edges {
-        node {
-          category {
-            id
-            name
-            slug
-          }
-          cover {
-            url(width: 640)
-            caption
-            alternativeText
-            height
-            width
-          }
-          id
-          lead
-          path
-          published_at
-          slug
-          title
-        }
-      }
+ query($page: Int) {
+    articles: allStrapiArticle(
+      perPage: 1
+      page: $page
+    ) @paginate {
+    pageInfo {
+      currentPage
+      hasNextPage
     }
-    categories: allStrapiCategory(sortBy: "name", order: ASC) {
-      edges {
-        node {
-          id
-          name
-          path
-          slug
+    edges {
+      node {
+        cover {
+          alternativeText
+          caption
+          url(width: 640)
         }
+        id
+        lead
+        path
+        published_at
+        title
       }
     }
   }
+  categories: allStrapiCategory(sortBy: "name", order: ASC) {
+    edges {
+      node {
+        id
+        name
+        path
+      }
+    }
+  }
+}
 </page-query>
 
 <script>
-import getUrl from "~/utils/url-resolver";
-import truncate from "~/utils/truncate";
+import { collectionMixin } from "~/mixins/collection.mixin";
 import AppRichContent from "~/components/RichContent.vue";
-import AppEntryPreview from "~/components/EntryPeview.vue";
+import AppPreviewCard from "~/components/PreviewCard.vue";
 import AppFilters from "~/components/Filters.vue";
 
 export default {
-  components: { AppEntryPreview, AppFilters, AppRichContent },
-
-  data() {
-    return {
-      getUrl,
-      articles: [],
-    };
-  },
-
-  mounted() {
-    this.articles = this.$page.articles.edges;
-  },
-
-  methods: {},
-
-  computed: {
-    filters() {
-      return this.$page.categories.edges.map(({ node: category }) => {
-        return {
-          path: category.path,
-          id: category.id,
-          name: category.name,
-        };
-      });
-    },
-
-    previews() {
-      return this.articles.map(({ node: entry }) => {
-        return {
-          id: entry.id,
-          category: entry.category?.name,
-          categoryCode: entry.category.slug,
-          date: entry.published_at,
-          title: entry.title,
-          content: truncate(entry.lead),
-          slug: entry.slug,
-          image: {
-            url: entry?.cover?.url,
-            alt: entry?.cover?.alternativeText,
-            caption: entry.cover?.caption,
-          },
-          link: entry.path,
-        };
-      });
-    },
-  },
+  name: "Index",
+  mixins: [collectionMixin],
+  components: { AppPreviewCard, AppFilters, AppRichContent },
 
   metaInfo: {
     title: "Marketingowy Wir",

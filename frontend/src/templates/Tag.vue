@@ -1,9 +1,14 @@
 <template>
-  <Layout :colNum="3">
-    <div>
-      <h1>{{ $page.tag.name }}</h1>
-    </div>
-  </Layout>
+  <section>
+    <!-- <h1>{{ $page.tag.name }}</h1> -->
+    <Layout :colNum="3">
+      <!-- <app-entry-preview
+        v-for="article in previews"
+        :key="article.id"
+        :entry="article"
+      ></app-entry-preview> -->
+    </Layout>
+  </section>
 </template>
 
 <page-query>
@@ -18,7 +23,7 @@
         cover {
           url
         }
-        preview
+        lead
         slug
         category {
           slug
@@ -27,3 +32,12 @@
     }
   }
 </page-query>
+
+<script>
+import AppPreviewCard from "~/components/PreviewCard.vue";
+
+export default {
+  name: "Tag",
+  components: { AppPreviewCard },
+};
+</script>

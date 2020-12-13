@@ -10,8 +10,19 @@ module.exports = {
   runtimeCompiler: true,
 
   templates: {
-    StrapiArticle: "/:category__name/:title",
-    StrapiCategory: "/:name",
+    StrapiArticle: [
+      {
+        path: "/:category__name/:title",
+        component: "./src/templates/Article.vue",
+      },
+    ],
+
+    StrapiTag: [
+      {
+        path: "/tagi/:name",
+        component: "./src/templates/Tag.vue",
+      },
+    ],
   },
 
   chainWebpack: (config) => {
