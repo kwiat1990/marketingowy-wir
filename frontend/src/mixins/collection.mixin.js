@@ -54,10 +54,14 @@ export const collectionMixin = {
 
     async fetchNextPage() {
       if (this.hasNextPage) {
-        const { data } = await this.$fetch(`${this.$route.path}${this.currentPage + 1}`);
-        this.articles = [...this.articles, ...data.articles.edges];
-        this.hasNextPage = data.articles.pageInfo.hasNextPage;
-        this.currentPage = data.articles.pageInfo.currentPage;
+        try {
+          const { data } = await this.$fetch(`${this.$route.path}${this.currentPage + 1}`);
+          this.articles = [...this.articles, ...data.articles.edges];
+          this.hasNextPage = data.articles.pageInfo.hasNextPage;
+          this.currentPage = data.articles.pageInfo.currentPage;
+        } catch(error) {
+          console.warn(`Cannot fetch next page, for more information check: ${error}`);
+        }
       }
     },
   },

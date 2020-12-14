@@ -18,7 +18,14 @@
         :url="article.path"
       ></app-preview-card>
     </Layout>
-    <button v-if="hasNextPage" @click="fetchNextPage">Load</button>
+
+    <button
+      v-if="hasNextPage"
+      class="block px-4 mx-auto mt-10 text-xl font-bold button button--outline"
+      @click="fetchNextPage"
+    >
+      Załaduj więcej
+    </button>
   </section>
 </template>
 

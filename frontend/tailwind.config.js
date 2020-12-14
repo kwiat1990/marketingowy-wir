@@ -24,7 +24,7 @@ module.exports = {
       "color-accent-3": "var(--accent-3)",
 
       "color-isabelline": "var(--color-isabelline)",
-      "color-eerie-black)": "var(--color-eerie-black)",
+      "color-eerie-black": "var(--color-eerie-black)",
       "color-black": "var(--color-black)",
       "color-white": "var(--color-white)",
     },
@@ -41,6 +41,7 @@ module.exports = {
   variants: {
     margin: ["responsive", "odd", "even"],
     backgroundImage: ["hover"],
+    borderStyle: ["hover"]
   },
   plugins: [require("@tailwindcss/typography")],
 };

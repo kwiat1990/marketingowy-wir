@@ -20,15 +20,13 @@
       </template>
     </Layout>
 
-    <div class="container mb-6 container--fixed">
-      <button
-        v-if="hasNextPage"
-        class="block px-2 mx-auto mt-10 text-xl font-bold button button--dark"
-        @click="fetchNextPage"
-      >
-        Load more
-      </button>
-    </div>
+    <button
+      v-if="hasNextPage"
+      class="block px-4 mx-auto mt-10 text-xl font-bold button button--outline"
+      @click="fetchNextPage"
+    >
+      Załaduj więcej
+    </button>
   </section>
 </template>
 
@@ -78,7 +76,7 @@ import AppFilters from "~/components/Filters.vue";
 export default {
   name: "Index",
   mixins: [collectionMixin],
-  components: { AppPreviewCard, AppFilters, AppRichContent },
+  components: { AppFilters, AppPreviewCard, AppRichContent },
 
   metaInfo: {
     title: "Marketingowy Wir",
