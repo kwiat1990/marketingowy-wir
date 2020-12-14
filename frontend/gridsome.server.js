@@ -46,10 +46,13 @@ module.exports = function (api) {
     }
 
     if (
-      options.internal.typeName === "StrapiTag" &&
+      options.internal.typeName === "StrapiTag" ||
       options.internal.typeName === "StrapiCategory"
     ) {
-      options.articles.forEach((article) => (article.category.path = `/${article.category.slug}/`));
+      options.articles.forEach((article) => {
+        article.path = `/${article.category.slug}/${article.slug}/`
+        article.category.path = `/${article.category.slug}/`;
+      });
     }
 
     // replace image's url with g-image data object

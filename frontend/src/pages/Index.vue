@@ -24,7 +24,7 @@
       <button
         v-if="hasNextPage"
         class="block px-2 mx-auto mt-10 text-xl font-bold button button--dark"
-        @click="fetchMore"
+        @click="fetchNextPage"
       >
         Load more
       </button>

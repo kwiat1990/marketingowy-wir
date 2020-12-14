@@ -18,7 +18,7 @@
         :url="article.path"
       ></app-preview-card>
     </Layout>
-    <button v-if="hasNextPage" @click="fetchMore">Load</button>
+    <button v-if="hasNextPage" @click="fetchNextPage">Load</button>
   </section>
 </template>
 
@@ -69,13 +69,5 @@ export default {
   name: "Category",
   mixins: [collectionMixin],
   components: { AppPreviewCard, AppFilters },
-
-  watch: {
-    $route(newRoute, oldRoute) {
-      this.articles = this.$page.articles.edges;
-      this.hasNextPage = this.$page.articles.pageInfo.hasNextPage;
-      this.currentPage = this.$page.articles.pageInfo.currentPage;
-    },
-  },
 };
 </script>
