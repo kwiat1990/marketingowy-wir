@@ -22,9 +22,11 @@
 }
 
 @layer components {
-  /* +++++++++++++++++++++++++++++++++++++++++++++++ */
-  /* CUSTOM ELEMENTS */
-  /* +++++++++++++++++++++++++++++++++++++++++++++++ */
+  /* 
+  +++++++++++++++++++++++++++++++++++++++++++++++
+  CUSTOM ELEMENTS
+  +++++++++++++++++++++++++++++++++++++++++++++++ 
+  */
   .button {
     @apply inline-block text-center transition-colors duration-300 border-2 border-dotted rounded-full cursor-pointer bg-color-surface-3 border-color-surface-3 hover:border-color-accent-3;
   }
@@ -46,15 +48,22 @@
     @apply block absolute left-2/4 bottom-0 transform -translate-x-1/2 h-0.5 w-full bg-color-surface-2 transition-all duration-300;
   }
 
-  /* +++++++++++++++++++++++++++++++++++++++++++++++ */
-  /* PROSE */
-  /* +++++++++++++++++++++++++++++++++++++++++++++++ */
+  /*
+  +++++++++++++++++++++++++++++++++++++++++++++++
+  PROSE
+  +++++++++++++++++++++++++++++++++++++++++++++++ 
+  */
   .prose {
     @apply max-w-3xl mx-auto text-current;
   }
 
+  .prose a {
+    @apply no-underline transition-all duration-300 bg-bottom bg-no-repeat bg-gradient-to-b from-color-accent-1 to-color-accent-1;
+    background-size: 100% 30%;
+  }
+
   .prose a:hover {
-    color: red;
+    background-size: 100% 100%;
   }
 
   .prose blockquote {
