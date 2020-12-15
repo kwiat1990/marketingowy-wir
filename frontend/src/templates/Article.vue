@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article class="px-6 overflow-hidden">
     <div class="hero">
       <g-link
         v-if="$page.article.category"
@@ -91,7 +91,15 @@ export default {
 <style lang="scss" scoped>
 img {
   max-width: calc(100% + #{theme("spacing.12")});
-  @apply -mx-6 my-10 sm:mx-auto sm:max-w-full;
+  @apply -mx-6 sm:mx-auto sm:max-w-full;
+}
+
+figure {
+  @apply my-10;
+}
+
+figcaption {
+  @apply max-w-3xl mx-auto text-center text-base;
 }
 
 .category {
