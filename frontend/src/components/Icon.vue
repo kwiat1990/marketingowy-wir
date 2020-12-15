@@ -28,6 +28,10 @@ export default {
 .icon {
   height: 1.5em;
   width: 1.5em;
-  @apply inline-block;
+  @apply inline-block transition-transform duration-300;
+
+  &:hover {
+    @apply transform scale-110;
+  }
 }
 </style>

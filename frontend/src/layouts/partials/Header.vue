@@ -19,19 +19,19 @@
 </template>
 
 <script>
-import Icon from "~/components/Icon.vue";
-import Nav from "~/components/Nav.vue";
-import Search from "~/components/Search.vue";
-import Waves from "~/layouts/partials/Waves.vue";
+import AppIcon from "~/components/Icon.vue";
+import AppNav from "~/components/Nav.vue";
+import AppSearch from "~/components/Search.vue";
+import AppWaves from "~/layouts/partials/Waves.vue";
 
 export default {
-  components: {
-    "app-icon": Icon,
-    "app-nav": Nav,
-    "app-search": Search,
-    "app-waves": Waves,
-  },
   name: "Header",
+  components: {
+    AppIcon,
+    AppNav,
+    AppSearch,
+    AppWaves,
+  },
 
   data() {
     return {
