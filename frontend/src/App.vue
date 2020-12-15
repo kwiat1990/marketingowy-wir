@@ -2,9 +2,7 @@
   <div id="app">
     <app-header></app-header>
     <main class="main">
-      <!-- <transition name="fade" mode="out-in" appear> -->
-        <router-view />
-      <!-- </transition> -->
+      <router-view />
     </main>
     <app-footer></app-footer>
   </div>
@@ -26,17 +24,6 @@ export default {
 
 <style lang="scss">
 @import "src/assets/scss/base.scss";
-
-// .fade-enter-active,
-// .fade-leave-active {
-//   transition: opacity 0.1s;
-// }
-
-// .fade-enter,
-// .fade-leave-to {
-//   opacity: 0;
-// }
-
 .main {
   flex: 1 0 auto;
   @apply my-12;

@@ -1,4 +1,4 @@
-export const collectionMixin = {
+export const fetchAndCacheArticlesMixin = {
   data() {
     return {
       articles: [],

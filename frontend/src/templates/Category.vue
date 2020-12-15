@@ -68,13 +68,13 @@
 </page-query>
 
 <script>
-import { collectionMixin } from "~/mixins/collection.mixin";
+import { fetchAndCacheArticlesMixin } from "~/mixins/fetch-and-cache-articles.mixin";
 import AppPreviewCard from "~/components/PreviewCard.vue";
 import AppFilters from "~/components/Filters.vue";
 
 export default {
   name: "Category",
-  mixins: [collectionMixin],
+  mixins: [fetchAndCacheArticlesMixin],
   components: { AppPreviewCard, AppFilters },
 };
 </script>
