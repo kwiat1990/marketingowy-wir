@@ -1,7 +1,12 @@
 <template>
-  <Layout>
+  <article>
     <div class="hero">
-      <g-link v-if="$page.article.category" class="category link-decor" :to="$page.article.category.path">{{ $page.article.category.name }}</g-link>
+      <g-link
+        v-if="$page.article.category"
+        class="category link-decor"
+        :to="$page.article.category.path"
+        >{{ $page.article.category.name }}</g-link
+      >
       <h1 class="headline">{{ $page.article.title }}</h1>
       <span class="lead">{{ $page.article.lead }}</span>
       <time class="date" :datetime="getFormattedDate($page.article.published_at).datetime">{{
@@ -28,7 +33,7 @@
 
       <app-rich-content :content="content.text" :key="`text-${content.id}`"></app-rich-content>
     </template>
-  </Layout>
+  </article>
 </template>
 
 <page-query>

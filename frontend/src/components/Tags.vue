@@ -1,6 +1,6 @@
 <template>
   <div class="tags">
-    <g-link v-for="tag in tags" :key="tag.id" :to="tag.path" class="px-2 button button--dark">{{
+    <g-link v-for="tag in tags" :key="tag.id" :to="tag.path" class="px-2 mx-2 mb-2 button button--dark">{{
       tag.name
     }}</g-link>
   </div>
@@ -18,6 +18,6 @@ export default {
 
 <style lang="scss" scoped>
 .tags {
-  @apply flex space-x-2;
+  @apply text-center -mb-2;
 }
 </style>
