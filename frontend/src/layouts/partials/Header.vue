@@ -66,6 +66,6 @@ export default {
 }
 
 .container {
-  @apply relative flex items-center justify-between max-w-none;
+  @apply relative flex items-center justify-between max-w-none py-4;
 }
 </style>

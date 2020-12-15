@@ -1,5 +1,5 @@
 <template>
-  <div class="overlay" :class="{ 'overlay--is-inactive': isInactive }" role="dialog" ref="overlay">
+  <div class="overlay" :class="{ ['overlay--is-active']: !isInactive }" role="dialog" ref="overlay">
     <button
       v-if="!isInactive"
       type="button"
@@ -27,7 +27,7 @@ export default {
 
   data() {
     return {
-      openClassName: "overlay--is-active",
+      openClassName: "overlay--is-open",
       overlayRef: null,
       isInactive: false,
     };
@@ -79,13 +79,12 @@ export default {
 }
 
 .overlay {
-  @apply items-center invisible opacity-0 fixed inset-0 z-50 py-3 px-6 transition-all duration-300;
-
-  &--is-inactive {
-    @apply static p-0 inset-auto visible opacity-100;
+  &--is-active {
+    @apply invisible opacity-0 duration-300 fixed inset-0 z-50 py-3 px-6;
+    transition-property: opacity, visibility;
   }
 
-  &--is-active {
+  &--is-open {
     @apply opacity-100 visible;
   }
 }
