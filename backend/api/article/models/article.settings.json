@@ -46,6 +46,11 @@
       "components": [
         "content.image-text"
       ]
+    },
+    "comments": {
+      "plugin": "comments",
+      "collection": "comment",
+      "via": "related"
     }
   }
 }
