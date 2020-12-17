@@ -8,6 +8,7 @@
 const fs = require("fs");
 const http = require("http");
 const path = require("path");
+const axios = require("axios");
 
 /**
  * Move all Strapi media files (videos, images etc.) to Gridsome's asset directory and set its URL to local path,
@@ -16,9 +17,8 @@ const path = require("path");
  */
 function moveImagesAndOverwriteUrl(imageObject) {
   const localFilePath = `./src/assets/img/${imageObject.hash + imageObject.ext}`;
-  const hostname = process.env.STRAPI_URL;
 
-  http.get(`${hostname}${imageObject.url}`, (response) => {
+  http.get(`${process.env.GRIDSOME_API_URL}${imageObject.url}`, (response) => {
     Object.defineProperty(imageObject, "url", {
       value: path.resolve(__dirname, localFilePath),
       writable: true,
@@ -50,7 +50,7 @@ module.exports = function (api) {
       options.internal.typeName === "StrapiCategory"
     ) {
       options.articles.forEach((article) => {
-        article.path = `/${article.category.slug}/${article.slug}/`
+        article.path = `/${article.category.slug}/${article.slug}/`;
         article.category.path = `/${article.category.slug}/`;
       });
     }
@@ -77,9 +77,9 @@ module.exports = function (api) {
     }
   });
 
-  // because route matching pattern for category and home is the same, 
-  // category pages have to to be created in advance, so that their routes are hardcoded  
-  api.createPages(async ({ getCollection, createPage }) => {
+  // because route matching pattern for category and home is the same,
+  // category pages have to to be created in advance, so that their routes are hardcoded
+  api.createPages(({ getCollection, createPage }) => {
     getCollection("StrapiCategory")
       .data()
       .forEach((category) => {

@@ -33,6 +33,11 @@
 
       <app-rich-content :content="content.text" :key="`text-${content.id}`"></app-rich-content>
     </template>
+
+    <button @click="showComments = true">Pokaz komentarze</button>
+    <div class="comments" v-if="showComments && comments">
+      <p v-for="comment in comments" :key="`${comment.relatedSlug}-${comment.id}`">{{ comment.content }}</p>
+    </div>
   </article>
 </template>
 
@@ -83,7 +88,20 @@ export default {
     return {
       getFormattedDate,
       getUrl,
+      showComments: false,
+      comments: [],
     };
+  },
+
+  async mounted() {
+    try {
+      const response = await fetch(
+        `${process.env.GRIDSOME_API_URL}/comments/articles:${this.$page.article.id}`
+      );
+      this.comments = await response.json();
+    } catch (e) {
+      console.error(`An error occured when fetching comments. ${e}`);
+    }
   },
 };
 </script>
