@@ -1,13 +1,80 @@
+@import "colors";
+
 :root {
+  // theming
+  --content-1: var(--color-eerie-black);
+  --content-2: var(--color-isabelline);
+  --surface-1: var(--color-isabelline);
+  --surface-2: var(--color-eerie-black);
+  --surface-3: var(--color-gray);
+  --accent-1: var(--color-wheat);
+  --accent-2: var(--color-gold-crayola);
+  --accent-3: var(--color-jet);
+  --separator: rgba(255, 255, 255, .2);
+  --section-gradient: linear-gradient(
+    306deg,
+    rgba(54, 54, 54, 0.05),
+    rgba(54, 54, 54, 0.05) 33.333%,
+    rgba(85, 85, 85, 0.05) 0,
+    rgba(85, 85, 85, 0.05) 66.666%,
+    hsla(0, 0%, 100%, 0.05) 0,
+    hsla(0, 0%, 100%, 0.05) 99.999%
+  ),
+  linear-gradient(
+    353deg,
+    rgba(81, 81, 81, 0.05),
+    rgba(81, 81, 81, 0.05) 33.333%,
+    hsla(0, 0%, 93.3%, 0.05) 0,
+    hsla(0, 0%, 93.3%, 0.05) 66.666%,
+    rgba(32, 32, 32, 0.05) 0,
+    rgba(32, 32, 32, 0.05) 99.999%
+  ),
+  linear-gradient(
+    140deg,
+    hsla(0, 0%, 75.3%, 0.05),
+    hsla(0, 0%, 75.3%, 0.05) 33.333%,
+    hsla(0, 0%, 42.7%, 0.05) 0,
+    hsla(0, 0%, 42.7%, 0.05) 66.666%,
+    rgba(30, 30, 30, 0.05) 0,
+    rgba(30, 30, 30, 0.05) 99.999%
+  ),
+  linear-gradient(
+    189deg,
+    rgba(77, 77, 77, 0.05),
+    rgba(77, 77, 77, 0.05) 33.333%,
+    rgba(55, 55, 55, 0.05) 0,
+    rgba(55, 55, 55, 0.05) 66.666%,
+    hsla(0, 0%, 56.9%, 0.05) 0,
+    hsla(0, 0%, 56.9%, 0.05) 99.999%
+  );
+
   --body-color: #433422;
-  --bg: #f1e7d0;
-  --dark-bg: #111;
+  --bg: #{map-get($colors, sand)};
+  --dark-bg: #{map-get($colors, dark)};
   --code-bg: #222;
   --bg-transparent: rgba(241, 231, 208, 0.88);
-  --bg-secondary: #eae0c9;
   --bg-teritary: #eadec2;
-  --border-color: #ded0bf;
-  --border-color-darker: #ccbca9;
   --glow: 2px 2px 15px 0 #ccbca9;
   --primary-color: #00a672;
+
+  [data-theme="dark"] {
+    // theming
+    --color-primary: var(--color-dark);
+    --color-secondary: var(--color-sand);
+    --bg-primary: var(--color-dark);
+    --bg-secondary: var(--color-sand);
+    --border-color-primary: var(--color-light);
+    --border-color-secondary: var(--color-gray);
+
+    --body-color: #433422;
+    --bg: var(--color-dark);
+    --dark-bg: #{map-get($colors, dark)};
+    --code-bg: #222;
+    --bg-transparent: rgba(241, 231, 208, 0.88);
+    --bg-teritary: #eadec2;
+    --border-color: #ded0bf;
+    --border-color-darker: #ccbca9;
+    --glow: 2px 2px 15px 0 #ccbca9;
+    --primary-color: #00a672;
+  }
 }

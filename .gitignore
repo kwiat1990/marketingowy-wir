@@ -1,8 +1,9 @@
 *.log
 .cache
+.idea
 .DS_Store
-src/.temp
-node_modules
-dist
 .env
 .env.*
+node_modules
+dist
+backend/.strapi-updater.json

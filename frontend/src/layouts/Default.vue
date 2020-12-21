@@ -1,27 +1,23 @@
 <template>
-  <div class="layout">
-    <slot />
+  <div class="container container--fixed layout">
+    <slot></slot>
   </div>
 </template>
 
-<static-query>
-query {
-  metadata {
-    siteName
-  }
-}
-</static-query>
+<script>
+export default {
+  name: "LayoutDefault",
+  props: {
+    colNum: {
+      type: Number,
+      default: 1,
+    },
+  },
+};
+</script>
 
-<style>
-img {
-  height: auto;
-  max-width: 100%;
-}
-
+<style lang="scss" scoped>
 .layout {
-  max-width: 760px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+   @apply grid gap-12 sm:gap-6 md:gap-16 xl:gap-20 sm:grid-cols-2 lg:grid-cols-3;
 }
 </style>

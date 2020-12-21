@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  img {
+    @apply mx-auto;
+  }
+
+  body {
+    font-size: theme("fontSize.lg");
+    line-height: theme("lineHeight.relaxed");
+  }
+
+  .container {
+    @apply px-6 mx-auto lg:px-20;
+  }
+
+  .container--fixed {
+    @apply max-w-screen-2xl;
+  }
+}
+
+@layer components {
+  /* 
+  +++++++++++++++++++++++++++++++++++++++++++++++
+  CUSTOM ELEMENTS
+  +++++++++++++++++++++++++++++++++++++++++++++++ 
+  */
+  .button {
+    @apply inline-block text-center transition-colors duration-300 border-2 border-dotted rounded-full cursor-pointer bg-color-surface-3 border-color-surface-3 hover:border-color-accent-3;
+  }
+  .button--dark {
+    @apply text-color-content-2 border-color-surface-2 bg-color-accent-3 hover:border-color-surface-3;
+  }
+  .button--outline {
+    @apply bg-transparent border-solid hover:border-current;
+  }
+
+  .link-decor {
+    @apply relative pb-1 font-bold;
+  }
+  .link-decor:hover::after {
+    @apply w-0;
+  }
+  .link-decor::after {
+    content: "";
+    @apply block absolute left-2/4 bottom-0 transform -translate-x-1/2 h-0.5 w-full bg-color-surface-2 transition-all duration-300;
+  }
+
+  /*
+  +++++++++++++++++++++++++++++++++++++++++++++++
+  PROSE
+  +++++++++++++++++++++++++++++++++++++++++++++++ 
+  */
+  .prose {
+    @apply max-w-3xl mx-auto text-current;
+  }
+
+  .prose a {
+    @apply no-underline transition-all duration-300 bg-bottom bg-no-repeat bg-gradient-to-b from-color-accent-1 to-color-accent-1;
+    background-size: 100% 30%;
+  }
+
+  .prose a:hover {
+    background-size: 100% 100%;
+  }
+
+  .prose blockquote {
+    @apply border-color-surface-2;
+  }
+
+  .prose ol > li::before {
+    color: inherit;
+  }
+
+  .prose ul > li::before {
+    background-color: currentColor;
+  }
+}

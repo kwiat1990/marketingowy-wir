@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "categories",
   "info": {
-    "name": "category"
+    "name": "category",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -15,10 +16,12 @@
       "required": true,
       "unique": true
     },
-    "restaurants": {
-      "collection": "restaurant",
-      "via": "categories",
-      "dominant": true
+    "articles": {
+      "via": "category",
+      "collection": "article"
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }

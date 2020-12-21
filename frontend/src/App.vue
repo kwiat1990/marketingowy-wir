@@ -1,50 +1,36 @@
 <template>
   <div id="app">
-    <Header />
+    <app-header></app-header>
     <main class="main">
-      <transition>
-        <router-view />
-      </transition>
+      <router-view />
     </main>
-    <footer>Footer</footer>
+    <app-footer></app-footer>
   </div>
 </template>
 
-<script lang="ts">
-import Header from "~/components/Header/Header.vue";
+<script>
+import Footer from "./layouts/partials/Footer.vue";
+import Icon from "~/components/Icon.vue";
+import Header from "~/layouts/partials/Header.vue";
 
 export default {
   components: {
-    Header,
+    "app-footer": Footer,
+    "app-header": Header,
+    "app-icon": Icon,
   },
 };
 </script>
 
 <style lang="scss">
-@import "src/assets/scss/variables";
-
-html,
-body,
-#app {
-  height: 100%;
-}
-
-body {
-  background-color: var(--bg);
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
+@import "src/assets/scss/base.scss";
+.main {
+  flex: 1 0 auto;
+  @apply my-12;
 }
 
 #app {
   display: flex;
   flex-direction: column;
-}
-
-.main {
-  flex: 1 0 auto;
 }
 </style>
