@@ -2,7 +2,7 @@ name: DEPLOY
 on:
   repository_dispatch:
     branches: 
-      - design-page
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
