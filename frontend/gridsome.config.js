@@ -55,7 +55,7 @@ module.exports = {
     {
       use: "@gridsome/source-strapi",
       options: {
-        apiURL: process.env.GRIDSOME_STRAPI_URL,
+        apiURL: process.env.GRIDSOME_API_URL,
         queryLimit: 1000, // Defaults to 100
         contentTypes: ["Article", "Category", "Tag"],
         singleTypes: ["About", "Footer"],

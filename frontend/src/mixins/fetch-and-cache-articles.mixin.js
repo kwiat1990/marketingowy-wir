@@ -10,22 +10,28 @@ export const fetchAndCacheArticlesMixin = {
   mounted() {
     // TODO: it must be decided if cache should be persistent on page refresh or not
     // window.addEventListener("beforeunload", () => this.cacheData(this.$route.path));
-    window.addEventListener("beforeunload", () => sessionStorage.clear());
+    if (process.isClient && window.sessionStorage) {
+      window.addEventListener("beforeunload", () => {
+        sessionStorage.clear();
+      });
+    }
   },
 
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      const {
-        edges,
-        pageInfo: { hasNextPage, currentPage },
-      } =
-        sessionStorage.getItem(to.path) !== null
-          ? JSON.parse(sessionStorage.getItem(to.path))
-          : vm.$page.articles;
+      if (process.isClient && window.sessionStorage) {
+        const {
+          edges,
+          pageInfo: { hasNextPage, currentPage },
+        } =
+          sessionStorage.getItem(to.path) !== null
+            ? JSON.parse(sessionStorage.getItem(to.path))
+            : vm.$page.articles;
 
-      vm.articles = edges;
-      vm.hasNextPage = hasNextPage;
-      vm.currentPage = currentPage;
+        vm.articles = edges;
+        vm.hasNextPage = hasNextPage;
+        vm.currentPage = currentPage;
+      }
     });
   },
 
@@ -38,7 +44,7 @@ export const fetchAndCacheArticlesMixin = {
 
   methods: {
     cacheData(key) {
-      if (this.articles.length > 0) {
+      if (process.isClient && window.sessionStorage && this.articles.length > 0) {
         sessionStorage.setItem(
           key,
           JSON.stringify({
@@ -59,7 +65,7 @@ export const fetchAndCacheArticlesMixin = {
           this.articles = [...this.articles, ...data.articles.edges];
           this.hasNextPage = data.articles.pageInfo.hasNextPage;
           this.currentPage = data.articles.pageInfo.currentPage;
-        } catch(error) {
+        } catch (error) {
           console.warn(`Cannot fetch next page, for more information check: ${error}`);
         }
       }

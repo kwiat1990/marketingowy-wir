@@ -6,9 +6,8 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 const fs = require("fs");
-const http = require("http");
+const https = require("https");
 const path = require("path");
-const axios = require("axios");
 
 /**
  * Move all Strapi media files (videos, images etc.) to Gridsome's asset directory and set its URL to local path,
@@ -17,15 +16,17 @@ const axios = require("axios");
  */
 function moveImagesAndOverwriteUrl(imageObject) {
   const localFilePath = `./src/assets/img/${imageObject.hash + imageObject.ext}`;
-
-  http.get(`${process.env.GRIDSOME_API_URL}${imageObject.url}`, (response) => {
+  const req = https.get(`${process.env.GRIDSOME_API_URL}${imageObject.url}`, (response) => {
     Object.defineProperty(imageObject, "url", {
       value: path.resolve(__dirname, localFilePath),
       writable: true,
     });
-
     const file = fs.createWriteStream(localFilePath);
     response.pipe(file);
+  });
+  req.end();
+  req.on("error", (error) => {
+    console.error(error);
   });
 }
 

@@ -34,9 +34,14 @@
       <app-rich-content :content="content.text" :key="`text-${content.id}`"></app-rich-content>
     </template>
 
-    <button @click="showComments = true">Pokaz komentarze</button>
-    <div class="comments" v-if="showComments && comments">
-      <p v-for="comment in comments" :key="`${comment.relatedSlug}-${comment.id}`">{{ comment.content }}</p>
+    <div class="max-w-3xl mx-auto">
+      <button @click="showComments = true">Pokaz komentarze</button>
+      <div class="comments" v-if="showComments && comments">
+        <app-comment-form></app-comment-form>
+        <p v-for="comment in comments" :key="`${comment.relatedSlug}-${comment.id}`">
+          {{ comment.content }}
+        </p>
+      </div>
     </div>
   </article>
 </template>
@@ -78,12 +83,13 @@
 <script>
 import getFormattedDate from "~/utils/format-date";
 import getUrl from "~/utils/url-resolver";
-import RichContent from "~/components/RichContent.vue";
-import Tags from "~/components/Tags.vue";
+import AppRichContent from "~/components/RichContent.vue";
+import AppCommentForm from "~/components/CommentForm.vue";
+import AppTags from "~/components/Tags.vue";
 
 export default {
   name: "Article",
-  components: { "app-rich-content": RichContent, "app-tags": Tags },
+  components: { AppCommentForm, AppRichContent, AppTags },
   data() {
     return {
       getFormattedDate,

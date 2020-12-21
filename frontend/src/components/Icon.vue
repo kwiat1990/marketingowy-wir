@@ -18,7 +18,9 @@ export default {
   computed: {
     iconCode() {
       // get a single icon and its id from the icons directory using webpack require function
-      return require(`../assets/icons/${this.icon}.svg`)?.default?.id;
+      if (process.isClient) {
+        return require(`../assets/icons/${this.icon}.svg`)?.default?.id;
+      }
     },
   },
 };
