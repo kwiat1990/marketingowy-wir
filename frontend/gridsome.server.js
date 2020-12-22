@@ -6,6 +6,7 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 const fs = require("fs");
+const http = require("http");
 const https = require("https");
 const path = require("path");
 
@@ -16,7 +17,8 @@ const path = require("path");
  */
 function moveImagesAndOverwriteUrl(imageObject) {
   const localFilePath = `./src/assets/img/${imageObject.hash + imageObject.ext}`;
-  const req = https.get(`${process.env.GRIDSOME_API_URL}${imageObject.url}`, (response) => {
+  const reqMode = process.env.NODE_ENV === "development" ? http : https;
+  const req = reqMode.get(`${process.env.GRIDSOME_API_URL}${imageObject.url}`, (response) => {
     Object.defineProperty(imageObject, "url", {
       value: path.resolve(__dirname, localFilePath),
       writable: true,

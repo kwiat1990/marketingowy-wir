@@ -1,13 +1,11 @@
 <template>
-  <Layout class="prose">
-    <h1>{{ $page.about.edges[0].node.title }}</h1>
-    <!-- TODO: adjust to the new api -->
-    <!-- <g-image
-      v-if="$page.about.edges[0].node.img.length > 0"
-      :src="getUrl($page.about.edges[0].node.img[0].url)"
-    ></g-image>
-    <app-rich-content :content="$page.about.edges[0].node.content.text"></app-rich-content> -->
-  </Layout>
+  <single-layout>
+    <h1 class="headline">{{ $page.about.edges[0].node.title }}</h1>
+    <template v-for="content in $page.about.edges[0].node.content">
+      <g-image v-if="content.image" :alt="content.image.alternativeText" :src="content.image.url" :key="`image-${content.id}`" class="mb-12"></g-image>
+      <app-rich-content :content="content.text" :key="`text-${content.id}`"></app-rich-content>
+    </template>
+  </single-layout>
 </template>
 
 <page-query>
@@ -16,12 +14,13 @@
       edges {
         node {
           content {
-            text
+            id
             image {
               url
               alternativeText
               caption
             }
+            text
           }
           title
         }
@@ -31,19 +30,16 @@
 </page-query>
 
 <script>
-import getUrl from "~/utils/url-resolver";
-import RichContent from "~/components/RichContent.vue";
+import AppRichContent from "~/components/RichContent.vue";
 
 export default {
   name: "About",
-  components: { "app-rich-content": RichContent },
-
-  data() {
-    return {
-      getUrl,
-    };
-  },
+  components: { AppRichContent },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.headline {
+  @apply text-4xl font-bold mb-8;
+}
+</style>

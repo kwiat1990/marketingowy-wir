@@ -1,5 +1,5 @@
 <template>
-  <article class="px-6 overflow-hidden">
+  <single-layout>
     <div class="hero">
       <g-link
         v-if="$page.article.category"
@@ -17,7 +17,7 @@
 
     <figure v-if="$page.article.cover">
       <g-image
-        :src="getUrl($page.article.cover.url)"
+        :src="$page.article.cover.url"
         :alt="$page.article.cover.alternativeText"
       ></g-image>
       <figcaption v-if="$page.article.cover.caption">
@@ -27,7 +27,7 @@
 
     <template v-for="content in $page.article.content">
       <figure v-if="content.image" :key="`image-${content.id}`">
-        <g-image :src="getUrl(content.image.url)" :alt="content.image.alternativeText"></g-image>
+        <g-image :src="content.image.url" :alt="content.image.alternativeText"></g-image>
         <figcaption v-if="content.image.caption">{{ content.image.caption }}</figcaption>
       </figure>
 
@@ -43,7 +43,7 @@
         </p>
       </div>
     </div>
-  </article>
+  </single-layout>
 </template>
 
 <page-query>
@@ -82,7 +82,6 @@
 
 <script>
 import getFormattedDate from "~/utils/format-date";
-import getUrl from "~/utils/url-resolver";
 import AppRichContent from "~/components/RichContent.vue";
 import AppCommentForm from "~/components/CommentForm.vue";
 import AppTags from "~/components/Tags.vue";
@@ -93,7 +92,6 @@ export default {
   data() {
     return {
       getFormattedDate,
-      getUrl,
       showComments: false,
       comments: [],
     };

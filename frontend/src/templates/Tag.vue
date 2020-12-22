@@ -1,13 +1,13 @@
 <template>
   <section>
     <!-- <h1>{{ $page.tag.name }}</h1> -->
-    <Layout :colNum="3">
+    <grid-layout :colNum="3">
       <!-- <app-entry-preview
         v-for="article in previews"
         :key="article.id"
         :entry="article"
       ></app-entry-preview> -->
-    </Layout>
+    </grid-layout>
   </section>
 </template>
 
