@@ -22,7 +22,7 @@
 
     <button
       v-if="hasNextPage"
-      class="block px-4 mx-auto mt-10 text-xl font-bold button button--outline"
+      class="block px-4 py-2 mx-auto mt-10 text-xl font-bold button button--outline"
       @click="fetchNextPage"
     >
       Załaduj więcej
@@ -77,15 +77,5 @@ export default {
   name: "Index",
   mixins: [fetchAndCacheArticlesMixin],
   components: { AppFilters, AppPreviewCard, AppRichContent },
-
-  metaInfo: {
-    title: "Marketingowy Wir",
-    meta: [
-      {
-        name: "description",
-        content: "Blog o online marketingu.",
-      },
-    ],
-  },
 };
 </script>

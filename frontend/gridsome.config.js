@@ -6,7 +6,6 @@
 const tailwind = require("tailwindcss");
 
 module.exports = {
-  siteName: "Marketingowy wir",
   runtimeCompiler: true,
 
   templates: {

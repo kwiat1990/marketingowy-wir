@@ -2,7 +2,7 @@
   <single-layout>
     <h1 class="headline">{{ $page.about.edges[0].node.title }}</h1>
     <template v-for="content in $page.about.edges[0].node.content">
-      <g-image v-if="content.image" :src="content.image.url" :key="`image-${content.id}`" class="mb-12"></g-image>
+      <g-image v-if="content.image" :alt="content.image.alternativeText" :src="content.image.url" :key="`image-${content.id}`" class="mb-12"></g-image>
       <app-rich-content :content="content.text" :key="`text-${content.id}`"></app-rich-content>
     </template>
   </single-layout>
