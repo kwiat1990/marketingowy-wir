@@ -7,7 +7,7 @@
       :filters="filters"
     ></app-filters>
 
-    <Layout v-if="articles.length > 0">
+    <grid-layout v-if="articles.length > 0">
       <app-preview-card
         v-for="{ node: article } in articles"
         :key="article.id"
@@ -17,7 +17,7 @@
         :title="article.title"
         :url="article.path"
       ></app-preview-card>
-    </Layout>
+    </grid-layout>
 
     <button
       v-if="hasNextPage"

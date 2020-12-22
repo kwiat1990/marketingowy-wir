@@ -6,7 +6,7 @@
       :filters="filters"
     ></app-filters>
 
-    <Layout :colNum="3">
+    <grid-layout :colNum="3">
       <template v-if="articles.length > 0">
         <app-preview-card
           v-for="{ node: article } in articles"
@@ -18,7 +18,7 @@
           :url="article.path"
         ></app-preview-card>
       </template>
-    </Layout>
+    </grid-layout>
 
     <button
       v-if="hasNextPage"
@@ -89,5 +89,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped></style>
