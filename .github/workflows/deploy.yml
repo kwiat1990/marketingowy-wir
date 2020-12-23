@@ -3,6 +3,11 @@ on:
   repository_dispatch:
     branches: 
       - master
+  
+defaults:
+  run:
+    working-directory: frontend  
+        
 jobs:
   deploy:
     runs-on: ubuntu-latest
