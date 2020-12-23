@@ -7,19 +7,19 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "knex": "^0.21.13",
+    "knex": "^0.21.14",
     "mysql": "latest",
     "slugify": "^1.4.6",
-    "strapi": "^3.4.0",
-    "strapi-admin": "^3.4.0",
-    "strapi-connector-bookshelf": "^3.4.0",
+    "strapi": "^3.4.1",
+    "strapi-admin": "^3.4.1",
+    "strapi-connector-bookshelf": "^3.4.1",
     "strapi-plugin-comments": "^1.0.1-beta.2",
-    "strapi-plugin-content-manager": "^3.4.0",
-    "strapi-plugin-content-type-builder": "^3.4.0",
-    "strapi-plugin-email": "^3.4.0",
-    "strapi-plugin-upload": "^3.4.0",
-    "strapi-plugin-users-permissions": "^3.4.0",
-    "strapi-utils": "^3.4.0"
+    "strapi-plugin-content-manager": "^3.4.1",
+    "strapi-plugin-content-type-builder": "^3.4.1",
+    "strapi-plugin-email": "^3.4.1",
+    "strapi-plugin-upload": "^3.4.1",
+    "strapi-plugin-users-permissions": "^3.4.1",
+    "strapi-utils": "^3.4.1"
   },
   "strapi": {
     "uuid": "5e92daef-755d-4978-8ce1-4e39567fba52"
