@@ -1,5 +1,6 @@
 <script>
 import marked from "~/utils/markdown-renderer";
+import DOMPurify from "dompurify";
 
 /**
  *  In order to be able to render a Vue component inside marked() a dynamic component has to be used.
@@ -11,10 +12,13 @@ export default {
   template: `<component :is="transformed"></component>`,
   computed: {
     transformed() {
-      return {
-        name: "MarkdownTransformer",
-        template: `<div class="prose prose-lg">${marked(this.content)}</div>`,
-      };
+      if (process.isClient) {
+        const sanitized = DOMPurify.sanitize(this.content);
+        return {
+          name: "MarkdownTransformer",
+          template: `<div class="prose prose-lg">${marked(sanitized)}</div>`,
+        };
+      }
     },
   },
 };

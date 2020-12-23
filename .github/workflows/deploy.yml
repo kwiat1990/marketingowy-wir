@@ -1,13 +1,17 @@
 name: DEPLOY
+
 on:
   repository_dispatch:
     branches: 
       - master
+
+env:
+  GRIDSOME_API_URL: ${{ github.event.action }}
   
 defaults:
   run:
     working-directory: frontend  
-        
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -28,6 +32,7 @@ jobs:
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
         
