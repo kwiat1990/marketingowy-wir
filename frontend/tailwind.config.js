@@ -4,7 +4,7 @@ module.exports = {
     // purgeLayersByDefault: true,
   },
   purge: {
-    content: ["./src/**/*.vue", "./src/**/*.js"],
+    content: ["./src/**/*.js"],
     options: {
       safelist: ["g-image", "g-image--lazy", "g-image--loaded"],
     },

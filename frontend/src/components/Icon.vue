@@ -1,26 +1,37 @@
 <template>
   <svg class="icon" :class="{ [`rotate-${this.rotate}`]: this.rotate, transform: this.rotate }">
-    <use :xlink:href="`#${iconCode}`"></use>
+    <use :xlink:href="`#${iconComponent}`"></use>
   </svg>
 </template>
 
 <script>
+import arrow from "~/assets/icons/arrow-up.svg";
+import close from "~/assets/icons/close.svg";
+import facebook from "~/assets/icons/facebook.svg";
+import instagram from "~/assets/icons/instagram.svg";
+import menu from "~/assets/icons/menu.svg";
+import search from "~/assets/icons/search.svg";
+
+const icons = {
+  "arrow-up": arrow,
+  close,
+  facebook,
+  instagram,
+  menu,
+  search,
+};
 export default {
   name: "Icon",
   props: {
     icon: {
       type: String,
-      required: true,
+      required: true
     },
     rotate: String,
   },
-
   computed: {
-    iconCode() {
-      // get a single icon and its id from the icons directory using webpack require function
-      if (process.isClient) {
-        return require(`../assets/icons/${this.icon}.svg`)?.default?.id;
-      }
+    iconComponent() {
+      return icons[this.icon]?.id;
     },
   },
 };

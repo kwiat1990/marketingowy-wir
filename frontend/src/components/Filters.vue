@@ -33,7 +33,7 @@ export default {
 
   watch: {
     $route(to, from) {
-      this.$refs.overlay.close();
+      this.$refs.overlay?.close();
     },
   },
 };
