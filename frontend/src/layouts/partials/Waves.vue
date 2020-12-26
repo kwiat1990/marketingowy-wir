@@ -34,8 +34,8 @@ export default {
     color: String,
     height: {
       type: String,
-      default: "20px"
-    }
+      default: "20px",
+    },
   },
 
   computed: {
@@ -59,13 +59,12 @@ export default {
 
 <style lang="scss" scoped>
 .waves {
-  color: inherit;
-  transition: color 0.3s;
-  @apply w-full;
+  @apply w-full text-inherit transition-colors duration-300;
 
   &--is-animated {
     .parallax {
       use {
+        backface-visibility: hidden;
         animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
 
         @for $i from 1 through 4 {

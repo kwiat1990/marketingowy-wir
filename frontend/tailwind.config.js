@@ -12,6 +12,7 @@ module.exports = {
   theme: {
     colors: {
       current: "currentColor",
+      inherit: "inherit",
       transparent: "transparent",
 
       "color-content-1": "var(--content-1)",
