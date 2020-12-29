@@ -2,27 +2,31 @@
   <form @submit.prevent="onSubmit">
     <div>
       <label for="name">Name</label>
-      <div>
-        <app-icon icon="user"></app-icon>
+      <div class="input-wrapper">
+        <app-icon icon="user" disableHover></app-icon>
         <input type="text" id="name" v-model="name" />
       </div>
     </div>
+
     <div>
       <label for="email">E-mail</label>
-      <div>
-        <app-icon icon="email"></app-icon>
+      <div class="input-wrapper">
+        <app-icon icon="email" disableHover></app-icon>
         <input type="email" id="email" v-model="email" />
       </div>
     </div>
-    <div class="col-span-2">
+    
+    <div class="col-span-2 input-wrapper">
       <label for="comment">Comment</label>
-      <textarea name="comment" id="comment" rows="3" v-model="comment"></textarea>
+      <textarea name="comment" id="comment" rows="8" v-model="comment"></textarea>
     </div>
-    <button type="sumit" class="col-span-2">Submit</button>
+    
+    <button type="submit" class="w-full col-span-2 px-6 py-2 button button--dark">Submit</button>
   </form>
 </template>
 
 <script>
+import sanitizeHtml from "sanitize-html";
 import AppIcon from "~/components/Icon.vue";
 
 export default {
@@ -38,7 +42,11 @@ export default {
 
   methods: {
     onSubmit() {
-      this.$emit("on-submit", this.$data);
+      this.$emit("on-submit", {
+        comment: sanitizeHtml(this.comment),
+        email: sanitizeHtml(this.email),
+        name: sanitizeHtml(this.name),
+      });
     },
   },
 };
@@ -46,15 +54,27 @@ export default {
 
 <style lang="scss" scoped>
 form {
-  @apply sm:grid gap-x-12 gap-y-6 grid-cols-2;
+  @apply sm:grid gap-x-12 grid-cols-2;
 }
 
 input,
 textarea {
-  @apply px-6 py-4 w-full;
+  @apply px-6 py-2 w-full border-2 border-color-accent-3;
+}
+
+input {
+  @apply pl-14;
 }
 
 label {
   @apply block;
+}
+
+.input-wrapper {
+  @apply relative mb-6;
+
+  svg {
+    @apply absolute top-1/2 left-3 transform -translate-y-2/4 hover:scale-100;
+  }
 }
 </style>

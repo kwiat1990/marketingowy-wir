@@ -1,5 +1,12 @@
 <template>
-  <svg class="icon" :class="{ [`rotate-${this.rotate}`]: this.rotate, transform: this.rotate }">
+  <svg
+    class="icon"
+    :class="{
+      [`rotate-${this.rotate}`]: this.rotate,
+      ['icon--has-hover']: !disableHover,
+      transform: this.rotate,
+    }"
+  >
     <use :xlink:href="`#${iconComponent}`"></use>
   </svg>
 </template>
@@ -29,9 +36,13 @@ export default {
   props: {
     icon: {
       type: String,
-      required: true
+      required: true,
     },
     rotate: String,
+    disableHover: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     iconComponent() {
@@ -45,10 +56,13 @@ export default {
 .icon {
   height: 1.5em;
   width: 1.5em;
-  @apply inline-block transition-transform duration-300;
 
-  &:hover {
-    @apply transform scale-110;
+  &--has-hover {
+    @apply inline-block transition-transform duration-300;
+
+    &:hover {
+      @apply transform scale-110;
+    }
   }
 }
 </style>
