@@ -17,6 +17,7 @@
     "gridsome": "^0.7.23",
     "marked": "^1.2.7",
     "postcss": "^7.0.35",
+    "sanitize-html": "^2.3.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1"
   },
   "devDependencies": {
