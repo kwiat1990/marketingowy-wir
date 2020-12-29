@@ -7,18 +7,22 @@
 <script>
 import arrow from "~/assets/icons/arrow-up.svg";
 import close from "~/assets/icons/close.svg";
+import email from "~/assets/icons/email.svg";
 import facebook from "~/assets/icons/facebook.svg";
 import instagram from "~/assets/icons/instagram.svg";
 import menu from "~/assets/icons/menu.svg";
 import search from "~/assets/icons/search.svg";
+import user from "~/assets/icons/user.svg";
 
 const icons = {
   "arrow-up": arrow,
   close,
+  email,
   facebook,
   instagram,
   menu,
   search,
+  user,
 };
 export default {
   name: "Icon",

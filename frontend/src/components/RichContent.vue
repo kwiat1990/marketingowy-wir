@@ -12,13 +12,11 @@ export default {
   template: `<component :is="transformed"></component>`,
   computed: {
     transformed() {
-      if (process.isClient) {
-        const sanitized = DOMPurify.sanitize(this.content);
-        return {
-          name: "MarkdownTransformer",
-          template: `<div class="prose prose-lg">${marked(sanitized)}</div>`,
-        };
-      }
+      const sanitized = DOMPurify.sanitize(this.content);
+      return {
+        name: "MarkdownTransformer",
+        template: `<div class="prose prose-lg">${marked(sanitized)}</div>`,
+      };
     },
   },
 };
