@@ -59,7 +59,7 @@ form {
 
 input,
 textarea {
-  @apply px-6 py-2 w-full border-2 border-color-accent-3;
+  @apply px-6 py-2 w-full rounded-md border-2 border-color-accent-3;
 }
 
 input {
@@ -68,6 +68,10 @@ input {
 
 label {
   @apply block;
+}
+
+textarea {
+  @apply resize-none
 }
 
 .input-wrapper {

@@ -16,10 +16,7 @@
     </div>
 
     <figure v-if="$page.article.cover">
-      <g-image
-        :src="$page.article.cover.url"
-        :alt="$page.article.cover.alternativeText"
-      ></g-image>
+      <g-image :src="$page.article.cover.url" :alt="$page.article.cover.alternativeText"></g-image>
       <figcaption v-if="$page.article.cover.caption">
         {{ $page.article.content.caption }}
       </figcaption>
@@ -37,7 +34,7 @@
     <div class="max-w-3xl mx-auto">
       <button @click="showComments = true">Pokaz komentarze</button>
       <div class="comments" v-if="showComments && comments">
-        <app-comment-form></app-comment-form>
+        <app-comment-form @on-submit="submitComment"></app-comment-form>
         <p v-for="comment in comments" :key="`${comment.relatedSlug}-${comment.id}`">
           {{ comment.content }}
         </p>
@@ -100,12 +97,40 @@ export default {
   async mounted() {
     try {
       const response = await fetch(
-        `${process.env.GRIDSOME_API_URL}/comments/articles:${this.$page.article.id}`
+        `${process.env.GRIDSOME_API_URL}/comments/article:${this.$page.article.id}`
       );
       this.comments = await response.json();
     } catch (e) {
       console.error(`An error occured when fetching comments. ${e}`);
     }
+  },
+
+  methods: {
+    submitComment(event) {
+      try {
+        fetch(`${process.env.GRIDSOME_API_URL}/comments/article:${this.$page.article.id}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            authorId: event.email,
+            authorName: event.name,
+            authorEmail: event.email,
+            content: event.comment,
+            related: [
+              {
+                refId: parseInt(this.$page.article.id, 10),
+                ref: "article",
+                field: "comments",
+              },
+            ],
+          }),
+        });
+      } catch (e) {
+        console.error(`The comment could not be posted. Please try again. Error details: ${e}`);
+      }
+    },
   },
 };
 </script>

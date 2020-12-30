@@ -6,6 +6,8 @@
 const tailwind = require("tailwindcss");
 
 module.exports = {
+  runtimeCompiler: true,
+  
   templates: {
     StrapiArticle: [
       {

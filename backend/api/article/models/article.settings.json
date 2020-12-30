@@ -21,11 +21,7 @@
     "cover": {
       "model": "file",
       "via": "related",
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
+      "allowedTypes": ["images", "files", "videos"],
       "plugin": "upload",
       "required": false
     },
@@ -43,9 +39,7 @@
     },
     "content": {
       "type": "dynamiczone",
-      "components": [
-        "content.image-text"
-      ]
+      "components": ["content.image-text"]
     },
     "comments": {
       "plugin": "comments",
