@@ -7,7 +7,7 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "knex": "^0.21.14",
+    "knex": "^0.21.15",
     "mysql": "latest",
     "slugify": "^1.4.6",
     "strapi": "^3.4.1",
