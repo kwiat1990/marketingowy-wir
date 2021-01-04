@@ -21,7 +21,7 @@
       <textarea name="comment" id="comment" rows="8" v-model="comment"></textarea>
     </div>
     
-    <button type="submit" class="w-full col-span-2 px-6 py-2 button button--dark">Submit</button>
+    <button type="submit" class="w-full col-span-2 px-6 py-2 button button--dark" :disabled="!isValid">Submit</button>
   </form>
 </template>
 
@@ -32,6 +32,7 @@ import AppIcon from "~/components/Icon.vue";
 export default {
   name: "CommentForm",
   components: { AppIcon },
+  
   data() {
     return {
       comment: "",
@@ -49,6 +50,12 @@ export default {
       });
     },
   },
+
+  computed: {
+    isValid() {
+      return true;
+    }
+  }
 };
 </script>
 

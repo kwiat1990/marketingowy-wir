@@ -34,10 +34,21 @@
     <div class="max-w-3xl mx-auto">
       <button @click="showComments = true">Pokaz komentarze</button>
       <div class="comments" v-if="showComments && comments">
+        <app-comment-entry
+          class="mb-4"
+          v-for="comment in comments"
+          :comment="comment"
+          :key="`comment-${comment.id}`"
+        >
+          <template v-slot="{ isReplying }">
+            <app-comment-form
+              class="mt-4"
+              v-if="isReplying"
+              @on-submit="submitComment($event, comment.id)"
+            ></app-comment-form>
+          </template>
+        </app-comment-entry>
         <app-comment-form @on-submit="submitComment"></app-comment-form>
-        <p v-for="comment in comments" :key="`${comment.relatedSlug}-${comment.id}`">
-          {{ comment.content }}
-        </p>
       </div>
     </div>
   </single-layout>
@@ -80,17 +91,19 @@
 <script>
 import getFormattedDate from "~/utils/format-date";
 import AppRichContent from "~/components/RichContent.vue";
-import AppCommentForm from "~/components/CommentForm.vue";
+import AppCommentEntry from "~/components/comments/CommentEntry.vue";
+import AppCommentForm from "~/components/comments/CommentForm.vue";
 import AppTags from "~/components/Tags.vue";
 
 export default {
   name: "Article",
-  components: { AppCommentForm, AppRichContent, AppTags },
+  components: { AppCommentEntry, AppCommentForm, AppRichContent, AppTags },
   data() {
     return {
       getFormattedDate,
       showComments: false,
       comments: [],
+      showReply: false,
     };
   },
 
@@ -106,7 +119,7 @@ export default {
   },
 
   methods: {
-    submitComment(event) {
+    submitComment(event, threadId = null) {
       try {
         fetch(`${process.env.GRIDSOME_API_URL}/comments/article:${this.$page.article.id}`, {
           method: "POST",
@@ -118,6 +131,7 @@ export default {
             authorName: event.name,
             authorEmail: event.email,
             content: event.comment,
+            threadOf: threadId,
             related: [
               {
                 refId: parseInt(this.$page.article.id, 10),

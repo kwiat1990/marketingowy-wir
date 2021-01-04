@@ -18,6 +18,7 @@ import email from "~/assets/icons/email.svg";
 import facebook from "~/assets/icons/facebook.svg";
 import instagram from "~/assets/icons/instagram.svg";
 import menu from "~/assets/icons/menu.svg";
+import reply from "~/assets/icons/back-left.svg";
 import search from "~/assets/icons/search.svg";
 import user from "~/assets/icons/user.svg";
 
@@ -28,6 +29,7 @@ const icons = {
   facebook,
   instagram,
   menu,
+  "back-left": reply,
   search,
   user,
 };
@@ -56,9 +58,10 @@ export default {
 .icon {
   height: 1.5em;
   width: 1.5em;
+  @apply inline-block;
 
   &--has-hover {
-    @apply inline-block transition-transform duration-300;
+    @apply transition-transform duration-300;
 
     &:hover {
       @apply transform scale-110;
