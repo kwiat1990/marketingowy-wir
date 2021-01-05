@@ -41,6 +41,11 @@
       "type": "dynamiczone",
       "components": ["content.image-text"]
     },
+    "author": {
+      "type": "string",
+      "required": true,
+      "default": "Monika Kwiatkowska"
+    },
     "comments": {
       "plugin": "comments",
       "collection": "comment",
