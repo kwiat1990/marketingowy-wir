@@ -3,13 +3,17 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    font-size: theme("fontSize.lg");
+    line-height: theme("lineHeight.relaxed");
+  }
+  
   img {
     @apply mx-auto;
   }
 
-  body {
-    font-size: theme("fontSize.lg");
-    line-height: theme("lineHeight.relaxed");
+  *:focus {
+    @apply outline-none ring-4 ring-color-accent-1 !important;
   }
 
   .container {
