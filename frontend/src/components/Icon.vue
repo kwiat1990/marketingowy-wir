@@ -17,6 +17,7 @@ import close from "~/assets/icons/close.svg";
 import email from "~/assets/icons/email.svg";
 import facebook from "~/assets/icons/facebook.svg";
 import instagram from "~/assets/icons/instagram.svg";
+import lock from "~/assets/icons/lock.svg";
 import menu from "~/assets/icons/menu.svg";
 import reply from "~/assets/icons/back-left.svg";
 import search from "~/assets/icons/search.svg";
@@ -28,6 +29,7 @@ const icons = {
   email,
   facebook,
   instagram,
+  lock,
   menu,
   "back-left": reply,
   search,

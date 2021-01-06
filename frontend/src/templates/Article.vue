@@ -31,26 +31,10 @@
       <app-rich-content :content="content.text" :key="`text-${content.id}`"></app-rich-content>
     </template>
 
-    <div class="max-w-3xl mx-auto">
-      <button @click="showComments = true">Pokaz komentarze</button>
-      <div class="comments" v-if="showComments && comments">
-        <app-comment-entry
-          class="mb-4"
-          v-for="comment in comments"
-          :comment="comment"
-          :key="`comment-${comment.id}`"
-        >
-          <template v-slot="{ isReplying }">
-            <app-comment-form
-              class="mt-4"
-              v-if="isReplying"
-              @on-submit="submitComment($event, comment.id)"
-            ></app-comment-form>
-          </template>
-        </app-comment-entry>
-        <app-comment-form @on-submit="submitComment"></app-comment-form>
-      </div>
-    </div>
+    <app-comment-section
+      class="max-w-3xl mx-auto"
+      :relatedTo="$page.article.id"
+    ></app-comment-section>
   </single-layout>
 </template>
 
@@ -91,71 +75,17 @@
 <script>
 import getFormattedDate from "~/utils/format-date";
 import AppRichContent from "~/components/RichContent.vue";
-import AppCommentEntry from "~/components/comments/CommentEntry.vue";
-import AppCommentForm from "~/components/comments/CommentForm.vue";
+import AppCommentSection from "~/components/comments/CommentSection.vue";
 import AppTags from "~/components/Tags.vue";
 
 export default {
   name: "Article",
-  components: { AppCommentEntry, AppCommentForm, AppRichContent, AppTags },
+  components: { AppCommentSection, AppRichContent, AppTags },
   data() {
     return {
       getFormattedDate,
       showComments: false,
-      comments: [],
-      showReply: false,
     };
-  },
-
-  async mounted() {
-    try {
-      const response = await fetch(
-        `${process.env.GRIDSOME_API_URL}/comments/article:${this.$page.article.id}`
-      );
-      this.comments = await response.json();
-    } catch (e) {
-      console.error(`An error occured when fetching comments. ${e}`);
-    }
-  },
-
-  methods: {
-    submitComment(event, threadId = null) {
-      function handleErrors(response) {
-        console.log(response.json());
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response;
-      }
-
-      try {
-        fetch(`${process.env.GRIDSOME_API_URL}/comments/article:${this.$page.article.id}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            authorId: event.email,
-            authorName: event.name,
-            authorEmail: event.email,
-            content: event.comment,
-            threadOf: threadId,
-            related: [
-              {
-                refId: parseInt(this.$page.article.id, 10),
-                ref: "article",
-                field: "comments",
-              },
-            ],
-          }),
-        })
-          .then(handleErrors)
-          .then((response) => console.log("ok"))
-          .catch((error) => console.log(error));
-      } catch (e) {
-        console.error(`The comment could not be posted. Please try again. Error details: ${e}`);
-      }
-    },
   },
 };
 </script>

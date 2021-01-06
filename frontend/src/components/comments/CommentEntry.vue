@@ -60,7 +60,7 @@ export default {
 }
 
 .toggle-button {
-  @apply border-color-accent-1 mt-4 text-base py-1 px-2;
+  @apply border-color-accent-1 mt-4 text-base py-0.5 px-2;
 }
 
 .response {
