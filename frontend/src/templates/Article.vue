@@ -120,6 +120,14 @@ export default {
 
   methods: {
     submitComment(event, threadId = null) {
+      function handleErrors(response) {
+        console.log(response.json());
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      }
+
       try {
         fetch(`${process.env.GRIDSOME_API_URL}/comments/article:${this.$page.article.id}`, {
           method: "POST",
@@ -140,7 +148,10 @@ export default {
               },
             ],
           }),
-        });
+        })
+          .then(handleErrors)
+          .then((response) => console.log("ok"))
+          .catch((error) => console.log(error));
       } catch (e) {
         console.error(`The comment could not be posted. Please try again. Error details: ${e}`);
       }

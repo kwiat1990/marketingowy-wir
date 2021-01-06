@@ -12,12 +12,24 @@
 import Footer from "./layouts/partials/Footer.vue";
 import Icon from "~/components/Icon.vue";
 import Header from "~/layouts/partials/Header.vue";
+import {
+  addFocusHandlers,
+  removeFocusHandlers,
+} from "~/utils/focus-events";
 
 export default {
   components: {
     "app-footer": Footer,
     "app-header": Header,
     "app-icon": Icon,
+  },
+
+  mounted() {
+    addFocusHandlers();
+  },
+
+  beforeDestroy() {
+    removeFocusHandlers();
   },
 };
 </script>
