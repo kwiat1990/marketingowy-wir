@@ -1,9 +1,10 @@
 <template>
-  <div class="comment" :id="comment.id">
+  <div class="comment-entry" :id="`comment-${comment.id}`">
     <app-comment
-      :author="comment.authorName"
+      :author="userName(comment)"
       :content="comment.content"
       :date="comment.created_at"
+      :hasUser="comment.authorUser !== null"
     ></app-comment>
 
     <button
@@ -21,9 +22,10 @@
       <app-comment
         class="response"
         v-for="childComment in comment.children"
-        :author="childComment.authorName"
+        :author="userName(childComment)"
         :content="childComment.content"
         :date="childComment.created_at"
+        :hasUser="childComment.authorUser !== null"
         :key="`nested-comment-${childComment.id}`"
       ></app-comment>
     </template>
@@ -51,11 +53,17 @@ export default {
       return this.comment.children && this.comment.children.length > 0;
     },
   },
+
+  methods: {
+    userName(comment) {
+      return comment?.authorUser ? comment.authorUser?.username : comment.authorName;
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-.comment {
+.comment-entry {
   @apply bg-color-white border border-color-accent-1 p-4 rounded-md;
 }
 

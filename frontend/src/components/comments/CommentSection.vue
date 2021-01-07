@@ -1,22 +1,27 @@
 <template>
-  <div class="comments" v-if="commentCount > 0">
-    <span class="block w-full mt-8 mb-6 text-2xl font-bold">Komentarze ({{ commentCount }}) </span>
-    
-    <app-comment-entry
-      class="mb-4"
-      v-for="comment in comments"
-      :comment="comment"
-      :key="`comment-${comment.id}`"
-    >
-      <template v-slot="{ isReplying }">
-        <app-comment-form
-          class="mt-4"
-          v-if="isReplying"
-          @on-submit="submitComment($event, comment.id)"
-        ></app-comment-form>
-      </template>
-    </app-comment-entry>
-    
+  <div class="comments">
+    <template v-if="commentCount > 0">
+      <span class="block w-full mt-8 mb-6 text-2xl font-bold"
+        >Komentarze ({{ commentCount }})
+      </span>
+
+      <app-comment-entry
+        class="mb-4"
+        v-for="comment in comments"
+        :comment="comment"
+        :key="`comment-${comment.id}`"
+      >
+        <template v-slot="{ isReplying }">
+          <app-comment-form
+            class="mt-4"
+            v-if="isReplying"
+            @on-submit="submitComment($event, comment.id)"
+          ></app-comment-form>
+        </template>
+      </app-comment-entry>
+    </template>
+    <span v-else class="block w-full mt-8 mb-6 text-2xl font-bold">Brak komentarzy - zacznij dyskuje</span>
+
     <app-comment-form @on-submit="submitComment"></app-comment-form>
   </div>
 </template>
@@ -64,7 +69,6 @@ export default {
   methods: {
     submitComment(event, threadId = null) {
       function handleErrors(response) {
-        console.log(response.json());
         if (!response.ok) {
           throw Error(response.statusText);
         }
@@ -93,8 +97,7 @@ export default {
           }),
         })
           .then(handleErrors)
-          .then((response) => console.log("ok"))
-          .catch((error) => console.log(error));
+          .catch((error) => console.warn(error));
       } catch (e) {
         console.error(`The comment could not be posted. Please try again. Error details: ${e}`);
       }
