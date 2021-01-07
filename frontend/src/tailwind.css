@@ -7,19 +7,68 @@
     font-size: theme("fontSize.lg");
     line-height: theme("lineHeight.relaxed");
   }
-  
+
   .using-mouse *:focus {
     outline: 0 !important;
   }
-  
+
   body:not(.using-mouse) *:focus {
     @apply outline-none ring-4 ring-color-accent-1 !important;
   }
-  
+
   img {
     @apply mx-auto;
   }
 
+  label {
+    @apply block;
+  }
+
+  [type="text"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  [multiple],
+  textarea,
+  select {
+    @apply w-full px-6 py-2;
+  }
+
+  [type="text"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="time"],
+  [type="checkbox"],
+  [type="radio"],
+  textarea,
+  select {
+    @apply border-2 rounded-md text-color-accent-3 border-color-accent-3 focus:outline-none focus:ring-4 focus:ring-color-accent-1 focus:border-inherit;
+  }
+
+  [type="checkbox"],
+  [type="radio"] {
+    @apply w-5 h-5 focus:ring-offset-0;
+  }
+
+  textarea {
+    @apply resize-none;
+  }
 
   .container {
     @apply px-6 mx-auto lg:px-20;
@@ -44,6 +93,13 @@
   }
   .button--outline {
     @apply bg-transparent border-solid hover:border-current;
+  }
+
+  .input-wrapper {
+    @apply relative mb-6;
+  }
+  .input-wrapper svg {
+    @apply absolute transform top-1/2 left-3 -translate-y-2/4 hover:scale-100;
   }
 
   .link-decor {

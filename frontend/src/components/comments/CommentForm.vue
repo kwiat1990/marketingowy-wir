@@ -15,13 +15,19 @@
         <input type="email" id="email" v-model="email" />
       </div>
     </div>
-    
+
     <div class="col-span-2 input-wrapper">
       <label for="comment">Comment</label>
       <textarea name="comment" id="comment" rows="8" v-model="comment"></textarea>
     </div>
-    
-    <button type="submit" class="w-full col-span-2 px-6 py-2 button button--dark" :disabled="!isValid">Submit</button>
+
+    <button
+      type="submit"
+      class="w-full col-span-2 px-6 py-2 button button--dark"
+      :disabled="!isValid"
+    >
+      Submit
+    </button>
   </form>
 </template>
 
@@ -32,7 +38,7 @@ import AppIcon from "~/components/Icon.vue";
 export default {
   name: "CommentForm",
   components: { AppIcon },
-  
+
   data() {
     return {
       comment: "",
@@ -54,8 +60,8 @@ export default {
   computed: {
     isValid() {
       return true;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -64,28 +70,7 @@ form {
   @apply sm:grid gap-x-12 grid-cols-2;
 }
 
-input,
-textarea {
-  @apply px-6 py-2 w-full rounded-md border-2 border-color-accent-3;
-}
-
 input {
   @apply pl-14;
-}
-
-label {
-  @apply block;
-}
-
-textarea {
-  @apply resize-none
-}
-
-.input-wrapper {
-  @apply relative mb-6;
-
-  svg {
-    @apply absolute top-1/2 left-3 transform -translate-y-2/4 hover:scale-100;
-  }
 }
 </style>

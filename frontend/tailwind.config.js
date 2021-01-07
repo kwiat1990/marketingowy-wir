@@ -42,7 +42,7 @@ module.exports = {
   variants: {
     margin: ["responsive", "odd", "even"],
     backgroundImage: ["hover"],
-    borderStyle: ["hover"]
+    borderStyle: ["hover"],
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
 };
