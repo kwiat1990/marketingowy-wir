@@ -85,6 +85,10 @@
   CUSTOM ELEMENTS
   +++++++++++++++++++++++++++++++++++++++++++++++ 
   */
+  .button:disabled {
+    color: #959595;
+    @apply cursor-not-allowed bg-color-surface-3 border-color-surface-3;
+  }
   .button {
     @apply inline-block text-center transition-colors duration-300 border-2 border-dotted rounded-full cursor-pointer bg-color-surface-3 border-color-surface-3 hover:border-color-accent-3;
   }

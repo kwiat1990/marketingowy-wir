@@ -154,7 +154,13 @@
       </div>
     </div>
 
-    <button type="submit" class="block w-full px-4 py-2 mx-auto button button--dark">Submit</button>
+    <button
+      type="submit"
+      class="block w-full px-4 py-2 mx-auto button button--dark"
+      :disabled="!isValid"
+    >
+      Submit
+    </button>
   </form>
 </template>
 
@@ -182,6 +188,12 @@ export default {
     } catch (e) {
       console.error("An error occured while fetching user: ", e);
     }
+  },
+
+  computed: {
+    isValid() {
+      return this.email !== "" && this.password !== "";
+    },
   },
 
   methods: {

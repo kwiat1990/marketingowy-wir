@@ -59,7 +59,7 @@ export default {
 
   computed: {
     isValid() {
-      return true;
+      return this.comment !== "" && this.email !== "" && this.name !== "";
     },
   },
 };
