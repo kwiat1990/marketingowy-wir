@@ -161,6 +161,7 @@ export default {
   components: { AppIconLink, AppInput },
   data() {
     return {
+      error: null,
       user: "",
       email: "",
       password: "",
@@ -168,15 +169,14 @@ export default {
   },
 
   async mounted() {
-    try {
-      const res = await fetch(`${process.env.GRIDSOME_API_URL}/users/me`, {
-        credentials: "include",
-      });
-      const data = await res.json();
-      this.user = data?.username;
-    } catch (e) {
-      console.error("An error occured while fetching user: ", e);
-    }
+    this.$http
+      .url("/users/me")
+      .get()
+      .json((res) => {
+        this.user = res.username;
+      })
+      .then((err) => (this.error = err))
+      .catch((err) => console.error("An error occured while fetching user. ", err));
   },
 
   computed: {
@@ -204,22 +204,18 @@ export default {
 
   methods: {
     onSubmit() {
-      try {
-        fetch(`${process.env.GRIDSOME_API_URL}/auth/local`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({ identifier: this.email, password: this.password }),
+      this.$http
+        .url("/auth/local")
+        .post({ identifier: this.email, password: this.password })
+        .json((res) => {
+          this.user = res.user.username;
+          this.email = "";
+          this.password = "";
         })
-          .then((res) => res.json())
-          .then((data) => (this.user = data?.user?.username));
-        this.email = "";
-        this.password = "";
-      } catch (e) {
-        console.warn("There is an error occured.", e);
-      }
+        .then((err) => {
+          this.error = err;
+        })
+        .catch((err) => console.error("There is an error occured. ", e));
     },
   },
 };
