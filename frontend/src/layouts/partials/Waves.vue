@@ -32,10 +32,6 @@ export default {
     animate: Boolean,
     invert: Boolean,
     color: String,
-    height: {
-      type: String,
-      default: "20px",
-    },
   },
 
   computed: {
@@ -48,9 +44,7 @@ export default {
     },
     styles() {
       return {
-        color: this.color || "#2f2f2f",
-        height: this.height,
-        "min-height": this.height,
+        color: this.color || "#2f2f2f"
       };
     },
   },
@@ -59,7 +53,7 @@ export default {
 
 <style lang="scss" scoped>
 .waves {
-  @apply w-full text-inherit transition-colors duration-300;
+  @apply w-full text-inherit transition-colors duration-300 h-2 max-h-2 md:max-h-3 md:h-3;
 
   &--is-animated {
     .parallax {
