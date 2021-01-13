@@ -132,27 +132,15 @@
       />
     </svg>
 
-    <g-link to="/" class="font-bold">
-      <app-icon class="mr-2" icon="arrow-up" rotate="270" disableHover></app-icon>
-      Wróć do strony głównej</g-link
-    >
+    <app-icon-link to="/"></app-icon-link>
   </single-layout>
   <form v-else class="container max-w-xl" @submit.prevent="onSubmit">
-    <div>
-      <label for="email">E-mail</label>
-      <div class="input-wrapper">
-        <app-icon icon="email" disableHover></app-icon>
-        <input type="email" id="email" v-model="email" />
-      </div>
-    </div>
-
-    <div>
-      <label for="name">Password</label>
-      <div class="input-wrapper">
-        <app-icon icon="lock" disableHover></app-icon>
-        <input type="password" id="password" v-model="password" />
-      </div>
-    </div>
+    <app-input
+      v-for="field in fields"
+      :key="field.id"
+      :field="field"
+      v-model="$data[field.id]"
+    ></app-input>
 
     <button
       type="submit"
@@ -165,11 +153,11 @@
 </template>
 
 <script>
-import AppIcon from "~/components/Icon.vue";
+import AppIconLink from "~/components/IconLink.vue";
 
 export default {
-  name: "Login",
-  components: { AppIcon },
+  name: "LoginPage",
+  components: { AppIconLink },
   data() {
     return {
       user: "",
@@ -191,6 +179,23 @@ export default {
   },
 
   computed: {
+    fields() {
+      return [
+        {
+          type: "email",
+          icon: "email",
+          id: "email",
+          label: "E-mail",
+        },
+        {
+          type: "password",
+          icon: "lock",
+          id: "password",
+          label: "Password",
+        },
+      ];
+    },
+
     isValid() {
       return this.email !== "" && this.password !== "";
     },
@@ -218,9 +223,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-input {
-  @apply pl-14;
-}
-</style>

@@ -33,7 +33,7 @@
 import AppRichContent from "~/components/RichContent.vue";
 
 export default {
-  name: "About",
+  name: "AboutPage",
   components: { AppRichContent },
 };
 </script>

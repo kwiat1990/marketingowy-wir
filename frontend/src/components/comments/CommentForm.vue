@@ -1,20 +1,11 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <div>
-      <label for="name">Name</label>
-      <div class="input-wrapper">
-        <app-icon icon="user" disableHover></app-icon>
-        <input type="text" id="name" v-model="name" />
-      </div>
-    </div>
-
-    <div>
-      <label for="email">E-mail</label>
-      <div class="input-wrapper">
-        <app-icon icon="email" disableHover></app-icon>
-        <input type="email" id="email" v-model="email" />
-      </div>
-    </div>
+    <app-input
+      v-for="field in fields"
+      :key="field.id"
+      :field="field"
+      v-model="$data[field.id]"
+    ></app-input>
 
     <div class="col-span-2 input-wrapper">
       <label for="comment">Comment</label>
@@ -34,10 +25,11 @@
 <script>
 import sanitizeHtml from "sanitize-html";
 import AppIcon from "~/components/Icon.vue";
+import AppInput from "~/components/Input.vue";
 
 export default {
   name: "CommentForm",
-  components: { AppIcon },
+  components: { AppIcon, AppInput },
 
   data() {
     return {
@@ -61,6 +53,23 @@ export default {
     isValid() {
       return this.comment !== "" && this.email !== "" && this.name !== "";
     },
+
+    fields() {
+      return [
+        {
+          type: "text",
+          icon: "user",
+          id: "name",
+          label: "Name",
+        },
+        {
+          type: "email",
+          icon: "email",
+          id: "email",
+          label: "E-mail",
+        },
+      ];
+    },
   },
 };
 </script>
@@ -68,9 +77,5 @@ export default {
 <style lang="scss" scoped>
 form {
   @apply sm:grid gap-x-12 grid-cols-2;
-}
-
-input {
-  @apply pl-14;
 }
 </style>

@@ -129,18 +129,15 @@
       <strong>Błąd 404: Nie znaleziono szukanej strony</strong>
     </p>
 
-    <g-link to="/" class="font-bold">
-      <app-icon class="mr-2" icon="arrow-up" rotate="270" disableHover></app-icon>
-      Wróć do strony głównej</g-link
-    >
+    <app-icon-link to="/"></app-icon-link>
   </single-layout>
 </template>
 
 <script>
-import AppIcon from "~/components/Icon.vue";
+import AppIconLink from "~/components/IconLink.vue";
 
 export default {
-  name: "404",
-  components: { AppIcon },
+  name: "NotFoundPage",
+  components: { AppIconLink },
 };
 </script>

@@ -74,7 +74,7 @@ import AppPreviewCard from "~/components/PreviewCard.vue";
 import AppFilters from "~/components/Filters.vue";
 
 export default {
-  name: "Index",
+  name: "HomePage",
   mixins: [fetchAndCacheArticlesMixin],
   components: { AppFilters, AppPreviewCard, AppRichContent },
 };
