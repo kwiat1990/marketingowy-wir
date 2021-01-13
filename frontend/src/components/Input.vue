@@ -4,8 +4,9 @@
     <div class="input-wrapper" :class="{ ['input-wrapper--has-icon']: field.icon }">
       <app-icon v-if="field.icon" :icon="field.icon" disableHover></app-icon>
       <input
-        :type="field.type"
+        v-bind="$attrs"
         :id="field.id"
+        :type="field.type"
         :value="value"
         @input="$emit('input', $event.target.value.trim())"
       />
@@ -19,6 +20,7 @@ import AppIcon from "~/components/Icon.vue";
 export default {
   name: "Input",
   components: { AppIcon },
+  inheritAttrs: false,
   props: {
     field: Object,
     value: String,

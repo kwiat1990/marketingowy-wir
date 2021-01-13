@@ -154,10 +154,11 @@
 
 <script>
 import AppIconLink from "~/components/IconLink.vue";
+import AppInput from "~/components/Input.vue";
 
 export default {
   name: "LoginPage",
-  components: { AppIconLink },
+  components: { AppIconLink, AppInput },
   data() {
     return {
       user: "",

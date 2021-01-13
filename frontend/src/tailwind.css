@@ -58,7 +58,7 @@
   [type="radio"],
   textarea,
   select {
-    @apply border-2 rounded-md text-color-accent-3 border-color-accent-3 focus:outline-none focus:ring-4 focus:ring-color-accent-1 focus:border-inherit;
+    @apply border rounded-md text-color-accent-3 border-color-surface-3 focus:outline-none focus:ring-4 focus:ring-color-accent-1 focus:border-inherit;
   }
 
   [type="checkbox"],
