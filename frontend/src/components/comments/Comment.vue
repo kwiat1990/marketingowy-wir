@@ -4,7 +4,7 @@
       >Autor</span
     >
     <span class="mr-2 text-base font-bold">{{ author }}</span>
-    <time class="block text-base text-color-accent-2 sm:inline" :datetime="getFormattedDate(date).datetime">{{
+    <time class="block mb-2 text-base text-color-accent-2 sm:inline sm:mb-0" :datetime="getFormattedDate(date).datetime">{{
       getFormattedDate(date).date
     }}</time>
     <app-rich-content :content="content"></app-rich-content>
