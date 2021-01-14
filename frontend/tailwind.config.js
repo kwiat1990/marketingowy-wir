@@ -1,12 +1,8 @@
 module.exports = {
-  future: {
-    // removeDeprecatedGapUtilities: true,
-    // purgeLayersByDefault: true,
-  },
   purge: {
     content: ["./src/**/*.vue", "./src/**/*.js"],
     options: {
-      safelist: ["g-image", "g-image--lazy", "g-image--loaded"],
+      safelist: ["g-image", "g-image--lazy", "g-image--loaded", "rotate-270"],
     },
   },
   theme: {
