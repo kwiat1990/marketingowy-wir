@@ -15,18 +15,23 @@
       <app-tags v-if="$page.article.tags.length > 0" :tags="$page.article.tags"></app-tags>
     </div>
 
-    <figure v-if="$page.article.cover">
-      <g-image :src="$page.article.cover.url" :alt="$page.article.cover.alternativeText"></g-image>
-      <figcaption v-if="$page.article.cover.caption">
-        {{ $page.article.content.caption }}
-      </figcaption>
-    </figure>
+    <app-image
+      v-if="$page.article.cover"
+      :srcset="$page.article.cover.url"
+      :altText="$page.article.cover.alternativeText"
+      :caption="$page.article.content.caption"
+    >
+    </app-image>
 
     <template v-for="content in $page.article.content">
-      <figure v-if="content.image" :key="`image-${content.id}`">
-        <g-image :src="content.image.url" :alt="content.image.alternativeText"></g-image>
-        <figcaption v-if="content.image.caption">{{ content.image.caption }}</figcaption>
-      </figure>
+      <app-image
+        v-if="content.image"
+        :key="`image-${content.id}`"
+        :srcset="content.image.url"
+        :altText="content.image.alternativeText"
+        :caption="content.image.caption"
+      >
+      </app-image>
 
       <app-rich-content :content="content.text" :key="`text-${content.id}`"></app-rich-content>
     </template>
@@ -77,10 +82,11 @@ import getFormattedDate from "~/utils/format-date";
 import AppRichContent from "~/components/RichContent.vue";
 import AppCommentSection from "~/components/comments/CommentSection.vue";
 import AppTags from "~/components/Tags.vue";
+import AppImage from "~/components/Image.vue";
 
 export default {
   name: "Article",
-  components: { AppCommentSection, AppRichContent, AppTags },
+  components: { AppCommentSection, AppImage, AppRichContent, AppTags },
   data() {
     return {
       getFormattedDate,
@@ -91,19 +97,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-img {
-  max-width: calc(100% + #{theme("spacing.12")});
-  @apply -mx-6 sm:mx-auto sm:max-w-full;
-}
-
-figure {
-  @apply my-10;
-}
-
-figcaption {
-  @apply max-w-3xl mx-auto text-center text-base;
-}
-
 .category {
   @apply uppercase inline-block pb-0 mb-4;
 }
