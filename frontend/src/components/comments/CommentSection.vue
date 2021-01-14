@@ -21,7 +21,7 @@
       </app-comment-entry>
     </template>
     <span v-else class="block w-full mt-8 mb-6 text-2xl font-bold"
-      >Brak komentarzy - zacznij dyskuje</span
+      >Brak komentarzy - zacznij dyskusję</span
     >
 
     <app-comment-form @on-submit="submitComment"></app-comment-form>

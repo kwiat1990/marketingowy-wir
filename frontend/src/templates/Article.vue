@@ -32,7 +32,7 @@
     </template>
 
     <app-comment-section
-      class="max-w-3xl mx-auto"
+      class="max-w-3xl mx-auto mt-12 border-t-2 border-color-surface-3"
       :relatedTo="$page.article.id"
     ></app-comment-section>
   </single-layout>

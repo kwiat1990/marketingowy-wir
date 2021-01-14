@@ -21,7 +21,7 @@
   }
 
   label {
-    @apply block text-base font-bold uppercase;
+    @apply block text-sm font-bold uppercase;
   }
 
   [type="text"],
