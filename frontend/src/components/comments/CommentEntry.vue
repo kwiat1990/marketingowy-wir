@@ -65,7 +65,7 @@ export default {
 
 <style lang="scss">
 .comment-entry {
-  @apply bg-color-white border border-color-accent-1 p-4 rounded-md;
+  @apply border-b border-color-accent-1 pb-6 px-4;
 }
 
 .toggle-button {

@@ -6,7 +6,7 @@
       </span>
 
       <app-comment-entry
-        class="mb-4"
+        class="mb-6"
         v-for="comment in comments"
         :comment="comment"
         :hasReplied="showSuccess(`form-${comment.id}`)"
@@ -26,9 +26,11 @@
         </template>
       </app-comment-entry>
     </template>
+    
     <span v-else class="block w-full mt-8 mb-6 text-2xl font-bold"
       >Brak komentarzy - zacznij dyskusję</span
     >
+    
     <p v-if="showError('form-reply')" class="mb-4 error-message">{{ errorMessage }}</p>
     <p v-if="showSuccess('form-reply')">{{ successMessage }}</p>
     <app-comment-form
@@ -135,5 +137,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
