@@ -80,10 +80,13 @@
     <app-icon-link to="/"></app-icon-link>
   </single-layout>
   <form v-else class="container max-w-xl" @submit.prevent="onSubmit">
+    <p v-if="error" class="error-message">{{ error }}</p>
+
     <app-input
       v-for="field in fields"
       :key="field.id"
       :field="field"
+      :class="{ ['border-red']: error }"
       v-model="$data[field.id]"
     ></app-input>
 
@@ -120,7 +123,6 @@ export default {
       .json((res) => {
         this.user = res.username;
       })
-      .then((err) => (this.error = err))
       .catch((err) => console.error("An error occured while fetching user. ", err));
   },
 
@@ -152,16 +154,26 @@ export default {
       this.$http
         .url("/auth/local")
         .post({ identifier: this.email, password: this.password })
+        .badRequest(
+          (err) =>
+            (this.error = "Podany adres e-mail lub hasło jest nieprawidłowe. Spróbuj ponownie.")
+        )
         .json((res) => {
           this.user = res.user.username;
           this.email = "";
           this.password = "";
         })
-        .then((err) => {
-          this.error = err;
-        })
-        .catch((err) => console.error("There is an error occured. ", e));
+        .catch((err) => {
+          this.error = err.info;
+          console.error("There is an error occured. ", err);
+        });
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.border-red /deep/ input {
+  border-color: var(--color-red);
+}
+</style>

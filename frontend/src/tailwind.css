@@ -99,6 +99,11 @@
     @apply bg-transparent border-solid hover:border-current;
   }
 
+  .error-message {
+    background-color: var(--color-red);
+    @apply py-0.5 px-4 rounded-md text-color-white text-base;
+  }
+
   .input-wrapper {
     @apply relative mb-6;
   }

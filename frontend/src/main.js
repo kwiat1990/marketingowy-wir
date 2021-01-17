@@ -13,11 +13,24 @@ const fetchConfig = wretch()
   // Parse all errors
   .errorType("json")
   // Cover all important errors and make it accessible using then() method
-  .catcher(400, (err) => err.json)
-  .catcher(401, (err) => err.json)
-  .catcher(403, (err) => err.json)
-  .catcher(404, (err) => err.json)
-  .catcher(500, (err) => err.json)
+  .catcher(400, (error) => {
+    throw { ...error, info: "Coś poszło nie tak" };
+  })
+  .catcher(401, (error) => {
+    throw { ...error, info: "Nieautoryzowany użytkownik" };
+  })
+  .catcher(403, (error) => {
+    throw { ...error, info: "Nieautoryzowany użytkownik" };
+  })
+  .catcher(404, (error) => {
+    throw { ...error, info: "Nie znaleziono strony" };
+  })
+  .catcher(405, (error) => {
+    throw { ...error, info: "Coś poszło nie tak" };
+  })
+  .catcher(500, (err) => {
+    throw { ...error, info: "Błąd serwera" };
+  });
 
 export default function (Vue, { router, head, isClient }) {
   // Set default layout as a global component

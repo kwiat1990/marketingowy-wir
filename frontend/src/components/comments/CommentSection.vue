@@ -9,22 +9,35 @@
         class="mb-4"
         v-for="comment in comments"
         :comment="comment"
+        :hasReplied="showSuccess(`form-${comment.id}`)"
         :key="`comment-${comment.id}`"
       >
         <template v-slot="{ isReplying }">
+          <p v-if="showError(`form-${comment.id}`)" class="mt-6 error-message">{{ errorMessage }}</p>
+          <p v-if="showSuccess(`form-${comment.id}`)">{{ successMessage }}</p>
           <app-comment-form
             class="mt-4"
-            v-if="isReplying"
+            v-if="isReplying && !showSuccess(`form-${comment.id}`)"
+            :id="`form-${comment.id}`"
+            :hasError="showError(`form-${comment.id}`)"
             @on-submit="submitComment($event, comment.id)"
-          ></app-comment-form>
+          >
+          </app-comment-form>
         </template>
       </app-comment-entry>
     </template>
     <span v-else class="block w-full mt-8 mb-6 text-2xl font-bold"
       >Brak komentarzy - zacznij dyskusję</span
     >
-
-    <app-comment-form @on-submit="submitComment"></app-comment-form>
+    <p v-if="showError('form-reply')" class="mb-4 error-message">{{ errorMessage }}</p>
+    <p v-if="showSuccess('form-reply')">{{ successMessage }}</p>
+    <app-comment-form
+      v-if="!showSuccess('form-reply')"
+      id="form-reply"
+      :hasError="showError('form-reply')"
+      @on-submit="submitComment"
+    >
+    </app-comment-form>
   </div>
 </template>
 
@@ -44,7 +57,10 @@ export default {
 
   data() {
     return {
+      activeFormId: null,
       comments: [],
+      errorMessage: null,
+      hasReplied: false,
     };
   },
 
@@ -55,11 +71,17 @@ export default {
       .json((res) => {
         this.comments = res;
       })
-      .then((err) => (this.error = err))
-      .catch((err) => console.error("An error occured while fetching comments. ", err));
+      .catch((err) => {
+        this.errorMessage = err.info;
+        console.error("An error occured while fetching comments. ", err);
+      });
   },
 
   computed: {
+    successMessage() {
+      return "Twój komentarz został dodany. Odśwież stronę, aby go zobaczyć.";
+    },
+
     commentCount() {
       if (this.comments.length > 0) {
         return (
@@ -71,7 +93,16 @@ export default {
   },
 
   methods: {
+    showError(formId) {
+      return this.errorMessage && this.activeFormId === formId;
+    },
+
+    showSuccess(formId) {
+      return this.hasReplied && this.activeFormId === formId;
+    },
+
     submitComment(event, threadId = null) {
+      this.activeFormId = event.id;
       this.$http
         .url(`/comments/article:${this.$page.article.id}`)
         .post({
@@ -88,13 +119,18 @@ export default {
             },
           ],
         })
+        .badRequest(
+          (err) =>
+            (this.errorMessage =
+              "Coś poszło nie tak. Spróbuj ponownie, a jeśli problem będzie się powtarzał, daj nam znać.")
+        )
         .json((res) => {
-          return res;
+          this.hasReplied = true;
         })
-        .then((err) => {
-          this.error = err;
-        })
-        .catch((err) => console.error("An error occured while posting the comment. ", err));
+        .catch((err) => {
+          this.errorMessage = err.info;
+          console.error("An error occured while posting the comment. ", err);
+        });
     },
   },
 };

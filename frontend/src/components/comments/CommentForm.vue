@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onSubmit">
+  <form class="form" :class="{ ['form--has-error']: hasError }" @submit.prevent="onSubmit">
     <app-input
       v-for="field in fields"
       :key="field.id"
@@ -30,6 +30,13 @@ import AppInput from "~/components/Input.vue";
 export default {
   name: "CommentForm",
   components: { AppIcon, AppInput },
+  props: {
+    id: String,
+    hasError: {
+      type: Boolean,
+      default: false,
+    },
+  },
 
   data() {
     return {
@@ -45,6 +52,7 @@ export default {
         comment: sanitizeHtml(this.comment),
         email: sanitizeHtml(this.email),
         name: sanitizeHtml(this.name),
+        id: this.id,
       });
     },
   },
@@ -75,7 +83,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-form {
+.form {
   @apply sm:grid gap-x-12 grid-cols-2;
+  
+  &--has-error {
+    /deep/ input,
+    textarea {
+      border-color: var(--color-red);
+    }
+  }
 }
 </style>

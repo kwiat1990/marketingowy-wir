@@ -8,6 +8,7 @@
     ></app-comment>
 
     <button
+      v-if="!hasReplied"
       type="button"
       class="toggle-button button button--outline"
       @click="isReplying = !isReplying"
@@ -39,7 +40,7 @@ import AppIcon from "~/components/Icon.vue";
 
 export default {
   name: "CommentEntry",
-  props: ["comment"],
+  props: ["comment", "hasReplied"],
   components: { AppComment, AppIcon, AppRichContent },
 
   data() {
