@@ -80,7 +80,7 @@ export default {
 
 .overlay {
   &--is-active {
-    @apply invisible opacity-0 duration-300 fixed inset-0 z-50 py-3 px-6;
+    @apply invisible opacity-0 duration-300 fixed top-1 left-0 right-0 bottom-0 z-50 py-3 px-6;
     transition-property: opacity, visibility;
   }
 

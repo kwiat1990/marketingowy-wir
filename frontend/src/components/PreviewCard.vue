@@ -1,15 +1,13 @@
 <template>
-  <section class="card">
-    <g-link v-if="url" :to="url">
-      <g-image v-if="image" :src="image.url" :alt="image.alternativeText" class="mb-4"></g-image>
-    </g-link>
+  <g-link v-if="url" :to="url" class="card" aria-label="Czytaj więcej">
+    <g-image v-if="image" :src="image.url" :alt="image.alternativeText" class="mb-4"></g-image>
+
     <time class="block mt-4 text-base" :datetime="getFormattedDate(date).datetime">{{
       getFormattedDate(date).date
     }}</time>
     <span class="title">{{ title }}</span>
     <p class="my-4">{{ content }}</p>
-    <g-link v-if="url" :to="url" class="link-decor">Czytaj więcej</g-link>
-  </section>
+  </g-link>
 </template>
 
 <script>
@@ -41,15 +39,21 @@ img {
 }
 
 .read-more {
-  background-size: 100% 50%;
-  @apply inline bg-gradient-to-r from-color-accent-3 to-color-accent-3 bg-no-repeat transition-all duration-500 bg-left-bottom;
-}
+  }
 
 .title {
+  background-size: 0% 50%;
   @apply text-2xl;
+  @apply inline bg-gradient-to-t from-color-accent-2 to-color-surface-2 bg-no-repeat transition-all duration-500 bg-left-bottom;
 }
 
 .card {
   @apply relative;
+
+  &:hover {
+    .title {
+      background-size: 100% 50%;
+    }
+  }
 }
 </style>
