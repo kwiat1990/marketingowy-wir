@@ -3,7 +3,7 @@ name: CI
 on:
   repository_dispatch:
     branches:
-      - master
+      - dark-theme
 
 defaults:
   run:
