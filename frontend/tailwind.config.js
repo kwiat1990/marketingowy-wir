@@ -19,9 +19,7 @@ module.exports = {
       "color-accent-1": "var(--accent-1)",
       "color-accent-2": "var(--accent-2)",
       "color-accent-3": "var(--accent-3)",
-
-      "color-isabelline": "var(--color-isabelline)",
-      "color-eerie-black": "var(--color-eerie-black)",
+      "color-accent-4": "var(--separator)",
       "color-black": "var(--color-black)",
       "color-white": "var(--color-white)",
     },

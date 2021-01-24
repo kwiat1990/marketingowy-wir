@@ -60,12 +60,12 @@
   [type="radio"],
   textarea,
   select {
-    @apply border rounded-md bg-color-surface-2 text-color-content-2 border-color-surface-3 focus:outline-none focus:ring-4 focus:ring-color-accent-1 focus:border-inherit;
+    @apply border-2 rounded-md bg-color-surface-2 text-color-content-2 border-color-accent-4 focus:outline-none focus:ring-4 focus:ring-color-accent-1 focus:border-inherit;
   }
 
   [type="checkbox"],
   [type="radio"] {
-    @apply w-5 h-5 focus:ring-offset-0;
+    @apply w-6 h-6 focus:ring-offset-0 text-color-content-1;
   }
 
   textarea {
@@ -88,9 +88,7 @@
   +++++++++++++++++++++++++++++++++++++++++++++++ 
   */
   .button:disabled {
-    color: #959595;
-    border-color: #959595;
-    @apply bg-transparent border-solid cursor-not-allowed;
+    @apply bg-transparent border-solid cursor-not-allowed border-color-accent-4 text-color-accent-4;
   }
   .button {
     @apply inline-block font-bold text-center transition-colors duration-300 border-2 border-solid rounded-full cursor-pointer text-color-content-1 bg-color-surface-3 border-color-surface-3;
