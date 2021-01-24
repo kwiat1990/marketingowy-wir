@@ -1,8 +1,8 @@
 <template>
-  <single-layout v-if="user">
+  <single-layout v-if="isAuthUser">
     <p class="text-center">
       Cześć
-      <span class="block text-2xl font-bold">{{ user }}</span>
+      <span class="block text-2xl font-bold">{{ name }}</span>
     </p>
 
     <svg class="mx-auto my-12 max-h-96" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
@@ -101,29 +101,26 @@
 </template>
 
 <script>
+import { saveUserDataMixin } from "~/mixins/save-user-data.mixin";
 import AppIconLink from "~/components/IconLink.vue";
 import AppInput from "~/components/Input.vue";
 
 export default {
   name: "LoginPage",
+  mixins: [saveUserDataMixin],
   components: { AppIconLink, AppInput },
+
   data() {
     return {
       error: null,
-      user: "",
-      email: "",
       password: "",
     };
   },
 
-  async mounted() {
-    this.$http
-      .url("/users/me")
-      .get()
-      .json((res) => {
-        this.user = res.username;
-      })
-      .catch((err) => console.error("An error occured while fetching user. ", err));
+  mounted() {
+    if (this.isAuthUser) {
+      this.getUser();
+    }
   },
 
   computed: {
@@ -159,7 +156,11 @@ export default {
             (this.error = "Podany adres e-mail lub hasło jest nieprawidłowe. Spróbuj ponownie.")
         )
         .json((res) => {
-          this.user = res.user.username;
+          if (res.user) {
+            this.saveUser({ name: res.user.username, email: res.user.email, isAuth: true });
+            this.error = null;
+            this.getUser();
+          }
           this.email = "";
           this.password = "";
         })

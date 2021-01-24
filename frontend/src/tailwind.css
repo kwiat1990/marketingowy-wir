@@ -4,8 +4,10 @@
 
 @layer base {
   body {
-    font-size: theme("fontSize.lg");
-    line-height: theme("lineHeight.relaxed");
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: theme("fontSize.xl");
+    line-height: theme("lineHeight.loose");
   }
 
   .using-mouse *:focus {
@@ -17,11 +19,11 @@
   }
 
   img {
-    @apply mx-auto;
+    @apply mx-auto border-2 border-color-white;
   }
 
   label {
-    @apply block text-sm font-bold uppercase;
+    @apply block mb-2 text-sm font-bold uppercase;
   }
 
   [type="text"],
@@ -58,7 +60,7 @@
   [type="radio"],
   textarea,
   select {
-    @apply border rounded-md text-color-accent-3 border-color-surface-3 focus:outline-none focus:ring-4 focus:ring-color-accent-1 focus:border-inherit;
+    @apply border rounded-md bg-color-surface-2 text-color-content-2 border-color-surface-3 focus:outline-none focus:ring-4 focus:ring-color-accent-1 focus:border-inherit;
   }
 
   [type="checkbox"],
@@ -87,16 +89,17 @@
   */
   .button:disabled {
     color: #959595;
-    @apply cursor-not-allowed bg-color-surface-3 border-color-surface-3;
+    border-color: #959595;
+    @apply bg-transparent border-solid cursor-not-allowed;
   }
   .button {
-    @apply inline-block text-center transition-colors duration-300 border-2 border-dotted rounded-full cursor-pointer bg-color-surface-3 border-color-surface-3 hover:border-color-accent-3;
+    @apply inline-block font-bold text-center transition-colors duration-300 border-2 border-solid rounded-full cursor-pointer text-color-content-1 bg-color-surface-3 border-color-surface-3;
   }
   .button--dark {
     @apply text-color-content-2 border-color-surface-2 bg-color-accent-3 hover:border-color-surface-3;
   }
   .button--outline {
-    @apply bg-transparent border-solid hover:border-current;
+    @apply bg-transparent border-solid border-color-accent-2 hover:border-current text-inherit;
   }
 
   .error-message {
@@ -119,7 +122,7 @@
   }
   .link-decor::after {
     content: "";
-    @apply block absolute left-2/4 bottom-0 transform -translate-x-1/2 h-0.5 w-full bg-color-surface-2 transition-all duration-300;
+    @apply block absolute left-2/4 bottom-0 transform -translate-x-1/2 h-0.5 w-full bg-color-accent-2 transition-all duration-300;
   }
 
   /*
@@ -128,20 +131,31 @@
   +++++++++++++++++++++++++++++++++++++++++++++++ 
   */
   .prose {
-    @apply max-w-3xl mx-auto text-current;
+    @apply max-w-4xl mx-auto leading-loose text-inherit;
+  }
+
+  .prose * {
+    @apply text-inherit;
   }
 
   .prose a {
-    @apply no-underline transition-all duration-300 bg-bottom bg-no-repeat bg-gradient-to-b from-color-accent-1 to-color-accent-1;
-    background-size: 100% 30%;
+    @apply no-underline transition-all duration-300 bg-bottom bg-no-repeat bg-gradient-to-b from-color-accent-2 to-color-accent-2;
+    background-size: 100% 10%;
   }
 
   .prose a:hover {
     background-size: 100% 100%;
+    @apply text-color-content-1;
+  }
+
+  .prose a,
+  .prose blockquote,
+  .prose strong {
+    @apply text-inherit;
   }
 
   .prose blockquote {
-    @apply border-color-surface-2;
+    @apply border-color-surface-1;
   }
 
   .prose ol > li::before {

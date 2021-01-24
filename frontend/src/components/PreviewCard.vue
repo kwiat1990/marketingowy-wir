@@ -1,11 +1,8 @@
 <template>
   <section class="card">
-    <g-image
-      v-if="image"
-      :src="image.url"
-      :alt="image.alternativeText"
-      class="mb-4"
-    ></g-image>
+    <g-link v-if="url" :to="url">
+      <g-image v-if="image" :src="image.url" :alt="image.alternativeText" class="mb-4"></g-image>
+    </g-link>
     <time class="block mt-4 text-base" :datetime="getFormattedDate(date).datetime">{{
       getFormattedDate(date).date
     }}</time>
@@ -27,7 +24,7 @@ export default {
     title: String,
     url: String,
   },
-  
+
   data() {
     return {
       getFormattedDate,

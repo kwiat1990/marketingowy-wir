@@ -16,20 +16,5 @@ body,
 }
 
 body {
-  background-color: var(--surface-1);
-
-  // TODO: adjust theming options
-  @media (prefers-color-scheme: light) {
-    body {
-      background: white;
-      color: black;
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    body {
-      background: black;
-      color: white;
-    }
-  }
+  @apply bg-gradient bg-color-surface-2 text-color-content-2;
 }

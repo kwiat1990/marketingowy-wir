@@ -37,7 +37,7 @@
     </template>
 
     <app-comment-section
-      class="max-w-3xl mx-auto mt-12 border-t-2 border-color-surface-3"
+      class="max-w-4xl mx-auto mt-40 border-t-2 border-color-surface-3"
       :relatedTo="$page.article.id"
     ></app-comment-section>
   </single-layout>
@@ -110,10 +110,10 @@ export default {
 }
 
 .hero {
-  @apply max-w-3xl mx-auto text-center;
+  @apply max-w-4xl mx-auto text-center;
 }
 
 .lead {
-  @apply block mt-8 text-xl sm:text-2xl text-center;
+  @apply block mt-8 leading-10 text-xl sm:text-2xl sm:leading-10 text-center;
 }
 </style>

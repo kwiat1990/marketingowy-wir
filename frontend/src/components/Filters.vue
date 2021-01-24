@@ -4,15 +4,15 @@
       Zobacz filtry
     </button>
 
-    <app-overlay class="bg-color-surface-1 md:bg-transparent" deactivateAbove="768px" ref="overlay">
+    <app-overlay class="bg-color-surface-2 md:bg-transparent" deactivateAbove="768px" ref="overlay">
       <div class="filters">
-        <g-link to="/" class="button" exact-active-class="button--dark">Wszystko</g-link>
+        <g-link to="/" class="button" exact-active-class="button--outline">Wszystko</g-link>
         <g-link
           v-for="filter in filters"
           :key="filter.id"
           :to="filter.path"
           class="button"
-          exact-active-class="button--dark"
+          exact-active-class="button--outline"
         >
           {{ filter.name }}
         </g-link>

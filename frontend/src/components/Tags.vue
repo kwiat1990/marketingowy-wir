@@ -1,6 +1,6 @@
 <template>
   <div class="tags">
-    <g-link v-for="tag in tags" :key="tag.id" :to="tag.path" class="px-2 mx-2 mb-2 button">{{
+    <g-link v-for="tag in tags" :key="tag.id" :to="tag.path" class="px-4 mx-2 mb-2 button">{{
       tag.name
     }}</g-link>
   </div>

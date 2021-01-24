@@ -1,10 +1,24 @@
 <template>
   <div class="comments">
-    <template v-if="commentCount > 0">
-      <span class="block w-full mt-8 mb-6 text-2xl font-bold"
-        >Komentarze ({{ commentCount }})
-      </span>
+    <span v-if="commentCount > 0" class="block w-full mt-8 mb-6 text-2xl font-bold"
+      >Komentarze ({{ commentCount }})
+    </span>
+    <span v-else class="block w-full mt-8 mb-6 text-2xl font-bold"
+      >Brak komentarzy - zacznij dyskusję</span
+    >
 
+    <p v-if="showError('form-reply')" class="mb-4 error-message">{{ errorMessage }}</p>
+    <p v-if="showSuccess('form-reply')">{{ successMessage }}</p>
+    <app-comment-form
+      v-if="!showSuccess('form-reply')"
+      class="my-12"
+      id="form-reply"
+      :hasError="showError('form-reply')"
+      @on-submit="submitComment"
+    >
+    </app-comment-form>
+
+    <template v-if="commentCount > 0">
       <app-comment-entry
         class="mb-6"
         v-for="comment in comments"
@@ -13,7 +27,9 @@
         :key="`comment-${comment.id}`"
       >
         <template v-slot="{ isReplying }">
-          <p v-if="showError(`form-${comment.id}`)" class="mt-6 error-message">{{ errorMessage }}</p>
+          <p v-if="showError(`form-${comment.id}`)" class="mt-6 error-message">
+            {{ errorMessage }}
+          </p>
           <p v-if="showSuccess(`form-${comment.id}`)">{{ successMessage }}</p>
           <app-comment-form
             class="mt-4"
@@ -26,20 +42,6 @@
         </template>
       </app-comment-entry>
     </template>
-    
-    <span v-else class="block w-full mt-8 mb-6 text-2xl font-bold"
-      >Brak komentarzy - zacznij dyskusję</span
-    >
-    
-    <p v-if="showError('form-reply')" class="mb-4 error-message">{{ errorMessage }}</p>
-    <p v-if="showSuccess('form-reply')">{{ successMessage }}</p>
-    <app-comment-form
-      v-if="!showSuccess('form-reply')"
-      id="form-reply"
-      :hasError="showError('form-reply')"
-      @on-submit="submitComment"
-    >
-    </app-comment-form>
   </div>
 </template>
 
@@ -91,6 +93,7 @@ export default {
           this.comments.reduce((count, comment) => (count += comment.children.length), 0)
         );
       }
+      return 0;
     },
   },
 
