@@ -13,7 +13,9 @@
         :key="`comment-${comment.id}`"
       >
         <template v-slot="{ isReplying }">
-          <p v-if="showError(`form-${comment.id}`)" class="mt-6 error-message">{{ errorMessage }}</p>
+          <p v-if="showError(`form-${comment.id}`)" class="mt-6 error-message">
+            {{ errorMessage }}
+          </p>
           <p v-if="showSuccess(`form-${comment.id}`)">{{ successMessage }}</p>
           <app-comment-form
             class="mt-4"
@@ -26,11 +28,11 @@
         </template>
       </app-comment-entry>
     </template>
-    
+
     <span v-else class="block w-full mt-8 mb-6 text-2xl font-bold"
       >Brak komentarzy - zacznij dyskusję</span
     >
-    
+
     <p v-if="showError('form-reply')" class="mb-4 error-message">{{ errorMessage }}</p>
     <p v-if="showSuccess('form-reply')">{{ successMessage }}</p>
     <app-comment-form
