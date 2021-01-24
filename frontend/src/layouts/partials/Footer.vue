@@ -1,6 +1,5 @@
 <template>
   <footer ref="footer">
-    <app-waves animate></app-waves>
     <div class="inner">
       <div class="container">
         <div class="separator">
@@ -61,14 +60,12 @@
 <script>
 import Icon from "~/components/Icon.vue";
 import ScrollToTop from "~/components/ScrollToTop.vue";
-import Waves from "~/layouts/partials/Waves.vue";
 
 export default {
   name: "Footer",
   components: {
     "app-icon": Icon,
     "app-scroll-to-top": ScrollToTop,
-    "app-waves": Waves,
   },
 
   data() {
@@ -108,7 +105,7 @@ export default {
 }
 
 .inner {
-  @apply py-12 bg-color-surface-2 bg-gradient text-center text-color-content-2;
+  @apply py-12 text-center;
 }
 
 .separator {

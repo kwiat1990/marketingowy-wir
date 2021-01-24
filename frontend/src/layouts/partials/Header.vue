@@ -14,7 +14,6 @@
         </transition-group>
       </div>
     </div>
-    <app-waves animate invert :color="showSearch ? '#fff' : null"></app-waves>
   </header>
 </template>
 
@@ -22,7 +21,6 @@
 import AppIcon from "~/components/Icon.vue";
 import AppNav from "~/components/Nav.vue";
 import AppSearch from "~/components/Search.vue";
-import AppWaves from "~/layouts/partials/Waves.vue";
 
 export default {
   name: "Header",
@@ -30,7 +28,6 @@ export default {
     AppIcon,
     AppNav,
     AppSearch,
-    AppWaves,
   },
 
   data() {
@@ -53,7 +50,7 @@ export default {
 }
 
 .inner {
-  @apply bg-color-surface-2 bg-gradient text-color-content-2 overflow-hidden;
+  @apply overflow-hidden;
 }
 
 .bar {

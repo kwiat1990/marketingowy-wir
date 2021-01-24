@@ -128,7 +128,11 @@
   +++++++++++++++++++++++++++++++++++++++++++++++ 
   */
   .prose {
-    @apply max-w-3xl mx-auto text-current;
+    @apply max-w-3xl mx-auto text-inherit;
+  }
+
+  .prose * {
+    @apply text-inherit;
   }
 
   .prose a {
