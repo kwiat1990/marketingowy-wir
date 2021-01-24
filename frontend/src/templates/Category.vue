@@ -33,7 +33,7 @@
   query($page: Int, $name: String!) {
     articles: allStrapiArticle(
       filter: { category: { name: { eq: $name } } }
-      perPage: 1
+      perPage: 6
       page: $page
     ) @paginate {
       pageInfo {

@@ -6,18 +6,27 @@
       :filters="filters"
     ></app-filters>
 
-    <grid-layout :colNum="3">
-      <template v-if="articles.length > 0">
-        <app-preview-card
-          v-for="{ node: article } in articles"
-          :key="article.id"
-          :content="article.lead"
-          :date="article.published_at"
-          :image="article.cover"
-          :title="article.title"
-          :url="article.path"
-        ></app-preview-card>
-      </template>
+    <single-layout class="mb-20">
+      <app-preview-card
+        :content="$page.latestArticle.edges[0].node.lead"
+        :date="$page.latestArticle.edges[0].node.published_at"
+        :image="$page.latestArticle.edges[0].node.cover"
+        :title="$page.latestArticle.edges[0].node.title"
+        :url="$page.latestArticle.edges[0].node.path"
+        isLatest
+      ></app-preview-card>
+    </single-layout>
+
+    <grid-layout :colNum="3" v-if="articles.length > 1">
+      <app-preview-card
+        v-for="{ node: article } in articles"
+        :key="article.id"
+        :content="article.lead"
+        :date="article.published_at"
+        :image="article.cover"
+        :title="article.title"
+        :url="article.path"
+      ></app-preview-card>
     </grid-layout>
 
     <button
@@ -32,9 +41,27 @@
 
 <page-query>
  query($page: Int) {
+   latestArticle: allStrapiArticle(limit: 1) {
+     edges {
+      node {
+        cover {
+          alternativeText
+          caption
+          url(width: 720)
+        }
+        id
+        lead
+        path
+        published_at
+        title
+      }
+    }
+   }
+   
     articles: allStrapiArticle(
-      perPage: 1
-      page: $page
+      perPage: 6
+      page: $page,
+      skip: 1
     ) @paginate {
     pageInfo {
       currentPage
@@ -55,6 +82,7 @@
       }
     }
   }
+  
   categories: allStrapiCategory(sortBy: "name", order: ASC) {
     edges {
       node {
