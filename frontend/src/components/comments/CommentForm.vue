@@ -24,7 +24,7 @@
 
     <button
       type="submit"
-      class="w-full col-span-2 px-6 py-2 button button--dark"
+      class="w-full col-span-2 px-6 py-2 button button--outline border-color-accent-2"
       :disabled="!isValid"
     >
       Submit

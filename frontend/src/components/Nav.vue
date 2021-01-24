@@ -76,7 +76,7 @@ export default {
   @apply block relative text-3xl mb-12 text-center;
 
   @screen md {
-    @apply text-lg mb-0 ml-4;
+    @apply text-xl mb-0 ml-4;
   }
 
   &::after {
