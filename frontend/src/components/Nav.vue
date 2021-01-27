@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex">
+  <nav>
     <button type="button" class="md:hidden" @click="$refs.overlay.open()">
       <app-icon icon="menu"></app-icon>
     </button>

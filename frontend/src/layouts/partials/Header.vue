@@ -5,7 +5,7 @@
       <div class="bar"></div>
       <div class="container">
         <g-link to="/" class="brand">Marketingowy wir</g-link>
-        <app-nav class="ml-auto mr-8"></app-nav>
+        <app-nav class="mr-8"></app-nav>
         <transition-group name="fade">
           <button key="button" type="button" @click="showSearch = true">
             <app-icon icon="search"></app-icon>
@@ -59,10 +59,10 @@ export default {
 }
 
 .brand {
-  @apply block text-2xl font-bold text-center;
+  @apply block text-2xl font-bold flex-auto; 
 }
 
 .container {
-  @apply relative flex items-center justify-between max-w-none py-4;
+  @apply relative flex items-center max-w-none py-4;
 }
 </style>
