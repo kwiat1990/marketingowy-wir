@@ -1,16 +1,23 @@
 <template>
-  <div class="overlay" :class="{ ['overlay--is-active']: !isInactive }" role="dialog" ref="overlay">
-    <button
-      v-if="!isInactive"
-      type="button"
-      aria-label="zamknij overlay"
-      class="close-button"
-      @click="close"
+  <transition name="fade">
+    <div
+      class="overlay"
+      :class="{ ['overlay--is-active']: !isInactive, ['overlay--is-open']: showModal }"
+      role="dialog"
+      ref="overlay"
     >
-      <app-icon icon="close"></app-icon>
-    </button>
-    <slot></slot>
-  </div>
+      <button
+        v-if="!isInactive"
+        type="button"
+        aria-label="zamknij overlay"
+        class="close-button"
+        @click="close"
+      >
+        <app-icon icon="close"></app-icon>
+      </button>
+      <slot></slot>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -27,16 +34,14 @@ export default {
 
   data() {
     return {
-      openClassName: "overlay--is-open",
-      overlayRef: null,
       isInactive: false,
+      showModal: false,
     };
   },
 
   mounted() {
     const mediaqueryList = window.matchMedia(`(min-width: ${this.deactivateAbove})`);
     mediaqueryList.addEventListener("change", this.removeStyles);
-    this.overlayRef = this.$refs.overlay;
     this.isInactive = mediaqueryList.matches;
   },
 
@@ -56,17 +61,15 @@ export default {
     // Public methods to use outside component:
     close() {
       this.$emit("on-close");
-      if (this.overlayRef) {
-        document.body.classList.remove("overflow-hidden");
-        this.overlayRef.classList.remove(this.openClassName);
-      }
+      this.showModal = false;
+      document.body.classList.remove("overflow-hidden");
     },
 
     open() {
       this.$emit("on-open");
-      if (this.overlayRef && !this.isInactive) {
+      this.showModal = true;
+      if (!this.isInactive) {
         document.body.classList.add("overflow-hidden");
-        this.overlayRef.classList.add(this.openClassName);
       }
     },
   },
@@ -74,18 +77,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .close-button {
   @apply block mb-16 mx-auto;
 }
 
 .overlay {
   &--is-active {
-    @apply invisible opacity-0 duration-300 fixed top-1 left-0 right-0 bottom-0 z-50 py-3 px-6;
-    transition-property: opacity, visibility;
+    @apply hidden;
   }
 
   &--is-open {
-    @apply opacity-100 visible;
+    @apply fixed block top-1 left-0 right-0 bottom-0 z-50 py-3 px-6;
   }
 }
 </style>
