@@ -158,8 +158,8 @@ export default {
         .json((res) => {
           if (res.user) {
             this.saveUser({ name: res.user.username, email: res.user.email, isAuth: true });
-            this.error = null;
             this.getUser();
+            this.error = null;
           }
           this.email = "";
           this.password = "";

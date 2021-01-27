@@ -6,7 +6,12 @@ export const saveUserDataMixin = {
     return {
       name: "",
       email: "",
+      isAuthUser: false,
     };
+  },
+
+  beforeMount() {
+    this.isAuthUser = process.isClient && !!localStorage && !!localStorage.getItem(AUTH_USER_KEY);
   },
 
   methods: {
@@ -21,7 +26,8 @@ export const saveUserDataMixin = {
         localStorage.setItem(USER_KEY, JSON.stringify({ name, email }));
 
         if (isAuth) {
-          localStorage.setItem(AUTH_USER_KEY, JSON.stringify(isAuth));
+          this.isAuthUser = true;
+          localStorage.setItem(AUTH_USER_KEY, JSON.stringify(this.isAuthUser));
         }
       }
     },
@@ -30,10 +36,6 @@ export const saveUserDataMixin = {
   computed: {
     isUser() {
       return process.isClient && !!localStorage && !!localStorage.getItem(USER_KEY);
-    },
-
-    isAuthUser() {
-      return process.isClient && !!localStorage && !!localStorage.getItem(AUTH_USER_KEY);
     },
   },
 };
