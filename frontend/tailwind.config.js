@@ -2,7 +2,13 @@ module.exports = {
   purge: {
     content: ["./src/**/*.vue", "./src/**/*.js"],
     options: {
-      safelist: ["g-image", "g-image--lazy", "g-image--loaded", "rotate-270"],
+      safelist: [
+        "g-image",
+        "g-image--lazy",
+        "g-image--loaded",
+        "rotate-270",
+        /-(leave|enter|appear)(|-(to|from|active))$/,
+      ],
     },
   },
   theme: {

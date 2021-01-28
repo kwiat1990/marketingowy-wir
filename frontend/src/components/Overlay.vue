@@ -1,8 +1,9 @@
 <template>
   <transition name="fade">
     <div
-      class="overlay"
+      v-show="showModal || isInactive"
       :class="{ ['overlay--is-active']: !isInactive, ['overlay--is-open']: showModal }"
+      class="overlay"
       role="dialog"
       ref="overlay"
     >
