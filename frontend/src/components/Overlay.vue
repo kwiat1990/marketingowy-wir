@@ -1,14 +1,17 @@
 <template>
-  <transition name="fade">
+  <component :is="component">
     <div
-      v-show="showModal || isInactive"
-      :class="{ ['overlay--is-active']: !isInactive, ['overlay--is-open']: showModal }"
+      v-show="show || !isActivated"
+      :class="[
+        isActivated ? 'overlay--is-active' : 'overlay--is-deactivated',
+        show && 'overlay--is-open',
+      ]"
       class="overlay"
       role="dialog"
       ref="overlay"
     >
       <button
-        v-if="!isInactive"
+        v-if="isActivated"
         type="button"
         aria-label="zamknij overlay"
         class="close-button"
@@ -18,15 +21,17 @@
       </button>
       <slot></slot>
     </div>
-  </transition>
+  </component>
 </template>
 
 <script>
 import AppIcon from "~/components/Icon.vue";
+import { FadeTransition as AppTransition} from "vue2-transitions";
 
 export default {
   name: "Overlay",
   components: {
+    AppTransition,
     AppIcon,
   },
   props: {
@@ -35,15 +40,15 @@ export default {
 
   data() {
     return {
-      isInactive: false,
-      showModal: false,
+      isActivated: false,
+      show: false,
     };
   },
 
   mounted() {
     const mediaqueryList = window.matchMedia(`(min-width: ${this.deactivateAbove})`);
     mediaqueryList.addEventListener("change", this.removeStyles);
-    this.isInactive = mediaqueryList.matches;
+    this.isActivated = !mediaqueryList.matches;
   },
 
   beforeDestroy() {
@@ -56,49 +61,49 @@ export default {
       if (event.matches) {
         this.close();
       }
-      this.isInactive = event.matches;
+      this.isActivated = !event.matches;
     },
 
     // Public methods to use outside component:
     close() {
       this.$emit("on-close");
-      this.showModal = false;
+      this.show = false;
       document.body.classList.remove("overflow-hidden");
     },
 
     open() {
       this.$emit("on-open");
-      this.showModal = true;
-      if (!this.isInactive) {
+      this.show = true;
+      if (this.isActivated) {
         document.body.classList.add("overflow-hidden");
       }
+    },
+  },
+
+  computed: {
+    component() {
+      return this.isActivated ? "app-transition" : "div";
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
 .close-button {
   @apply block mb-16 mx-auto;
 }
 
 .overlay {
   &--is-active {
-    @apply hidden;
+    @apply fixed top-1 left-0 right-0 bottom-0 z-50 py-3 px-6;
+  }
+
+  &--is-deactivated {
+    @apply block;
   }
 
   &--is-open {
-    @apply fixed block top-1 left-0 right-0 bottom-0 z-50 py-3 px-6;
+    // @apply fixed block top-1 left-0 right-0 bottom-0 z-50 py-3 px-6;
   }
 }
 </style>

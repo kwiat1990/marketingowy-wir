@@ -9,19 +9,16 @@
 </template>
 
 <script>
-import Footer from "./layouts/partials/Footer.vue";
-import Icon from "~/components/Icon.vue";
-import Header from "~/layouts/partials/Header.vue";
-import {
-  addFocusHandlers,
-  removeFocusHandlers,
-} from "~/utils/focus-events";
+import AppFooter from "./layouts/partials/Footer.vue";
+import AppIcon from "~/components/Icon.vue";
+import AppHeader from "~/layouts/partials/Header.vue";
+import { addFocusHandlers, removeFocusHandlers } from "~/utils/focus-events";
 
 export default {
   components: {
-    "app-footer": Footer,
-    "app-header": Header,
-    "app-icon": Icon,
+    AppFooter,
+    AppHeader,
+    AppIcon,
   },
 
   mounted() {

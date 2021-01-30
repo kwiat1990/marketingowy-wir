@@ -19,6 +19,7 @@
     "postcss": "^7.0.35",
     "sanitize-html": "^2.3.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1",
+    "vue2-transitions": "^0.3.0",
     "wretch": "^1.7.4"
   },
   "devDependencies": {

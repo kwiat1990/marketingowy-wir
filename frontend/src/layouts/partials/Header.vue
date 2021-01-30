@@ -6,12 +6,12 @@
       <div class="container">
         <g-link to="/" class="brand">Marketingowy wir</g-link>
         <app-nav class="mr-8"></app-nav>
-        <transition-group name="fade">
+        <app-transition group>
           <button key="button" type="button" @click="showSearch = true">
             <app-icon icon="search"></app-icon>
           </button>
           <app-search key="search" v-if="showSearch" @on-close="showSearch = false"></app-search>
-        </transition-group>
+        </app-transition>
       </div>
     </div>
   </header>
@@ -21,6 +21,7 @@
 import AppIcon from "~/components/Icon.vue";
 import AppNav from "~/components/Nav.vue";
 import AppSearch from "~/components/Search.vue";
+import { FadeTransition as AppTransition} from "vue2-transitions";
 
 export default {
   name: "Header",
@@ -28,6 +29,7 @@ export default {
     AppIcon,
     AppNav,
     AppSearch,
+    AppTransition,
   },
 
   data() {
@@ -39,16 +41,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
 .inner {
   @apply overflow-hidden;
 }
