@@ -1,14 +1,8 @@
 <template>
-  <g-link
-    v-if="url"
-    :to="url"
-    :class="{ ['card--is-latest']: isLatest }"
-    aria-label="Czytaj więcej"
-    class="card"
-  >
-    <div class="card__image-wrapper" v-if="image">
+  <article :class="[isLatest && 'card--is-latest']" class="card">
+    <g-link v-if="image" :to="url" class="card__image-wrapper" aria-label="Czytaj artykuł">
       <g-image :src="image.url" :alt="image.alternativeText"></g-image>
-    </div>
+    </g-link>
 
     <div class="card__content">
       <time class="block mt-4 text-base" :datetime="getFormattedDate(date).datetime">{{
@@ -16,8 +10,9 @@
       }}</time>
       <span class="card__title">{{ title }}</span>
       <p class="my-4">{{ content }}</p>
+      <g-link :to="url" class="px-4 button button--outline">Czytaj artykuł</g-link>
     </div>
-  </g-link>
+  </article>
 </template>
 
 <script>
@@ -54,18 +49,6 @@ img {
 
   &__content {
     @apply mb-4;
-  }
-
-  &__title {
-    background-size: 0% 50%;
-    @apply text-2xl;
-    @apply inline bg-gradient-to-t from-color-accent-2 to-color-surface-2 bg-no-repeat transition-all duration-500 bg-left-bottom;
-  }
-
-  &:hover {
-    .card__title {
-      background-size: 100% 50%;
-    }
   }
 }
 
