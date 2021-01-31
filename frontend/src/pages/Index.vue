@@ -6,28 +6,30 @@
       :filters="filters"
     ></app-filters>
 
-    <single-layout class="mb-20">
-      <app-preview-card
-        :content="$page.latestArticle.edges[0].node.lead"
-        :date="$page.latestArticle.edges[0].node.published_at"
-        :image="$page.latestArticle.edges[0].node.cover"
-        :title="$page.latestArticle.edges[0].node.title"
-        :url="$page.latestArticle.edges[0].node.path"
-        isLatest
-      ></app-preview-card>
-    </single-layout>
-
-    <grid-layout :colNum="3" v-if="articles.length > 1">
-      <app-preview-card
-        v-for="{ node: article } in articles"
-        :key="article.id"
-        :content="article.lead"
-        :date="article.published_at"
-        :image="article.cover"
-        :title="article.title"
-        :url="article.path"
-      ></app-preview-card>
-    </grid-layout>
+    <app-transition appear mode="out-in" :group="!$context.hideLatest">
+      <single-layout class="mb-20" v-if="!$context.hideLatest" :key="`latest-${$route.path}`">
+        <app-preview-card
+          :content="$page.latestArticle.edges[0].node.lead"
+          :date="$page.latestArticle.edges[0].node.published_at"
+          :image="$page.latestArticle.edges[0].node.cover"
+          :title="$page.latestArticle.edges[0].node.title"
+          :url="$page.latestArticle.edges[0].node.path"
+          isLatest
+        ></app-preview-card>
+      </single-layout>
+      
+      <grid-layout :key="`normal-${$route.path}`">
+        <app-preview-card
+          v-for="{ node: article } in articles"
+          :key="article.id"
+          :content="article.lead"
+          :date="article.published_at"
+          :image="article.cover"
+          :title="article.title"
+          :url="article.path"
+        ></app-preview-card>
+      </grid-layout>
+    </app-transition>
 
     <button
       v-if="hasNextPage"
@@ -40,9 +42,9 @@
 </template>
 
 <page-query>
- query($page: Int) {
-   latestArticle: allStrapiArticle(limit: 1) {
-     edges {
+ query($page: Int, $name: [String!], $toSkip: Int = 1) {
+  latestArticle: allStrapiArticle(limit: 1) {
+    edges {
       node {
         cover {
           alternativeText
@@ -56,17 +58,18 @@
         title
       }
     }
-   }
+  }
    
-    articles: allStrapiArticle(
-      perPage: 6
-      page: $page,
-      skip: 1
-    ) @paginate {
-    pageInfo {
-      currentPage
-      hasNextPage
-    }
+  articles: allStrapiArticle(
+    filter: { category: { name: { in: $name } } }
+    perPage: 6,
+    page: $page,
+    skip: $toSkip
+  ) @paginate {
+  pageInfo {
+    currentPage
+    hasNextPage
+  }
     edges {
       node {
         cover {
@@ -100,10 +103,11 @@ import { fetchAndCacheArticlesMixin } from "~/mixins/fetch-and-cache-articles.mi
 import AppRichContent from "~/components/RichContent.vue";
 import AppPreviewCard from "~/components/PreviewCard.vue";
 import AppFilters from "~/components/Filters.vue";
+import { ZoomCenterTransition as AppTransition } from "vue2-transitions";
 
 export default {
   name: "HomePage",
   mixins: [fetchAndCacheArticlesMixin],
-  components: { AppFilters, AppPreviewCard, AppRichContent },
+  components: { AppFilters, AppPreviewCard, AppRichContent, AppTransition },
 };
 </script>

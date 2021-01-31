@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button class="block w-full px-4 button md:hidden" @click="$refs.overlay.open()">
-      Zobacz filtry
+    <button class="block w-full px-4 button button--outline md:hidden" @click="$refs.overlay.open()">
+      Zobacz kategorie
     </button>
 
     <app-overlay class="bg-color-surface-2 md:bg-transparent" deactivateAbove="768px" ref="overlay">

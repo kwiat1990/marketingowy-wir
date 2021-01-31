@@ -88,12 +88,15 @@ module.exports = function (api) {
       .forEach((category) => {
         createPage({
           path: `/${category.path}`,
-          component: "./src/templates/Category.vue",
+          component: "./src/pages/Index.vue",
           context: {
             id: category.id,
-            name: category.name,
+            hideLatest: true,
+            toSkip: 0,
+            name: [category.name],
           },
         });
       });
+
   });
 };
