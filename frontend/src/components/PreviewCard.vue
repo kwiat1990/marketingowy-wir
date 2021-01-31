@@ -6,7 +6,9 @@
     aria-label="Czytaj więcej"
     class="card"
   >
-    <g-image v-if="image" :src="image.url" :alt="image.alternativeText"></g-image>
+    <div class="card__image-wrapper" v-if="image">
+      <g-image :src="image.url" :alt="image.alternativeText"></g-image>
+    </div>
 
     <div class="card__content">
       <time class="block mt-4 text-base" :datetime="getFormattedDate(date).datetime">{{
@@ -76,7 +78,9 @@ img {
     @screen md {
       @apply object-cover h-full w-full;
     }
+  }
 
+  .card__image-wrapper {
     @screen lg {
       @apply order-1;
     }
