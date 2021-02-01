@@ -6,7 +6,7 @@
       :filters="filters"
     ></app-filters>
 
-    <app-transition appear mode="out-in">
+    <app-transition :appear="true" mode="out-in">
       <grid-layout :key="$route.path" :fullWidhtCol="!$context.hideLatest">
         <app-preview-card
           v-if="!$context.hideLatest"
