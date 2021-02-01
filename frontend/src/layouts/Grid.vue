@@ -1,5 +1,5 @@
 <template>
-  <div class="container container--fixed layout">
+  <div class="container container--fixed layout" :class="[fullWidhtCol && 'layout--extra-row']">
     <slot></slot>
   </div>
 </template>
@@ -8,16 +8,23 @@
 export default {
   name: "GridLayout",
   props: {
-    colNum: {
-      type: Number,
-      default: 1,
-    },
+    fullWidhtCol: Boolean,
+    default: false,
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .layout {
-   @apply grid gap-12 sm:gap-6 md:gap-16 xl:gap-20 sm:grid-cols-2 lg:grid-cols-3;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  @apply grid gap-12 sm:gap-6 md:gap-16 xl:gap-20;
+
+  &--extra-row {
+    @apply place-items-start;
+
+    > :first-child {
+      @apply col-span-full;
+    }
+  }
 }
 </style>

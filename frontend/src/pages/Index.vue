@@ -1,24 +1,23 @@
 <template>
-  <section>
+  <div>
     <app-filters
       v-if="filters"
       class="container mb-6 container--fixed"
       :filters="filters"
     ></app-filters>
 
-    <app-transition appear mode="out-in" :group="!$context.hideLatest">
-      <single-layout class="mb-20" v-if="!$context.hideLatest" :key="`latest-${$route.path}`">
+    <app-transition appear mode="out-in">
+      <grid-layout :key="$route.path" :fullWidhtCol="!$context.hideLatest">
         <app-preview-card
-          :content="$page.latestArticle.edges[0].node.lead"
-          :date="$page.latestArticle.edges[0].node.published_at"
-          :image="$page.latestArticle.edges[0].node.cover"
-          :title="$page.latestArticle.edges[0].node.title"
-          :url="$page.latestArticle.edges[0].node.path"
+          v-if="!$context.hideLatest"
+          :content="latestArticle.lead"
+          :date="latestArticle.published_at"
+          :image="latestArticle.cover"
+          :title="latestArticle.title"
+          :url="latestArticle.path"
           isLatest
         ></app-preview-card>
-      </single-layout>
-      
-      <grid-layout :key="`normal-${$route.path}`">
+
         <app-preview-card
           v-for="{ node: article } in articles"
           :key="article.id"
@@ -38,7 +37,7 @@
     >
       Załaduj więcej
     </button>
-  </section>
+  </div>
 </template>
 
 <page-query>
@@ -103,11 +102,17 @@ import { fetchAndCacheArticlesMixin } from "~/mixins/fetch-and-cache-articles.mi
 import AppRichContent from "~/components/RichContent.vue";
 import AppPreviewCard from "~/components/PreviewCard.vue";
 import AppFilters from "~/components/Filters.vue";
-import { ZoomCenterTransition as AppTransition } from "vue2-transitions";
+import { SlideYDownTransition as AppTransition } from "vue2-transitions";
 
 export default {
   name: "HomePage",
   mixins: [fetchAndCacheArticlesMixin],
   components: { AppFilters, AppPreviewCard, AppRichContent, AppTransition },
+
+  computed: {
+    latestArticle() {
+      return this.$page?.latestArticle?.edges[0]?.node;
+    },
+  },
 };
 </script>
