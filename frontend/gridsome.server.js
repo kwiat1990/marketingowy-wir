@@ -38,10 +38,14 @@ module.exports = function (api) {
     // this happens automatically for collections created with template option in gridsome config
     // but unfortunately only on 1st level
     if (options.internal.typeName === "StrapiArticle") {
-      options.category.path = `/${options.category.slug}/`;
-      options.tags.forEach((tag) => {
-        tag.path = `/tagi/${tag.slug}/`;
-      });
+      if (options.category) {
+        options.category.path = `/${options.category.slug}/`;
+      }
+      if (options.tags && options.tags.length > 0) {
+        options.tags.forEach((tag) => {
+          tag.path = `/tagi/${tag.slug}/`;
+        });
+      }
     }
 
     if (options.internal.typeName === "StrapiCategory") {
@@ -53,8 +57,10 @@ module.exports = function (api) {
       options.internal.typeName === "StrapiCategory"
     ) {
       options.articles.forEach((article) => {
-        article.path = `/${article.category.slug}/${article.slug}/`;
-        article.category.path = `/${article.category.slug}/`;
+        if (options.category) {
+          article.path = `/${article.category.slug}/${article.slug}/`;
+          article.category.path = `/${article.category.slug}/`;
+        }
       });
     }
 
@@ -85,6 +91,7 @@ module.exports = function (api) {
   api.createPages(({ getCollection, createPage }) => {
     getCollection("StrapiCategory")
       .data()
+      .filter((category) => category.articles.length > 0)
       .forEach((category) => {
         createPage({
           path: `/${category.path}`,
@@ -97,6 +104,5 @@ module.exports = function (api) {
           },
         });
       });
-
   });
 };

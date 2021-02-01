@@ -85,7 +85,11 @@
     }
   }
   
-  categories: allStrapiCategory(sortBy: "name", order: ASC) {
+  categories: allStrapiCategory(
+    filter: { articles: { title: { exists:  true }} }
+    sortBy: "name", 
+    order: ASC
+  ) {
     edges {
       node {
         id
