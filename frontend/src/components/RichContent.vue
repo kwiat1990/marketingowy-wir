@@ -13,7 +13,7 @@ export default {
     transformed() {
       return {
         name: "MarkdownTransformer",
-        template: `<div class="prose prose-xl">${marked(this.content)}</div>`,
+        template: `<div class="prose prose-lg">${marked(this.content)}</div>`,
       };
     },
   },
