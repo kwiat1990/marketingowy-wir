@@ -5,21 +5,20 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
-    "knex": "^0.21.16",
+    "knex": "^0.95.4",
     "mysql": "latest",
-    "slugify": "^1.4.6",
-    "strapi": "^3.4.5",
-    "strapi-admin": "^3.4.5",
-    "strapi-connector-bookshelf": "^3.4.5",
+    "slugify": "^1.5.0",
+    "strapi": "^3.5.4",
+    "strapi-admin": "^3.5.4",
+    "strapi-connector-bookshelf": "^3.5.4",
     "strapi-plugin-comments": "^1.0.1-beta.5",
-    "strapi-plugin-content-manager": "^3.4.5",
-    "strapi-plugin-content-type-builder": "^3.4.5",
-    "strapi-plugin-email": "^3.4.5",
-    "strapi-plugin-upload": "^3.4.5",
-    "strapi-plugin-users-permissions": "^3.4.5",
-    "strapi-utils": "^3.4.5"
+    "strapi-plugin-content-manager": "^3.5.4",
+    "strapi-plugin-content-type-builder": "^3.5.4",
+    "strapi-plugin-email": "^3.5.4",
+    "strapi-plugin-upload": "^3.5.4",
+    "strapi-plugin-users-permissions": "^3.5.4",
+    "strapi-utils": "^3.5.4"
   },
   "strapi": {
     "uuid": "5e92daef-755d-4978-8ce1-4e39567fba52"
